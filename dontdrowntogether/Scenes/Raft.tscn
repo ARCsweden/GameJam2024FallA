@@ -1,14 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctnqn23etgcp0"]
+[gd_scene load_steps=4 format=3 uid="uid://ctnqn23etgcp0"]
 
 [ext_resource type="Script" path="res://Scripts/raft_body.gd" id="1_sw433"]
+[ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_12dra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crtqg"]
-size = Vector2(30, 30)
+size = Vector2(300, 300)
 
 [node name="Raft" type="Node2D"]
 
 [node name="RaftBody" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+angular_velocity = 0.349066
+angular_damp_mode = 1
 script = ExtResource("1_sw433")
 
 [node name="RaftCollisionShape" type="CollisionShape2D" parent="RaftBody"]
 shape = SubResource("RectangleShape2D_crtqg")
+
+[node name="Sprite2D" type="Sprite2D" parent="RaftBody"]
+visible = false
+texture = ExtResource("2_12dra")
