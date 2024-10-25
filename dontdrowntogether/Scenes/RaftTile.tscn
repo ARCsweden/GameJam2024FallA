@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://8a2ou3r5va8h"]
+[gd_scene load_steps=3 format=3 uid="uid://8a2ou3r5va8h"]
+
+[ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="1_1dexo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv43m"]
-size = Vector2(10, 10)
+size = Vector2(100, 100)
 
 [node name="RaftTile" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
 
 [node name="RaftTileCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mv43m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_1dexo")
