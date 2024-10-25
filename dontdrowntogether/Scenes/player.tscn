@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2jpkk5jqvofv"]
+
+[ext_resource type="Script" path="res://Scenes/body.gd" id="1_6bp4r"]
+[ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_quia6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53yoc"]
+atlas = ExtResource("2_quia6")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpy18"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53yoc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player 1" type="Node2D"]
+
+[node name="Body" type="CharacterBody2D" parent="."]
+script = ExtResource("1_6bp4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CapsuleShape2D_8txg1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
+sprite_frames = SubResource("SpriteFrames_bpy18")
