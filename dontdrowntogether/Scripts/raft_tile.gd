@@ -26,7 +26,7 @@ func _scale_sprite():
 	print("Size:", $"./Sprite2D".scale)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func edge_tile():

@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	paddle()
 	if Input.is_action_just_pressed("ui_up"):
 		take_damage(2, 2)
@@ -58,7 +58,7 @@ func _create_grid() -> void:
 			add_child(instance)
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
-			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2) - (Vector2(Global.raft_tile_length / 2, Global.raft_tile_length / 2))
+			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2.0) - (Vector2(Global.raft_tile_length / 2.0, Global.raft_tile_length / 2.0))
 			# Adds instance to grid so it can edited later
 			
 			# Creates an invisible layer around the raft to block the player

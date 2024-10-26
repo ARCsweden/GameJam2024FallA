@@ -54,7 +54,7 @@ func repair_raft_tile() -> void:
 	pass
 
 
-func _on_damage_tile_entered(area):
+func _on_damage_tile_entered(_area):
 	$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
 	$PlayerBoundUi/Label.visible = true
 	pass # Replace with function body.
