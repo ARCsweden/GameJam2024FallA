@@ -27,8 +27,6 @@ func _ready() -> void:
 	$"./RepairArea/RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RepairArea/RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
 	
-	$"./PaddleArea/PaddleCollisionShape".shape.size.x = Global.raft_tile_length
-	$"./PaddleArea/PaddleCollisionShape".shape.size.y = Global.raft_tile_length
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
 	# Instantiate them invisible
@@ -77,7 +75,6 @@ func destroy():
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
-	set_collision_layer_value(9, true) # player can paddle near it
 
 func update_color() -> void:
 	self.modulate = Color(
@@ -106,9 +103,3 @@ func rebuild():
 	set_collision_layer_value(5, true) # tile collides with walls
 	set_collision_mask_value(5, true)
 	set_collision_layer_value(1, false)
-	set_collision_layer_value(9, false) # player cannot paddle near it
-
-
-func _on_paddle_area_area_entered(_area) -> void:
-	#print("Entered!")
-	pass
