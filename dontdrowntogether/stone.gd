@@ -24,7 +24,7 @@ func setup_texture():
 	sprite2D_Node.rotation_degrees = Global.rng.randi_range(0, 3) * 90
 	sprite2D_Node.rotation_degrees += Global.rng.randi_range(-5, 5)
 	# Large negative to make sure other items are on top
-	sprite2D_Node.z_index += -50 + Global.rng.randi_range(-1, 1)
+	sprite2D_Node.z_index += -10 + Global.rng.randi_range(-1, 1)
 	
 func setup_collision_size():
 	#var newCollosion = newCollisionShape2D.instantiate()
