@@ -7,6 +7,7 @@
 radius = 785.17
 
 [node name="Hook" type="Node2D"]
+top_level = true
 script = ExtResource("1_5vwec")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
