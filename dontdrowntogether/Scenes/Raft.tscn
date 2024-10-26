@@ -19,3 +19,7 @@ shape = SubResource("RectangleShape2D_crtqg")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_12dra")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -300)
+zoom = Vector2(0.67, 0.67)
