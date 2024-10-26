@@ -5,9 +5,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vgax"]
 
-[node name="Stone" type="RigidBody2D"]
-collision_layer = 128
-collision_mask = 16
+[node name="Stone" type="StaticBody2D"]
+collision_layer = 132
+collision_mask = 20
+constant_linear_velocity = Vector2(0, -200)
 script = ExtResource("1_l58iv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

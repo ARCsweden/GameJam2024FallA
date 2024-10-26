@@ -8,6 +8,8 @@ var collision_scale = 0.9
 
 @onready var decay_timer: Timer = $DecayTimer
 
+@export var top_level_collision_shape: CollisionShape2D
+
 const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
 const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
 const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
@@ -35,8 +37,9 @@ func _ready() -> void:
 	
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
-	# Instantiate them invisible
-	self.visible = 0
+	# Instantiate sprites disabled and top collision shapes disabled
+	top_level_collision_shape.set_deferred("disabled", true)
+	$"./Sprite2D".visible = 0
 	decay_timer.timeout.connect(_on_decay)
 
 func _on_decay() -> void:
@@ -64,7 +67,8 @@ func _process(_delta: float) -> void:
 	
 func edge_tile():
 	set_collision_layer_value(1, true)
-	self.visible = 1
+	$"./Sprite2D".visible = 1
+	self.top_level_collision_shape.set_deferred("disabled", true)
 	$"./Sprite2D".texture = load("res://icon.svg")
 	$"./Sprite2D".flip_v = true
 
@@ -77,11 +81,13 @@ func take_damage(amount):
 
 func destroy():
 	$Crash_AudioStreamPlayer.play()
-	self.visible = 0
+	self.top_level_collision_shape.top_level_collision_shape.set_deferred("disabled", true)
+	$"./Sprite2D".visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
-
+	
+	
 func update_color() -> void:
 	self.modulate = Color(
 		lerp(0.8, 1.0, health / max_hp),
@@ -102,7 +108,8 @@ func repair():
 	
 
 func rebuild():
-	self.visible = 1
+	self.top_level_collision_shape.set_deferred("disabled", false)
+	$"./Sprite2D".visible = 1
 	self.health = max_hp
 	update_color()
 	setup_decay_timer()
@@ -112,3 +119,5 @@ func rebuild():
 	
 func set_random_sprite():
 	$Sprite2D.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]
+
+	

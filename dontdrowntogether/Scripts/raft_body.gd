@@ -8,7 +8,11 @@ var RaftTileScene := load("res://Scenes/RaftTile.tscn")
 var rows: int = 5
 var columns: int = 5
 
+var raft_max_size = Vector2(Global.raft_tile_length*(columns+3), Global.raft_tile_length*(rows+3))
+
 var starting_area_squares: int = 1
+
+var force_mult = 20
 
 var grid = []
 
@@ -22,10 +26,13 @@ var grid = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Sets max size of the raft
-	$"./RaftCollisionShape".shape.size.x = Global.raft_tile_length*columns
-	$"./RaftCollisionShape".shape.size.y = Global.raft_tile_length*rows
+	#$"./RaftCollisionShape".shape.size.x = Global.raft_tile_length*(columns+3)
+	#$"./RaftCollisionShape".shape.size.y = Global.raft_tile_length*(rows+3)
+	#$"./RaftCollisionShape".position -= Vector2(150, 150)
 	
 	_create_grid()
+	set_collision_layer_value(3, true)
+	set_collision_mask_value(3, true)
 	_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
 	
@@ -33,6 +40,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	forward_force()
+	force_mult += 0.01
 	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
@@ -40,7 +48,8 @@ func _process(_delta: float) -> void:
 
 func forward_force():
 	var force = Vector2.from_angle(deg_to_rad(rotation_degrees) - deg_to_rad(90))
-	apply_central_force(force*20)
+	apply_central_force(force*force_mult)
+	apply_central_force(Vector2.UP*force_mult)
 
 func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
 	# Force based on player direction
@@ -72,18 +81,24 @@ func _create_grid() -> void:
 			# Creates an instance of RaftTileScene
 			instance = RaftTileScene.instantiate() 
 			
-			# Adds the instance to the scene tree
-			add_child(instance)
-			
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
-			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2.0) - (Vector2(Global.raft_tile_length / 2.0, Global.raft_tile_length / 2.0))
+			instance.position = Vector2((r+1)*Global.raft_tile_length, (c+1)*Global.raft_tile_length) - (raft_max_size / 2.0) 
+			
+			var collision_shape = CollisionShape2D.new()
+			add_child(collision_shape)
+			instance.top_level_collision_shape = collision_shape
+			collision_shape.shape = instance.get_node("RaftTileCollisionShape").shape
+			collision_shape.position = instance.position
 			
 			# Creates an invisible layer around the raft to block the player
 			if r == 0 or r == rows+1:
 				instance.edge_tile()
 			if c == 0 or c == columns+1:
 				instance.edge_tile()
-				
+
+			# Adds the instance to the scene tree
+			add_child(instance)
+			
 			# Adds instance to grid so it can edited later
 			grid[r].append(instance)
