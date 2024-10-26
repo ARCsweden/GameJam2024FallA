@@ -30,6 +30,7 @@ max_distance = 1000.0
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = -100
+scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(0, 3000)
 repeat_times = 2
 
@@ -45,7 +46,7 @@ region_rect = Rect2(0, 0, 1000, 1000)
 
 [node name="Parallax2D_walls" type="Parallax2D" parent="."]
 z_index = -100
-scroll_scale = Vector2(1.2, 1.2)
+scroll_scale = Vector2(1.1, 1.1)
 repeat_times = 2
 
 [node name="WallLeft" type="Sprite2D" parent="Parallax2D_walls"]
