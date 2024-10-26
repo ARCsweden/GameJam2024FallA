@@ -44,15 +44,9 @@ func set_controller_id(id) -> void:
 
 func _process(_delta) -> void:
 	if controller_ready == true:
-		if(Input.get_action_strength("DEBUG",controller_id) > 0):
-			$PlayerBoundUi/Label.visible = true
-		else:
-			$PlayerBoundUi/Label.visible = false
 		if Input.is_action_just_pressed("hook" + str(controller_id)):
 			hook.activate_hook(cur_dir)
 
-
-	
 func repair_raft_tile() -> void:
 	pass
 

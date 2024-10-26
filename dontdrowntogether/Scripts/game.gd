@@ -8,6 +8,7 @@ var RaftScene: PackedScene = preload("res://Scenes/Raft.tscn")
 var raft: Raft
 
 @onready var grunk_timer: Timer = $GrunkTimer
+@onready var hud: HUD = $HUD
 
 const spawn_point = Vector2(1000, 500)
 
@@ -23,6 +24,7 @@ func _ready():
 		i += 1
 	if connected.size() == 0:
 		create_player(0)
+	SignalBus.pickup_grunka.connect(_on_pickup_grunka)
 
 	# Delay first grunka spawn by a few seconds
 	await get_tree().create_timer(3.0).timeout
@@ -40,6 +42,10 @@ func _on_grunk_spawn() -> void:
 	# Randomize timer
 	grunk_timer.start(randf_range(1.0, 3.0))
 
+func _on_pickup_grunka(value: int) -> void:
+	Global.scrapAmount += value
+	hud.update_scrap_Counter(Global.scrapAmount)
+
 func create_player(i: int) -> void:
 	var player = PlayerScene.instantiate()
 
@@ -49,7 +55,6 @@ func create_player(i: int) -> void:
 	player.set_controller_id(i)
 	raft.add_child(player)
 	
-
 func _process(_delta):
 	if Input.is_action_just_pressed("OpenCloseMenu"):
 		get_tree().quit()
