@@ -30,8 +30,8 @@ max_distance = 1000.0
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = -100
+scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(0, 3000)
-autoscroll = Vector2(0, 500)
 repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
@@ -43,3 +43,12 @@ scale = Vector2(3, 3)
 texture = ExtResource("5_imhee")
 region_enabled = true
 region_rect = Rect2(0, 0, 1000, 1000)
+
+[node name="Parallax2D_walls" type="Parallax2D" parent="."]
+z_index = -100
+scroll_scale = Vector2(1.1, 1.1)
+repeat_times = 2
+
+[node name="WallLeft" type="Sprite2D" parent="Parallax2D_walls"]
+
+[node name="WallRight" type="Sprite2D" parent="Parallax2D_walls"]
