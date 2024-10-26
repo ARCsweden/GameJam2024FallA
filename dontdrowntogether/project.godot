@@ -14,10 +14,6 @@ config/name="DontDrownTogether"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-SignalBus="*res://Scripts/SignalBus.gd"
-
 [display]
 
 window/size/viewport_width=1920
@@ -26,7 +22,3 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="DontDrownTogether"
-
-[physics]
-
-2d/default_gravity=0.0
