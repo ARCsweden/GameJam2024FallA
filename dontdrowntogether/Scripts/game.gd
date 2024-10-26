@@ -51,12 +51,6 @@ func _on_stone_spawn() -> void:
 	add_child(stone)
 	stone_timer.start(randf_range(5.0, 10.0))
 
-func _on_stone_spawn() -> void:
-	var stone = stone_Scene.instantiate()
-	stone.position = Vector2(randf_range(100, 1900), randf_range(-400, -1900))
-	add_child(stone)
-	stone_timer.start(randf_range(5.0, 10.0))
-
 func _on_pickup_grunka(value: int) -> void:
 	Global.scrapAmount += value
 	hud.update_scrap_Counter(Global.scrapAmount)
