@@ -12,12 +12,6 @@ func _ready() -> void:
 	setup_collision_size()
 	setup_texture()
 	setup_sprite()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func setup_sprite():
 	#set the size of the texture stone to fit the collision

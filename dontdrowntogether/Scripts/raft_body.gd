@@ -27,11 +27,11 @@ func _ready() -> void:
 	
 	_create_grid()
 	_create_starting_area(starting_area_squares)
+	SignalBus.paddle.connect(_on_paddle)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	paddle()
 	forward_force()
 	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
@@ -42,23 +42,9 @@ func forward_force():
 	var force = Vector2.from_angle(deg_to_rad(rotation_degrees) - deg_to_rad(90))
 	apply_central_force(force*20)
 
-func paddle():
-	# Old debug code
-	#if Input.is_action_pressed("ui_page_up"):
-		#apply_force(Vector2.LEFT*10, Vector2.DOWN*150)
-	#if Input.is_action_pressed("ui_page_down"):
-		#apply_force(Vector2.RIGHT*10, Vector2.UP*150)
-	
-	# Angle from center of raft to center of player
-	var relative_angle = $"./Player".position.angle_to_point(Vector2(0, 0))
-	var vector_to_player = -Vector2.from_angle(relative_angle)
-	
-	if Input.is_action_pressed("ui_page_up"):
-		# Force based on relative_angle
-		#apply_force(vector_to_player*300, $"./Player".position)
-		
-		# Force based on player direction
-		apply_force(-$"./Player".cur_dir*50, $"./Player".position)
+func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
+	# Force based on player direction
+	apply_force(-cur_dir*50, player_pos)
 
 func take_damage(r, c):
 	grid[r][c].take_damage(1.0)

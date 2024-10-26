@@ -11,11 +11,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_mute_music_texture_button_2_pressed() -> void:
 	if musicPlayer_node.playing:
 		musicPlayer_node.stop()

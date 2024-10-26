@@ -40,6 +40,6 @@ func _on_finished() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	SignalBus.hooked.emit(body, get_parent())
-	var tween = get_tree().create_tween()
+	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", get_parent().global_position, 0.1)
 	tween.tween_callback(_on_finished)
