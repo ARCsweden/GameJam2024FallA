@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctnqn23etgcp0"]
+[gd_scene load_steps=5 format=3 uid="uid://ctnqn23etgcp0"]
 
 [ext_resource type="Script" path="res://Scripts/raft_body.gd" id="1_sw433"]
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_12dra"]
 [ext_resource type="PackedScene" uid="uid://bj3j8e3vpjgrb" path="res://Scenes/water_shader_test.tscn" id="3_cj5d0"]
 [ext_resource type="Script" path="res://Scenes/water_shader_test.gd" id="4_mi4bn"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_crtqg"]
-size = Vector2(300, 300)
 
 [node name="RaftBody" type="RigidBody2D"]
 z_index = 5
@@ -14,15 +11,13 @@ collision_layer = 4
 collision_mask = 4
 gravity_scale = 0.0
 angular_damp_mode = 1
+angular_damp = 1.0
 script = ExtResource("1_sw433")
-
-[node name="RaftCollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_crtqg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = 5
-position = Vector2(0, 500)
+scale = Vector2(2.56, 2.56)
 texture = ExtResource("2_12dra")
 
 [node name="Camera2D" type="Camera2D" parent="."]
