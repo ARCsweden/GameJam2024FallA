@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://82fhe0w6dwgo"]
 
-[ext_resource type="Script" path="res://main_menu.gd" id="1_vsdwt"]
-[ext_resource type="Texture2D" uid="uid://dld5gwe03povq" path="res://UI/Images/MenuBackground2.PNG" id="2_4t21l"]
-[ext_resource type="Texture2D" uid="uid://0esun8vk0q22" path="res://UI/Images/BackgroundBoardNoB.png" id="3_eoofo"]
-[ext_resource type="Texture2D" uid="uid://b1tgm44fknjxm" path="res://UI/Images/BetterButton.png" id="4_m055q"]
-[ext_resource type="Theme" uid="uid://jia55bt3fpaw" path="res://UI/MainMenuTheme.tres" id="4_xjwdx"]
-[ext_resource type="AudioStream" uid="uid://dkmuwv6tvng7e" path="res://Assets/Music/title_screen.mp3" id="6_r0elw"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_676ga"]
+[ext_resource type="Texture2D" uid="uid://dld5gwe03povq" path="res://UI/Images/MenuBackground2.PNG" id="2_twjcq"]
+[ext_resource type="Texture2D" uid="uid://0esun8vk0q22" path="res://UI/Images/BackgroundBoardNoB.png" id="3_0erf3"]
+[ext_resource type="Texture2D" uid="uid://b1tgm44fknjxm" path="res://UI/Images/BetterButton.png" id="4_rppa8"]
+[ext_resource type="Theme" uid="uid://jia55bt3fpaw" path="res://UI/MainMenuTheme.tres" id="5_3cfmo"]
+[ext_resource type="AudioStream" uid="uid://dkmuwv6tvng7e" path="res://Assets/Music/title_screen.mp3" id="6_kr5xl"]
 
 [node name="MainMenu_CanvasLayer" type="CanvasLayer"]
-script = ExtResource("1_vsdwt")
+script = ExtResource("1_676ga")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1920.0
@@ -26,12 +26,12 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4t21l")
+texture = ExtResource("2_twjcq")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 629.0
 offset_bottom = 1080.0
-texture = ExtResource("3_eoofo")
+texture = ExtResource("3_0erf3")
 expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -54,7 +54,7 @@ custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("4_m055q")
+texture_normal = ExtResource("4_rppa8")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -71,7 +71,7 @@ offset_right = 24.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_xjwdx")
+theme = ExtResource("5_3cfmo")
 text = "Single Player"
 
 [node name="Multiplayer_TextureButton2" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
@@ -80,7 +80,7 @@ custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("4_m055q")
+texture_normal = ExtResource("4_rppa8")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -97,7 +97,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_xjwdx")
+theme = ExtResource("5_3cfmo")
 text = "Multiplayer"
 
 [node name="Quit_TextureButton3" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
@@ -106,7 +106,7 @@ custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("4_m055q")
+texture_normal = ExtResource("4_rppa8")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -123,12 +123,12 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_xjwdx")
+theme = ExtResource("5_3cfmo")
 text = "Quit"
 
 [node name="TitleScreen_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_r0elw")
+stream = ExtResource("6_kr5xl")
 autoplay = true
 parameters/looping = true
 
