@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 @export var speed: float = 200.0  # Movement speed of the character
 
 var controller_id
@@ -10,6 +11,7 @@ var move_left
 var move_right
 var paddle
 
+	
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 
@@ -42,3 +44,15 @@ func _process(_delta) -> void:
 		$PlayerBoundUi/Label.visible = true
 	else:
 		$PlayerBoundUi/Label.visible = false
+
+func check_for_damage() -> void:
+	
+	pass
+	
+func repair_raft_tile() -> void:
+	pass
+
+
+func _on_area_2d_area_entered(area):
+	$PlayerBoundUi/Label.visible = true
+	pass # Replace with function body.
