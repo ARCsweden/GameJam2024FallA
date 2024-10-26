@@ -57,6 +57,7 @@ text = "BUTTON_PROMT"
 script = ExtResource("3_777ti")
 
 [node name="Hook" parent="." instance=ExtResource("4_12b52")]
+distance = 300.0
 
 [connection signal="area_entered" from="RepairCheckArea" to="." method="_on_damage_tile_entered"]
 [connection signal="area_exited" from="RepairCheckArea" to="." method="_on_repair_check_area_area_exited"]

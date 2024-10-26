@@ -14,8 +14,7 @@ var paddle
 var hook_btn
 var controller_ready := false
 
-func _ready() -> void:
-	hook.set_controller_id(controller_id)
+var cur_dir: Vector2 = Vector2.LEFT
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -23,6 +22,9 @@ func _physics_process(_delta: float) -> void:
 	# Get input direction
 	if controller_ready == true:
 		direction = Input.get_vector(move_left, move_right, move_up, move_down).normalized()
+	# Update last known facing, used for hook
+	if direction != Vector2.ZERO:
+		cur_dir = direction
 
 	velocity = direction * speed
 
@@ -42,8 +44,15 @@ func set_controller_id(id) -> void:
 
 func _process(_delta) -> void:
 	if controller_ready == true:
-		pass
+		if(Input.get_action_strength("DEBUG",controller_id) > 0):
+			$PlayerBoundUi/Label.visible = true
+		else:
+			$PlayerBoundUi/Label.visible = false
+		if Input.is_action_just_pressed("hook" + str(controller_id)):
+			hook.activate_hook(cur_dir)
 
+
+	
 func repair_raft_tile() -> void:
 	pass
 

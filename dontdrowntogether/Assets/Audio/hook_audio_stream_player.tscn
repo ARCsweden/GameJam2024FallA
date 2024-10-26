@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://pvmyga7ymy24"]
+
+[ext_resource type="AudioStream" uid="uid://dh3r0i3k1gj52" path="res://Assets/Audio/Hook/Hook.mp3" id="1_xek5r"]
+[ext_resource type="AudioStream" uid="uid://chfym2bkk6l2l" path="res://Assets/Audio/Hook/Hook2.mp3" id="2_3chke"]
+[ext_resource type="AudioStream" uid="uid://cyk2ii8iddmpj" path="res://Assets/Audio/Hook/Hook1.mp3" id="3_1bk8i"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8hr17"]
+streams_count = 3
+stream_0/stream = ExtResource("1_xek5r")
+stream_1/stream = ExtResource("2_3chke")
+stream_2/stream = ExtResource("3_1bk8i")
+
+[node name="Hook_AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_8hr17")

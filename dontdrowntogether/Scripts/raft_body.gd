@@ -1,5 +1,6 @@
 #@tool  # Makes the code run in the editor, so we can see the raft
 extends RigidBody2D
+class_name Raft
 
 # Preloads scene for faster loading
 var RaftTileScene := load("res://Scenes/RaftTile.tscn")

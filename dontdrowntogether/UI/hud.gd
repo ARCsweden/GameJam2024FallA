@@ -13,16 +13,15 @@ extends CanvasLayer
 
 
 
-func _input(event):
-	if event.is_action_pressed("testUI"):
-		scrapAmount += 1
-		update_scrap_Counter(scrapAmount)
+func _on_pickup_grunka(value: int) -> void:
+	scrapAmount += value
+	update_scrap_Counter(scrapAmount)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	unixTime_start = Time.get_unix_time_from_system()
-	pass # Replace with function body.
+	SignalBus.pickup_grunka.connect(_on_pickup_grunka)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
