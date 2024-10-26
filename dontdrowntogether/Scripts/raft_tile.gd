@@ -4,6 +4,7 @@ extends StaticBody2D
 
 const max_hp := 10.0
 var health := 0.0
+var collision_scale = 0.9
 
 @onready var decay_timer: Timer = $DecayTimer
 
@@ -29,8 +30,8 @@ func _ready() -> void:
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
 	
-	$"./RepairArea/RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
-	$"./RepairArea/RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
+	$"./RepairArea/RaftTileCollisionShape".shape.size.x = Global.raft_tile_length*collision_scale
+	$"./RepairArea/RaftTileCollisionShape".shape.size.y = Global.raft_tile_length*collision_scale
 	
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
