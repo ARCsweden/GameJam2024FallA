@@ -9,3 +9,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func destroy():
+	self.visible = 0
+
+
+func repair():
+	self.visible = 1
