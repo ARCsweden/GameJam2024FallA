@@ -28,10 +28,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	paddle()
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_pressed("DebugRebuild"):
 		rebuild_tile(2, 2)
+	if Input.is_action_just_pressed("DebugRepair"):
+		repair_tile(2, 2)
 
 
 func paddle():
@@ -45,6 +47,9 @@ func take_damage(r, c):
 
 func rebuild_tile(r, c):
 	grid[r][c].rebuild()
+
+func repair_tile(r, c):
+	grid[r][c].repair()
 
 func _create_grid() -> void:
 	#Instantiate tiles in a grid.

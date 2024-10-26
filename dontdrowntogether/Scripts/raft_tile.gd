@@ -33,6 +33,7 @@ func edge_tile():
 
 func take_damage():
 	set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
+	self.modulate = Color("8cdada")
 	health -= 1
 	if(health == 0):
 		destroy()
@@ -44,9 +45,11 @@ func destroy():
 
 func repair():
 	self.health = 2
+	self.modulate = Color("ffffff")
 	set_collision_layer_value(2, false)
 
 func rebuild():
 	self.visible = 1
 	self.health = 2
+	self.modulate = Color("ffffff")
 	set_collision_layer_value(1, false)
