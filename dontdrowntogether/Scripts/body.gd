@@ -4,12 +4,18 @@ extends CharacterBody2D
 
 var controller_id
 
+var move_up
+var move_down
+var move_left
+var move_right
+var paddle
+
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 
 	# Get input direction
-	direction.x = Input.get_action_strength("p1_move_right", controller_id) - Input.get_action_strength("p1_move_left", controller_id)
-	direction.y = Input.get_action_strength("p1_move_down", controller_id) - Input.get_action_strength("p1_move_up", controller_id)
+	direction.x = Input.get_action_strength(move_right, controller_id) - Input.get_action_strength(move_left, controller_id)
+	direction.y = Input.get_action_strength(move_down, controller_id) - Input.get_action_strength(move_up, controller_id)
 
 	# Normalize direction to have consistent speed in all directions
 	if direction != Vector2.ZERO:
@@ -24,7 +30,12 @@ func _physics_process(delta: float) -> void:
 
 func set_controller_id(id) -> void: 
 	controller_id = id
-	print(controller_id)	
+	move_up = "move_up" + str(controller_id)
+	move_down = "move_down" + str(controller_id)
+	move_right = "move_right" + str(controller_id)
+	move_left = "move_left" + str(controller_id)
+	paddle = "paddle" + str(controller_id)
+	
 
 func _process(delta) -> void:
 	if(Input.get_action_strength("DEBUG",controller_id) > 0):
