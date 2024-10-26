@@ -1,3 +1,4 @@
+[gd_scene load_steps=5 format=3 uid="uid://becbpdg61vwge"]
 
 [ext_resource type="Script" path="res://Scripts/Walls.gd" id="1_qyktd"]
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_l7dus"]
