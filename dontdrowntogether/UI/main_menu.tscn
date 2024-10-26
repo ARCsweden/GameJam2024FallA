@@ -48,7 +48,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SinglePlayer_TextureButton" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
+[node name="Play_TextureButton" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
@@ -58,7 +58,7 @@ texture_normal = ExtResource("4_rppa8")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="SinglePLayer_Label" type="Label" parent="MarginContainer/Buttons_VBoxContainer/SinglePlayer_TextureButton"]
+[node name="PlayPLayer_Label" type="Label" parent="MarginContainer/Buttons_VBoxContainer/Play_TextureButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -72,9 +72,9 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_3cfmo")
-text = "Single Player"
+text = "Play"
 
-[node name="Multiplayer_TextureButton2" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
+[node name="Mute_TextureButton2" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
@@ -84,7 +84,7 @@ texture_normal = ExtResource("4_rppa8")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="MultiPlayer_Label" type="Label" parent="MarginContainer/Buttons_VBoxContainer/Multiplayer_TextureButton2"]
+[node name="Mute_Label" type="Label" parent="MarginContainer/Buttons_VBoxContainer/Mute_TextureButton2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -98,7 +98,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_3cfmo")
-text = "Multiplayer"
+text = "Mute Music"
 
 [node name="Quit_TextureButton3" type="TextureButton" parent="MarginContainer/Buttons_VBoxContainer"]
 unique_name_in_owner = true
@@ -130,9 +130,8 @@ text = "Quit"
 unique_name_in_owner = true
 stream = ExtResource("6_kr5xl")
 autoplay = true
-bus = &"Music"
 parameters/looping = true
 
-[connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/SinglePlayer_TextureButton" to="." method="_on_single_player_texture_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Multiplayer_TextureButton2" to="." method="_on_multiplayer_texture_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Play_TextureButton" to="." method="_on_play_texture_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Mute_TextureButton2" to="." method="_on_mute_texture_button_2_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Quit_TextureButton3" to="." method="_on_quit_texture_button_3_pressed"]

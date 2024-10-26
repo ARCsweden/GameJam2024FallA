@@ -54,9 +54,6 @@ func create_player(i: int) -> void:
 	# Controller ID for this player
 	player.set_controller_id(i)
 	raft.add_child(player)
-	
-func _process(_delta):
-	if Input.is_action_just_pressed("OpenCloseMenu"):
-		get_tree().quit()
-	# Temp grunka spawning
-	
+
+func queuefree_self():
+	queue_free()
