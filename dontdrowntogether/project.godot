@@ -31,3 +31,4 @@ project/assembly_name="DontDrownTogether"
 
 2d_physics/layer_1="PlayerCollision"
 2d_physics/layer_2="Damaged"
+2d_physics/layer_3="Raft"
