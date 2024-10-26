@@ -4,11 +4,13 @@ extends Node2D
 var PlayerScene: PackedScene = preload("res://Scenes/player.tscn")
 var GrunkaScene: PackedScene = preload("res://Scenes/grunka.tscn")
 var RaftScene: PackedScene = preload("res://Scenes/Raft.tscn")
+var stone_Scene: PackedScene = preload("res://Scenes/stone.tscn")
 
 var raft: Raft
 
 @onready var grunk_timer: Timer = $GrunkTimer
 @onready var hud: HUD = $HUD
+@onready var stone_timer : Timer = $StoneTimer
 
 const spawn_point = Vector2(1000, 500)
 
@@ -29,6 +31,9 @@ func _ready():
 	grunk_timer.connect("timeout", _on_grunk_spawn)
 	grunk_timer.start(randf_range(1.5, 3.0))
 
+	stone_timer.connect("timeout", _on_stone_spawn)
+	stone_timer.start(randf_range(5.0, 10.0))
+
 func _on_grunk_spawn() -> void:
 	var grunka: Grunka = GrunkaScene.instantiate()
 	var value = randi_range(1, 5)
@@ -39,6 +44,18 @@ func _on_grunk_spawn() -> void:
 	add_child(grunka)
 	# Randomize timer
 	grunk_timer.start(randf_range(0.25, 1.0))
+
+func _on_stone_spawn() -> void:
+	var stone = stone_Scene.instantiate()
+	stone.position = Vector2(randf_range(100, 1900), randf_range(-400, -1900))
+	add_child(stone)
+	stone_timer.start(randf_range(5.0, 10.0))
+
+func _on_stone_spawn() -> void:
+	var stone = stone_Scene.instantiate()
+	stone.position = Vector2(randf_range(100, 1900), randf_range(-400, -1900))
+	add_child(stone)
+	stone_timer.start(randf_range(5.0, 10.0))
 
 func _on_pickup_grunka(value: int) -> void:
 	Global.scrapAmount += value
