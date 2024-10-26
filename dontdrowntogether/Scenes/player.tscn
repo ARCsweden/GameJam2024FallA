@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2jpkk5jqvofv"]
+[gd_scene load_steps=7 format=3 uid="uid://d2jpkk5jqvofv"]
 
 [ext_resource type="Script" path="res://Scripts/body.gd" id="1_6bp4r"]
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_quia6"]
+[ext_resource type="Script" path="res://Scenes/label.gd" id="3_777ti"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txg1"]
 
@@ -30,3 +31,19 @@ shape = SubResource("CapsuleShape2D_8txg1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 sprite_frames = SubResource("SpriteFrames_bpy18")
+
+[node name="PlayerBoundUi" type="Control" parent="Body"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Body/PlayerBoundUi"]
+visible = false
+layout_mode = 2
+offset_left = 17.0
+offset_top = -44.0
+offset_right = 147.0
+offset_bottom = -21.0
+text = "BUTTON_PROMT"
+script = ExtResource("3_777ti")

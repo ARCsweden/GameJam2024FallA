@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var speed: float = 200.0  # Movement speed of the character
 
+var controller_id
+
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 
@@ -18,3 +20,13 @@ func _physics_process(delta: float) -> void:
 
 	# Move the character
 	move_and_slide()
+
+
+func set_controller_id(id) -> void: controller_id = id
+	
+
+func _process(delta) -> void:
+	if(Input.get_action_strength("DEBUG") > 0):
+		$PlayerBoundUi/Label.visible = true
+	else:
+		$PlayerBoundUi/Label.visible = false
