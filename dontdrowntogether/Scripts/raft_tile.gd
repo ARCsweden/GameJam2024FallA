@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+@onready var hud: HUD = $"../../HUD"
+
 var health = 2
 
 #Layer 1: Player collision layer
@@ -17,6 +19,8 @@ func _ready() -> void:
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
+	# Instantiate them invisible
+	self.visible = 0
 	
 func setup_texture():
 	# Gives random rotation
@@ -43,22 +47,27 @@ func edge_tile():
 	$"./Sprite2D".flip_v = true
 
 func take_damage():
-	$Area2D.set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
+	$RepairArea.set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
 	self.modulate = Color("8cdada")
 	health -= 1
 	if(health == 0):
 		destroy()
 
 func destroy():
+	$Crash_AudioStreamPlayer.play()
 	self.visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
-	$Area2D.set_collision_layer_value(2, false) #Tile is no longer damaged
+	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
 
 func repair():
+	$Repair_AudioStreamPlayer.play()
 	self.health = 2
 	self.modulate = Color("ffffff")
-	$Area2D.set_collision_layer_value(2, false)
+	$RepairArea.set_collision_layer_value(2, false)
+	Global.scrapAmount -= Global.repair_cost
+	hud.update_scrap_Counter(Global.scrapAmount)
+	
 
 func rebuild():
 	self.visible = 1

@@ -15,6 +15,8 @@ var paddle
 var hook_btn
 var controller_ready := false
 
+var last_repairable_tile
+var can_repair = false
 
 var cur_dir: Vector2 = Vector2.LEFT
 
@@ -50,23 +52,24 @@ func set_controller_id(id) -> void:
 
 func _process(_delta) -> void:
 	if controller_ready == true:
-		if(Input.get_action_strength("DEBUG",controller_id) > 0):
-			$PlayerBoundUi/Label.visible = true
-		else:
-			$PlayerBoundUi/Label.visible = false
 		if Input.is_action_just_pressed("hook" + str(controller_id)):
 			hook.activate_hook(cur_dir)
+		if Input.is_action_just_pressed("DebugRepair"): #TODO Change to an actual button for a controller
+			if(can_repair):
+				last_repairable_tile.call_repair()
 
-
-	
 func repair_raft_tile() -> void:
 	pass
 
 func _on_damage_tile_entered(_area):
-	$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
-	$PlayerBoundUi/Label.visible = true
+	if(Global.scrapAmount >= Global.repair_cost):
+		$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
+		$PlayerBoundUi/Label.visible = true
+		last_repairable_tile = _area
+		can_repair = true
 	pass
 
 func _on_repair_check_area_area_exited(area: Area2D) -> void:
 	$PlayerBoundUi/Label.visible = false
+	can_repair = false
 	pass
