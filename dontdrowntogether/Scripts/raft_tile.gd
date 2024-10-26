@@ -2,6 +2,11 @@ extends StaticBody2D
 
 var health = 2
 
+#Layer 1: Player collision layer
+#Layer 2: Damage taken layer
+#Layer 3: Raft layer
+#Layer 4: Environment collision layer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Sets raft tile length
