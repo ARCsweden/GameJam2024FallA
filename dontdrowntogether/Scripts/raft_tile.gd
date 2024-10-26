@@ -108,3 +108,6 @@ func rebuild():
 	set_collision_layer_value(5, true) # tile collides with walls
 	set_collision_mask_value(5, true)
 	set_collision_layer_value(1, false)
+	
+func set_random_sprite():
+	$Sprite2D.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]
