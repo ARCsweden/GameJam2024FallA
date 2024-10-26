@@ -2,11 +2,12 @@ extends Node2D
 
 # Load the Player scene
 var PlayerScene = preload("res://Scenes/player.tscn")
+var raft = preload("res://Scenes/Raft.tscn")
 
 const spawn_point = Vector2(1000, 500)
 
 func _ready():
-	var raft = preload("res://Scenes/Raft.tscn").instantiate()
+	raft = raft.instantiate()
 	raft.position = spawn_point
 	add_child(raft)
 	#TODO: Get spawnpoints for player 1 and player 2 from raft
@@ -23,10 +24,10 @@ func create_player(i: int) -> void:
 	var player = PlayerScene.instantiate()
 
 	# Set positions or other properties if necessary
-	player.position = spawn_point + Vector2(100 + i * 200, 100)  # Adjust as needed
+	# player.position = spawn_point  + Vector2(10 + i * 1, 1)  # Adjust as needed
 	# Controller ID for this player
 	player.set_controller_id(i)
-	add_child(player)
+	raft.add_child(player)
 	
 
 func _process(_delta):
