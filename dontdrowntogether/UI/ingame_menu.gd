@@ -2,8 +2,6 @@ extends CanvasLayer
 
 @onready var main_menu_scene: PackedScene = load("res://UI/main_menu.tscn")
 
-signal queuefreeGame
-signal pauseGame
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("OpenCloseMenu"):
@@ -24,6 +22,7 @@ func _on_mute_music_texture_button_2_pressed() -> void:
 
 func _on_main_menu_texture_button_3_pressed() -> void:
 	get_tree().call_deferred("change_scene_to_packed", main_menu_scene)
+	get_tree().paused = false
 	self.get_meta("gameNode").queue_free()
 	#queuefreeGame.emit()
 	queue_free()
