@@ -6,6 +6,8 @@
 [ext_resource type="Theme" uid="uid://jia55bt3fpaw" path="res://UI/MainMenuTheme.tres" id="3_gc886"]
 
 [node name="Menu_CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+visible = false
 script = ExtResource("1_iru8w")
 
 [node name="TextureRect" type="TextureRect" parent="."]
