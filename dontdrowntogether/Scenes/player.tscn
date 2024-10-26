@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkpbc6kmqjaim"]
+
+[ext_resource type="Script" path="res://Scripts/body.gd" id="1_6bp4r"]
+[ext_resource type="Texture2D" uid="uid://pw2elp0ug1sy" path="res://images/RockyDude.png" id="2_myuhg"]
+[ext_resource type="Script" path="res://Scenes/label.gd" id="3_777ti"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0pea"]
+atlas = ExtResource("2_myuhg")
+region = Rect2(0, 0, 20, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpy18"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0pea")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uo6tg"]
+
+[node name="Body" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_6bp4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_8txg1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bpy18")
+
+[node name="RapairCheckArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Mask checker" type="CollisionShape2D" parent="RapairCheckArea"]
+shape = SubResource("CapsuleShape2D_uo6tg")
+
+[node name="PlayerBoundUi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="PlayerBoundUi"]
+visible = false
+layout_mode = 2
+offset_left = 17.0
+offset_top = -44.0
+offset_right = 147.0
+offset_bottom = -21.0
+text = "BUTTON_PROMT"
+script = ExtResource("3_777ti")
+
+[connection signal="area_entered" from="RapairCheckArea" to="." method="_on_damage_tile_entered"]
