@@ -35,9 +35,9 @@ func _process(_delta: float) -> void:
 
 
 func paddle():
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_page_up"):
 		apply_force(Vector2.LEFT*10, position+Vector2.DOWN*150)
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_page_down"):
 		apply_force(Vector2.RIGHT*10, position+Vector2.DOWN*150)
 
 func take_damage(r, c):
