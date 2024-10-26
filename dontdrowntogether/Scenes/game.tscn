@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq24rlvjeaqyo"]
+[gd_scene load_steps=4 format=3 uid="uid://rslh7wyupis3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
+[ext_resource type="PackedScene" uid="uid://becbpdg61vwge" path="res://Scenes/Walls.tscn" id="3_5jli6"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ol0k5")
 
 [node name="HUD" parent="." instance=ExtResource("2_q2g3m")]
 
+[node name="Walls" parent="." instance=ExtResource("3_5jli6")]
 [node name="GrunkTimer" type="Timer" parent="."]
 wait_time = 2.0

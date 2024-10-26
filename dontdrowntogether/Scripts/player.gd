@@ -18,7 +18,7 @@ var cur_dir: Vector2 = Vector2.LEFT
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
-
+	rotation = 0 - $"..".rotation #Tries to lock rotation
 	# Get input direction
 	if controller_ready == true:
 		direction = Input.get_vector(move_left, move_right, move_up, move_down).normalized()
@@ -56,8 +56,11 @@ func _process(_delta) -> void:
 func repair_raft_tile() -> void:
 	pass
 
-
 func _on_damage_tile_entered(_area):
 	$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
 	$PlayerBoundUi/Label.visible = true
-	pass # Replace with function body.
+	pass
+
+func _on_repair_check_area_area_exited(area: Area2D) -> void:
+	$PlayerBoundUi/Label.visible = false
+	pass
