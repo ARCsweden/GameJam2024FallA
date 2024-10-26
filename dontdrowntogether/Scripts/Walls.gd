@@ -15,3 +15,7 @@ func _scale_sprite():
 	new_scale = Vector2($"./RightWall".shape.size.x / sprite_size.x, $"./RightWall".shape.size.y / sprite_size.y)
 	# Additional scaling to make sure sprite edges don't perfectly connect, it causes visual bug
 	$"./RightWall/Sprite2D".scale = new_scale
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	self.position.y = $"../RaftBody".position.y
