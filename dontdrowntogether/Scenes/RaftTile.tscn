@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cw6sggaruqqcp"]
 
-[ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="1_1dexo"]
 [ext_resource type="Script" path="res://Scripts/raft_tile.gd" id="1_3r40d"]
+[ext_resource type="Texture2D" uid="uid://dur8h03gaqp28" path="res://Assets/WoodRaftTile.png" id="2_rp4dj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv43m"]
 size = Vector2(100, 100)
@@ -16,4 +16,4 @@ shape = SubResource("RectangleShape2D_mv43m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_1dexo")
+texture = ExtResource("2_rp4dj")

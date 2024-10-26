@@ -67,6 +67,4 @@ func _create_grid() -> void:
 			if c == 0 or c == columns+1:
 				instance.edge_tile()
 				
-			
-			
 			grid[r].append(instance)
