@@ -38,7 +38,7 @@ func edge_tile():
 	$"./Sprite2D".flip_v = true
 
 func take_damage():
-	set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
+	$Area2D.set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
 	self.modulate = Color("8cdada")
 	health -= 1
 	if(health == 0):
@@ -47,12 +47,12 @@ func take_damage():
 func destroy():
 	self.visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
-	set_collision_layer_value(2, false) #Tile is no longer damaged
+	$Area2D.set_collision_layer_value(2, false) #Tile is no longer damaged
 
 func repair():
 	self.health = 2
 	self.modulate = Color("ffffff")
-	set_collision_layer_value(2, false)
+	$Area2D.set_collision_layer_value(2, false)
 
 func rebuild():
 	self.visible = 1

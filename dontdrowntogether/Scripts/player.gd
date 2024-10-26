@@ -42,18 +42,16 @@ func set_controller_id(id) -> void:
 
 func _process(_delta) -> void:
 	if controller_ready == true:
-		if(Input.get_action_strength("DEBUG",controller_id) > 0):
-			$PlayerBoundUi/Label.visible = true
-		else:
-			$PlayerBoundUi/Label.visible = false
+		pass
 
-
-	
 func repair_raft_tile() -> void:
 	pass
-
 
 func _on_damage_tile_entered(_area):
 	$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
 	$PlayerBoundUi/Label.visible = true
-	pass # Replace with function body.
+	pass
+
+func _on_repair_check_area_area_exited(area: Area2D) -> void:
+	$PlayerBoundUi/Label.visible = false
+	pass
