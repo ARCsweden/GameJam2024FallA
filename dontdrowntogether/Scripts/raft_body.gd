@@ -1,11 +1,11 @@
-@tool  # Makes the code run in the editor, so we can see the raft
+#@tool  # Makes the code run in the editor, so we can see the raft
 extends RigidBody2D
 
 # Preloads scene for faster loading
 var RaftTileScene := load("res://Scenes/RaftTile.tscn")
 
-var row: int = 3
-var column: int = 3
+var rows: int = 5
+var columns: int = 5
 
 var grid = []
 
@@ -18,8 +18,12 @@ var grid = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Sets max size of the raft
+	$"./RaftCollisionShape".shape.size.x = Global.raft_tile_length*columns
+	$"./RaftCollisionShape".shape.size.y = Global.raft_tile_length*rows
+	
 	_create_grid()
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -45,16 +49,16 @@ func repair_tile(r, c):
 func _create_grid() -> void:
 	#Instantiate tiles in a 3x3 grid.
 	var instance
-	for r in row:
+	for r in rows:
 		grid.append([])
-		for c in column:
+		for c in columns:
 			# Creates an instance of RaftTileScene
 			instance = RaftTileScene.instantiate() 
 			# Adds the instance to the scene tree
 			add_child(instance)
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
-			instance.position = Vector2(r*100+50, c*100+50) - ($RaftCollisionShape.shape.size / 2)
+			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2) + (Vector2(Global.raft_tile_length / 2, Global.raft_tile_length / 2))
 			# Adds instance to grid so it can edited later
 			grid[r].append(instance)
 	print(grid)
