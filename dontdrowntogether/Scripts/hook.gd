@@ -6,6 +6,8 @@ class_name Hook
 @export var distance: float = 200.0
 @export var speed: float = 0.5
 
+var id: int = 0
+
 var thrown: bool = false
 var tween: Tween
 
@@ -13,11 +15,12 @@ var tween: Tween
 func _ready() -> void:
 	visible = false
 
+func set_controller_id(controller_id: int) -> void:
+	id = controller_id
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	# TODO: Separate into a player command? Maybe trigger this from signal instead
-	if !thrown and Input.is_action_just_pressed("ui_accept"):
+	if !thrown and Input.is_action_just_pressed("hook" + str(id)):
 		var target = get_global_mouse_position()
 		var dir = (target - global_position).normalized()
 
