@@ -29,7 +29,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	paddle()
 	if Input.is_action_just_pressed("ui_up"):
-		destroy_tile(1, 1)
+		take_damage(1, 1)
 	if Input.is_action_just_pressed("ui_down"):
 		rebuild_tile(1, 1)
 
@@ -40,8 +40,8 @@ func paddle():
 	if Input.is_action_pressed("ui_right"):
 		apply_force(Vector2.RIGHT*10, position+Vector2.DOWN*150)
 
-func destroy_tile(r, c):
-	grid[r][c].destroy()
+func take_damage(r, c):
+	grid[r][c].take_damage()
 
 func rebuild_tile(r, c):
 	grid[r][c].rebuild()

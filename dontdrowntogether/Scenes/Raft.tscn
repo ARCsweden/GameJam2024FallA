@@ -9,6 +9,8 @@ size = Vector2(300, 300)
 [node name="Raft" type="Node2D"]
 
 [node name="RaftBody" type="RigidBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
 gravity_scale = 0.0
 angular_damp_mode = 1
 script = ExtResource("1_sw433")
