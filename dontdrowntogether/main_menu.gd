@@ -3,11 +3,22 @@ extends CanvasLayer
 @onready var SinglePlayerButton_Node = %SinglePlayer_TextureButton
 @onready var MultiPlayerButton_Node = %Multiplayer_TextureButton2
 @onready var QuitButton_Node = %Quit_TextureButton3
+@onready var TitleScreenAudioStream_Node = %TitleScreen_AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
+
+func _input(event):
+	if event.is_action_pressed("MuteMusic"):
+		if TitleScreenAudioStream_Node.playing:
+			TitleScreenAudioStream_Node.stop()
+		else:
+			TitleScreenAudioStream_Node.play()
+
+
 func _ready() -> void:
 	SinglePlayerButton_Node.scale = Vector2(.5,.5)
 	pass # Replace with function body.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

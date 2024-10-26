@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://w4gm67bydod"]
+[gd_scene load_steps=7 format=3 uid="uid://82fhe0w6dwgo"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_vsdwt"]
 [ext_resource type="Texture2D" uid="uid://dld5gwe03povq" path="res://UI/Images/MenuBackground2.PNG" id="2_4t21l"]
 [ext_resource type="Texture2D" uid="uid://0esun8vk0q22" path="res://UI/Images/BackgroundBoardNoB.png" id="3_eoofo"]
 [ext_resource type="Texture2D" uid="uid://b1tgm44fknjxm" path="res://UI/Images/BetterButton.png" id="4_m055q"]
 [ext_resource type="Theme" uid="uid://jia55bt3fpaw" path="res://UI/MainMenuTheme.tres" id="4_xjwdx"]
+[ext_resource type="AudioStream" uid="uid://dkmuwv6tvng7e" path="res://Assets/Music/title_screen.mp3" id="6_r0elw"]
 
 [node name="MainMenu_CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_vsdwt")
@@ -124,6 +125,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_xjwdx")
 text = "Quit"
+
+[node name="TitleScreen_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_r0elw")
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/SinglePlayer_TextureButton" to="." method="_on_single_player_texture_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Multiplayer_TextureButton2" to="." method="_on_multiplayer_texture_button_2_pressed"]

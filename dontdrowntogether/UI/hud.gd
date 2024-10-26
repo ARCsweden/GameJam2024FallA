@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var timeCounterLabel_Node = %NumberCounterTime_Label
 @onready var scrapCounterLabel_Node = %ScrapCounter_label
 
+
 @onready var scrapAmount : int = 0
 
 
@@ -16,6 +17,7 @@ func _input(event):
 	if event.is_action_pressed("testUI"):
 		scrapAmount += 1
 		update_scrap_Counter(scrapAmount)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
