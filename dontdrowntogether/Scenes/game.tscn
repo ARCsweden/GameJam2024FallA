@@ -3,17 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
 [ext_resource type="PackedScene" uid="uid://becbpdg61vwge" path="res://Scenes/Walls.tscn" id="3_5jli6"]
-[ext_resource type="PackedScene" uid="uid://bj3j8e3vpjgrb" path="res://Scenes/water_shader_test.tscn" id="3_xswel"]
+[ext_resource type="Texture2D" uid="uid://brlyj5y5qoqgy" path="res://Assets/Floorbed.png" id="5_imhee"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_ol0k5")
-
-[node name="WaterShaderTEST" parent="." instance=ExtResource("3_xswel")]
-z_index = -10
-z_as_relative = true
-position = Vector2(1007.5, 452.817)
-scale = Vector2(17.3203, 23.5128)
 
 [node name="HUD" parent="." instance=ExtResource("2_q2g3m")]
 
@@ -27,8 +21,25 @@ visible = false
 color = Color(0.458405, 0.458405, 0.458405, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 color = Color(0.94902, 0.701961, 0.364706, 1)
 energy = 0.16
 blend_mode = 1
 shadow_enabled = true
 max_distance = 1000.0
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -100
+repeat_size = Vector2(0, 3000)
+autoscroll = Vector2(0, 500)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+z_index = -11
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(1023, 413)
+scale = Vector2(3, 3)
+texture = ExtResource("5_imhee")
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 1000)
