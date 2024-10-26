@@ -12,12 +12,15 @@ size = Vector2(300, 300)
 z_index = 5
 collision_layer = 4
 collision_mask = 4
+mass = 10.0
 gravity_scale = 0.0
 angular_damp_mode = 1
+angular_damp = 1.0
 script = ExtResource("1_sw433")
 
 [node name="RaftCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_crtqg")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)

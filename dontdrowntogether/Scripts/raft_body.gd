@@ -4,6 +4,7 @@ class_name Raft
 
 # Preloads scene for faster loading
 var RaftTileScene := load("res://Scenes/RaftTile.tscn")
+var RaftTileScene2 := load("res://Scenes/RaftTile2.tscn")
 
 var rows: int = 5
 var columns: int = 5
@@ -26,7 +27,7 @@ func _ready() -> void:
 	$"./RaftCollisionShape".shape.size.y = Global.raft_tile_length*rows
 	
 	_create_grid()
-	_create_starting_area(starting_area_squares)
+	#_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
 	
 
@@ -70,20 +71,45 @@ func _create_grid() -> void:
 		grid.append([])
 		for c in columns+2:
 			# Creates an instance of RaftTileScene
-			instance = RaftTileScene.instantiate() 
+			#instance = RaftTileScene.instantiate() 
 			
 			# Adds the instance to the scene tree
-			add_child(instance)
+			#add_child(instance)
 			
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
-			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2.0) - (Vector2(Global.raft_tile_length / 2.0, Global.raft_tile_length / 2.0))
+			#instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2.0) - (Vector2(Global.raft_tile_length / 2.0, Global.raft_tile_length / 2.0))
 			
 			# Creates an invisible layer around the raft to block the player
-			if r == 0 or r == rows+1:
-				instance.edge_tile()
-			if c == 0 or c == columns+1:
-				instance.edge_tile()
-				
+			#if r == 0 or r == rows+1 or c == 0 or c == columns+1:
+				#instance.edge_tile()
+			# Creates collision shapes for Rigidbody
+			
+			
+			
+			
+			instance = RaftTileScene2.instantiate()
+			add_child(instance)
+			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2.0) - (Vector2(Global.raft_tile_length / 2.0, Global.raft_tile_length / 2.0))
+			
+			
+			
+			
+			#var collision_shape: CollisionShape2D = CollisionShape2D.new()
+			#var shape = RectangleShape2D.new()
+			#shape.size = Vector2(Global.raft_tile_length, Global.raft_tile_length)
+			#collision_shape.shape = shape
+			#add_child(collision_shape)
+			
+			#add_child(instance.get_node("RaftTileCollisionShape"))
+			#print(instance.get_children())
+			#instance.get_children(2).queue_free()
+			#add_child(instance.get_children()[3])
+			
 			# Adds instance to grid so it can edited later
 			grid[r].append(instance)
+	print(get_children())
+
+
+func bridge_set_collision_layer(layer, val):
+	set_collision_layer_value(layer, val)

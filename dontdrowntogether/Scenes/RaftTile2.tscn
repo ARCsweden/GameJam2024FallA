@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://50wgjww2bhd3"]
+
+[ext_resource type="Script" path="res://Scripts/raft_tile_2.gd" id="1_wqndm"]
+[ext_resource type="PackedScene" uid="uid://b1ob4rh1obs52" path="res://Assets/Audio/repair_audio_stream.tscn" id="2_exr2u"]
+[ext_resource type="Shader" path="res://tile.gdshader" id="3_kv10c"]
+[ext_resource type="Texture2D" uid="uid://dur8h03gaqp28" path="res://Assets/WoodRaftTile.png" id="4_y5t4d"]
+[ext_resource type="Script" path="res://Scripts/repair_area.gd" id="5_21p8n"]
+[ext_resource type="PackedScene" uid="uid://nysssxwky0oq" path="res://Assets/Audio/crash_audio_stream_player.tscn" id="6_ljyce"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_biivd"]
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe8hx"]
+shader = ExtResource("3_kv10c")
+shader_parameter/Strength = 4.943
+shader_parameter/Speed = 6.097
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ghw4"]
+size = Vector2(100, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D"]
+shape = SubResource("RectangleShape2D_biivd")
+script = ExtResource("1_wqndm")
+
+[node name="Repair_AudioStreamPlayer" parent="." instance=ExtResource("2_exr2u")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qe8hx")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_y5t4d")
+
+[node name="RepairArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("5_21p8n")
+
+[node name="RaftTileCollisionShape" type="CollisionShape2D" parent="RepairArea"]
+shape = SubResource("RectangleShape2D_8ghw4")
+
+[node name="Crash_AudioStreamPlayer" parent="." instance=ExtResource("6_ljyce")]
+
+[node name="DecayTimer" type="Timer" parent="."]
+one_shot = true
