@@ -31,3 +31,4 @@ zoom = Vector2(0.67, 0.67)
 [node name="WaterShaderTEST" parent="." instance=ExtResource("3_cj5d0")]
 z_index = -50
 position = Vector2(-1.99997, 700)
+scale = Vector2(22.625, 38.4453)
