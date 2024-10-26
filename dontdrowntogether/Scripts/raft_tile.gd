@@ -7,6 +7,11 @@ var health := 0.0
 
 @onready var decay_timer: Timer = $DecayTimer
 
+const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
+const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
+const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
+var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
+
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
@@ -19,7 +24,7 @@ func setup_decay_timer() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup_texture()
-	
+	set_random_sprite()
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
@@ -112,3 +117,6 @@ func rebuild():
 func _on_paddle_area_area_entered(_area) -> void:
 	#print("Entered!")
 	pass
+
+func set_random_sprite():
+	$Sprite2D.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]
