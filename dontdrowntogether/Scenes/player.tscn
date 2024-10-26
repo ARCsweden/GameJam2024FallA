@@ -1,20 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://d2jpkk5jqvofv"]
 
 [ext_resource type="Script" path="res://Scripts/body.gd" id="1_6bp4r"]
-[ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_quia6"]
+[ext_resource type="Texture2D" uid="uid://pw2elp0ug1sy" path="res://images/RockyDude.png" id="2_myuhg"]
 [ext_resource type="Script" path="res://Scenes/label.gd" id="3_777ti"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txg1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_53yoc"]
-atlas = ExtResource("2_quia6")
-region = Rect2(32, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0pea"]
+atlas = ExtResource("2_myuhg")
+region = Rect2(0, 0, 20, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bpy18"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_53yoc")
+"texture": SubResource("AtlasTexture_j0pea")
 }],
 "loop": true,
 "name": &"default",

@@ -37,7 +37,7 @@ func set_controller_id(id) -> void:
 	move_right = "move_right" + str(controller_id)
 	move_left = "move_left" + str(controller_id)
 	paddle = "paddle" + str(controller_id)
-	
+		
 
 func _process(_delta) -> void:
 	if(Input.get_action_strength("DEBUG",controller_id) > 0):
