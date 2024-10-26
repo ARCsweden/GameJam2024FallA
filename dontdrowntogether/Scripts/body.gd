@@ -45,14 +45,13 @@ func _process(_delta) -> void:
 	else:
 		$PlayerBoundUi/Label.visible = false
 
-func check_for_damage() -> void:
-	
-	pass
+
 	
 func repair_raft_tile() -> void:
 	pass
 
 
-func _on_area_2d_area_entered(area):
+func _on_damage_tile_entered(area):
+	$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
 	$PlayerBoundUi/Label.visible = true
 	pass # Replace with function body.
