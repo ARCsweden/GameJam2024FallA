@@ -33,3 +33,6 @@ script = ExtResource("4_chgcs")
 shape = SubResource("RectangleShape2D_mv43m")
 
 [node name="Crash_AudioStreamPlayer" parent="." instance=ExtResource("4_nin0e")]
+
+[node name="DecayTimer" type="Timer" parent="."]
+one_shot = true

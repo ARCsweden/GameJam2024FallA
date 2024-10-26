@@ -14,5 +14,6 @@ script = ExtResource("1_ol0k5")
 
 [node name="GrunkTimer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
 
 [node name="StoneTimer" type="Timer" parent="."]
