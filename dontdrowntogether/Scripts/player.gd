@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var hook: Hook = $Hook
 
 @export var speed: float = 200.0  # Movement speed of the character
 
@@ -10,8 +11,12 @@ var move_down
 var move_left
 var move_right
 var paddle
+var hook_btn
 var controller_ready := false
-	
+
+func _ready() -> void:
+	hook.set_controller_id(controller_id)
+
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 
@@ -32,8 +37,8 @@ func set_controller_id(id) -> void:
 	move_right = "move_right" + str(controller_id)
 	move_left = "move_left" + str(controller_id)
 	paddle = "paddle" + str(controller_id)
+	hook_btn = "hook" + str(controller_id)
 	controller_ready = true
-		
 
 func _process(_delta) -> void:
 	if controller_ready == true:
