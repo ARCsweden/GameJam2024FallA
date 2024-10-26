@@ -13,7 +13,7 @@ colors = PackedColorArray(0.381703, 0.381703, 0.381703, 1, 1, 1, 1, 1, 0.36283, 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lt1tr"]
 gradient = SubResource("Gradient_3ou28")
 width = 2
-height = 16
+height = 32
 use_hdr = true
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.991453, 0)
@@ -24,7 +24,7 @@ script = ExtResource("1_ol0k5")
 
 [node name="HUD" parent="." instance=ExtResource("2_q2g3m")]
 
-[node name="Rain2" type="CPUParticles2D" parent="HUD"]
+[node name="Rain" type="CPUParticles2D" parent="HUD"]
 position = Vector2(950, -400)
 rotation = 0.349066
 amount = 2000
