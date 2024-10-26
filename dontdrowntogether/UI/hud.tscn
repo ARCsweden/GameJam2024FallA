@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn6hyjabd7tel"]
+[gd_scene load_steps=4 format=3 uid="uid://bn6hyjabd7tel"]
 
 [ext_resource type="Script" path="res://UI/hud.gd" id="1_umctx"]
-[ext_resource type="Texture2D" uid="uid://c0pnrjv0efmgv" path="res://UI/Images/Scrap Icon.PNG.jpg" id="2_cv6u2"]
+[ext_resource type="Texture2D" uid="uid://cjek6ugp3hhhj" path="res://UI/Images/ScrapCounterBackground.png" id="2_qn6do"]
+[ext_resource type="Texture2D" uid="uid://b5gqua0y0f8h8" path="res://UI/Images/ScarpIcon.png" id="3_7rv3m"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_umctx")
@@ -49,19 +50,21 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -137.0
-offset_right = 198.0
+offset_right = 317.0
 grow_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="ScrapCounter"]
+[node name="TextureRect" type="TextureRect" parent="ScrapCounter"]
 layout_mode = 2
-color = Color(0.427451, 1, 1, 0.392157)
+texture = ExtResource("2_qn6do")
+expand_mode = 1
 
 [node name="ScrapCounter_HBox" type="HBoxContainer" parent="ScrapCounter"]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="ScrapIcon_TextureRect" type="TextureRect" parent="ScrapCounter/ScrapCounter_HBox"]
 layout_mode = 2
-texture = ExtResource("2_cv6u2")
+texture = ExtResource("3_7rv3m")
 expand_mode = 2
 
 [node name="ScrapCounter_label" type="Label" parent="ScrapCounter/ScrapCounter_HBox"]

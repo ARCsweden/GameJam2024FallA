@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0pnrjv0efmgv"
-path="res://.godot/imported/Scrap Icon.PNG.jpg-820722749a26d68bc3242bb1447cf667.ctex"
+uid="uid://cjek6ugp3hhhj"
+path="res://.godot/imported/ScrapCounterBackground.png-b706afb7ce169885a6bd1078405d5ce6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Images/Scrap Icon.PNG.jpg"
-dest_files=["res://.godot/imported/Scrap Icon.PNG.jpg-820722749a26d68bc3242bb1447cf667.ctex"]
+source_file="res://UI/Images/ScrapCounterBackground.png"
+dest_files=["res://.godot/imported/ScrapCounterBackground.png-b706afb7ce169885a6bd1078405d5ce6.ctex"]
 
 [params]
 
