@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkpbc6kmqjaim"]
+[gd_scene load_steps=9 format=3 uid="uid://dkpbc6kmqjaim"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
 [ext_resource type="Texture2D" uid="uid://pw2elp0ug1sy" path="res://images/RockyDude.png" id="2_myuhg"]
 [ext_resource type="Script" path="res://Scenes/label.gd" id="3_777ti"]
+[ext_resource type="PackedScene" uid="uid://m84cyg770d3x" path="res://Scenes/Hook.tscn" id="4_12b52"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txg1"]
 
@@ -55,5 +56,7 @@ offset_right = 147.0
 offset_bottom = -21.0
 text = "BUTTON_PROMT"
 script = ExtResource("3_777ti")
+
+[node name="Hook" parent="." instance=ExtResource("4_12b52")]
 
 [connection signal="area_entered" from="RapairCheckArea" to="." method="_on_damage_tile_entered"]

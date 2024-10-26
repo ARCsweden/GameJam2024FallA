@@ -23,17 +23,6 @@ func _ready():
 		add_child(player)
 		i += 1
 
-func get_unique_controller_id(player_num) -> int:
-	var connected = Input.get_connected_joypads()
-	# Check if there are any connected controllers
-	if connected.size() >= 2:
-		return connected[player_num]
-	else:
-		print("Un oh, please only connect two controllers")
-		get_tree().quit()
-		return -1
-		
 func _process(_delta):
-	pass
-	# Example movement input (adjust based on your input mappings)
-	# Add instances to the scene tree
+	if Input.is_action_just_pressed("OpenCloseMenu"):
+		get_tree().quit()
