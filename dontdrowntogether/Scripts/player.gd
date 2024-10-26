@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
 
+const GAME_OVER_CANVAS_LAYER = preload("res://UI/game_over_canvas_layer.tscn")
+
 @export var speed: float = 200.0  # Movement speed of the character
 
 var controller_id
@@ -37,6 +39,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _ready() -> void:
+	add_to_group("ActivePlayers")
 	if(controller_id % 2 == 1):
 		var texture = load("res://Assets/Cap2.png")
 		sprite.texture = texture
@@ -77,3 +80,17 @@ func _on_damage_tile_entered(_area):
 func _on_repair_check_area_area_exited(_area: Area2D) -> void:
 	$PlayerBoundUi/Label.visible = false
 	can_repair = false
+
+
+func _on_repair_check_area_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	var areas = $RepairCheckArea.get_overlapping_areas()
+	if areas.size() == 0:
+		self.remove_from_group("ActivePlayers")
+		
+	var playersGroup = get_tree().get_nodes_in_group("ActivePlayers")
+	if playersGroup.size() == 0:
+		print("gameover")
+		var newGameover = GAME_OVER_CANVAS_LAYER.instantiate()
+		add_child(newGameover)
+		get_tree().paused = true
+	pass # Replace with function body.

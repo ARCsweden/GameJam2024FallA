@@ -142,3 +142,4 @@ bus = &"Music"
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/Resume_TextureButton" to="." method="_on_resume_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/MuteMusic_TextureButton2" to="." method="_on_mute_music_texture_button_2_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/MainMenu_TextureButton3" to="." method="_on_main_menu_texture_button_3_pressed"]
+[connection signal="finished" from="Music_AudioStreamPlayer" to="." method="_on_music_audio_stream_player_finished"]
