@@ -32,6 +32,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	paddle()
+	print(deg_to_rad(rotation_degrees))
+	#print(deg_to_rad(position.angle_to_point($"./Sprite2D".position)))
 	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
