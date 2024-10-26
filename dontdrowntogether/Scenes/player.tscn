@@ -1,44 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkhs1oweifu3y"]
+[gd_scene load_steps=7 format=3 uid="uid://dkhs1oweifu3y"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
-[ext_resource type="Texture2D" uid="uid://pw2elp0ug1sy" path="res://images/RockyDude.png" id="2_myuhg"]
+[ext_resource type="Texture2D" uid="uid://c0xg5st4jh5tu" path="res://Assets/Cap1.png" id="2_o80hy"]
 [ext_resource type="Script" path="res://Scenes/label.gd" id="3_777ti"]
 [ext_resource type="PackedScene" uid="uid://m84cyg770d3x" path="res://Scenes/Hook.tscn" id="4_12b52"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txg1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nyveq"]
+radius = 22.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0pea"]
-atlas = ExtResource("2_myuhg")
-region = Rect2(0, 0, 20, 50)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bpy18"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0pea")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uo6tg"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nbwfu"]
+radius = 13.0384
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_6bp4r")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_8txg1")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.092, 0.092)
+texture = ExtResource("2_o80hy")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_bpy18")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nyveq")
 
 [node name="RepairCheckArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="Mask checker" type="CollisionShape2D" parent="RepairCheckArea"]
-shape = SubResource("CapsuleShape2D_uo6tg")
+shape = SubResource("CircleShape2D_nbwfu")
 
 [node name="PlayerBoundUi" type="Control" parent="."]
 layout_mode = 3
@@ -57,6 +45,8 @@ text = "BUTTON_PROMT"
 script = ExtResource("3_777ti")
 
 [node name="Hook" parent="." instance=ExtResource("4_12b52")]
+visible = false
+distance = 400.0
 
 [connection signal="area_entered" from="RepairCheckArea" to="." method="_on_damage_tile_entered"]
 [connection signal="area_exited" from="RepairCheckArea" to="." method="_on_repair_check_area_area_exited"]
