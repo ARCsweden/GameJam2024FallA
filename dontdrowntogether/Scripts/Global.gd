@@ -6,3 +6,4 @@ var rng = RandomNumberGenerator.new()
 
 # Player
 var scrapAmount : int = 0
+var repair_cost : int = 10
