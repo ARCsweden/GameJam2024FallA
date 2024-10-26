@@ -26,3 +26,7 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="DontDrownTogether"
+
+[layer_names]
+
+2d_physics/layer_4="Environment"

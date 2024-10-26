@@ -29,9 +29,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	paddle()
 	if Input.is_action_just_pressed("ui_up"):
-		take_damage(1, 1)
+		take_damage(2, 2)
 	if Input.is_action_just_pressed("ui_down"):
-		rebuild_tile(1, 1)
+		rebuild_tile(2, 2)
 
 
 func paddle():
