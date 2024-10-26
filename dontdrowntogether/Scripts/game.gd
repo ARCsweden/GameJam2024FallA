@@ -7,8 +7,6 @@ var RaftScene: PackedScene = preload("res://Scenes/Raft.tscn")
 var stone_Scene: PackedScene = preload("res://Scenes/stone.tscn")
 
 var raft: Raft
-var player_one: Player
-var player_two: Player
 
 @onready var grunk_timer: Timer = $GrunkTimer
 @onready var hud: HUD = $HUD
@@ -56,10 +54,6 @@ func _on_stone_spawn() -> void:
 func _on_pickup_grunka(value: int) -> void:
 	Global.scrapAmount += value
 	hud.update_scrap_Counter(Global.scrapAmount)
-	if(player_one.last_repairable_tile != null && player_one.can_repair):
-		player_one.set_repair(true)
-	if(player_two != null && player_two.last_repairable_tile != null && player_two.can_repair):
-		player_two.set_repair(true)
 
 func create_player(i: int) -> void:
 	var player = PlayerScene.instantiate()
@@ -69,9 +63,6 @@ func create_player(i: int) -> void:
 	# Controller ID for this player
 	player.set_controller_id(i)
 	raft.add_child(player)
-	match i:
-		0,1: player_one = player
-		2: player_two = player
 
 func queuefree_self():
 	queue_free()
