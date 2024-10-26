@@ -3,10 +3,6 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var action_name = "interact"
-	var keys_text = get_action_keys_text(action_name)
-	$Label.text = "Press " + keys_text + " to interact"
-	text = "BUTTON_PRESS_PROMT"
 	pass # Replace with function body.
 
 

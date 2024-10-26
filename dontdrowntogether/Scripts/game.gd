@@ -11,25 +11,24 @@ func _ready():
 	#TODO: Spawn in raft
 	#TODO: Get spawnpoints for player 1 and player 2 from raft
 	
+	
+
 	# Set positions or other properties if necessary
 	player1.position = Vector2(100, 100)  # Adjust as needed
 	player2.position = Vector2(300, 100)  # Adjust as needed
-	
-	
+	player1.set_controller_id(get_unique_controller_id(0))
+	player2.set_controller_id(get_unique_controller_id(1))
 	add_child(player1)
 	add_child(player2)
+	
 # Controller ID for this player
 
 
-func get_unique_controller_id() -> int:
+func get_unique_controller_id(player_num) -> int:
 	var connected = Input.get_connected_joypads()
 	# Check if there are any connected controllers
-	if connected.size() >= 2:
-		# Assign the first controller ID to Player 1 and second to Player 2
-		if is_instance_valid(self) and is_in_group("Player1"):
-			return connected[0]
-		else:
-			return connected[1]
+	if connected.size() > 0:
+			return connected[player_num]
 	else:
 		print("Not enough controllers connected!")
 		return -1
