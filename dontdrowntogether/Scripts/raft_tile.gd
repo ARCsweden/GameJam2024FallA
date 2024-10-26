@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 	pass
 	
 func edge_tile():
-	set_collision_layer_value(2, true)
+	set_collision_layer_value(1, true)
 	self.visible = 1
 	$"./Sprite2D".texture = load("res://icon.svg")
 	$"./Sprite2D".flip_v = true
