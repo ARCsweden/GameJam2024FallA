@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 	pass
 	
 func edge_tile():
-	set_collision_layer_value(5, true)
+	set_collision_layer_value(1, true)
 	self.visible = 1
 	$"./Sprite2D".flip_v = true
 
@@ -43,6 +43,7 @@ func take_damage():
 func destroy():
 	self.visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
+	set_collision_layer_value(2, false) #Tile is no longer damaged
 
 func repair():
 	self.health = 2
