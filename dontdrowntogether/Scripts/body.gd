@@ -10,7 +10,7 @@ var move_left
 var move_right
 var paddle
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
 
 	# Get input direction
@@ -37,7 +37,7 @@ func set_controller_id(id) -> void:
 	paddle = "paddle" + str(controller_id)
 	
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if(Input.get_action_strength("DEBUG",controller_id) > 0):
 		$PlayerBoundUi/Label.visible = true
 	else:
