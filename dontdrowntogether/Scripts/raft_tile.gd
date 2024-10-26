@@ -2,7 +2,15 @@ extends StaticBody2D
 
 @onready var hud: HUD = $"../../HUD"
 
-var health = 2
+const max_hp := 10.0
+var health := 0.0
+
+@onready var decay_timer: Timer = $DecayTimer
+
+const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
+const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
+const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
+var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
 
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
@@ -10,18 +18,31 @@ var health = 2
 #Layer 4: Environment collision layer
 #Layer 5: Wall collision layer
 
+func setup_decay_timer() -> void:
+	decay_timer.start(randf_range(10.0, 20.0))
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup_texture()
-	
+	set_random_sprite()
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
+	
+	$"./RepairArea/RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
+	$"./RepairArea/RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
+	
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
 	# Instantiate them invisible
 	self.visible = 0
-	
+	decay_timer.timeout.connect(_on_decay)
+
+func _on_decay() -> void:
+	take_damage(1.0)
+	if health >= 0.0:
+		setup_decay_timer()
+
 func setup_texture():
 	# Gives random rotation
 	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
@@ -46,11 +67,11 @@ func edge_tile():
 	$"./Sprite2D".texture = load("res://icon.svg")
 	$"./Sprite2D".flip_v = true
 
-func take_damage():
+func take_damage(amount):
 	$RepairArea.set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
-	self.modulate = Color("8cdada")
-	health -= 1
-	if(health == 0):
+	health -= amount
+	update_color()
+	if(health <= 0):
 		destroy()
 
 func destroy():
@@ -60,19 +81,33 @@ func destroy():
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
 
+func update_color() -> void:
+	self.modulate = Color(
+		lerp(0.8, 1.0, health / max_hp),
+		lerp(0.3, 1.0, health / max_hp),
+		lerp(0.3, 1.0, health / max_hp),
+		health / max_hp
+	)
+
 func repair():
 	$Repair_AudioStreamPlayer.play()
-	self.health = 2
-	self.modulate = Color("ffffff")
-	$RepairArea.set_collision_layer_value(2, false)
+	self.health += 1.0
+	update_color()
+	if health >= max_hp:
+		$RepairArea.set_collision_layer_value(2, false)
 	Global.scrapAmount -= Global.repair_cost
 	hud.update_scrap_Counter(Global.scrapAmount)
+	setup_decay_timer()
 	
 
 func rebuild():
 	self.visible = 1
-	self.health = 2
-	self.modulate = Color("ffffff")
+	self.health = max_hp
+	update_color()
+	setup_decay_timer()
 	set_collision_layer_value(5, true) # tile collides with walls
 	set_collision_mask_value(5, true)
 	set_collision_layer_value(1, false)
+	
+func set_random_sprite():
+	$Sprite2D.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]

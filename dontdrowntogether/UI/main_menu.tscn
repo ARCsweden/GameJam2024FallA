@@ -130,6 +130,7 @@ text = "Quit"
 unique_name_in_owner = true
 stream = ExtResource("6_kr5xl")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Play_TextureButton" to="." method="_on_play_texture_button_pressed"]

@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu7dqnxar2vcm"]
+[gd_scene load_steps=11 format=3 uid="uid://cu7dqnxar2vcm"]
 
 [ext_resource type="Script" path="res://UI/ingame_menu.gd" id="1_iru8w"]
 [ext_resource type="Texture2D" uid="uid://0esun8vk0q22" path="res://UI/Images/BackgroundBoardNoB.png" id="1_nfdg2"]
 [ext_resource type="Texture2D" uid="uid://b1tgm44fknjxm" path="res://UI/Images/BetterButton.png" id="2_ge33f"]
 [ext_resource type="Theme" uid="uid://jia55bt3fpaw" path="res://UI/MainMenuTheme.tres" id="3_gc886"]
+[ext_resource type="AudioStream" uid="uid://dykrcjny6ts6r" path="res://Assets/Music/flotten_v1.mp3" id="5_wmwyq"]
+[ext_resource type="AudioStream" uid="uid://c5b4g5psc0m2o" path="res://Assets/Music/flotten_v2.mp3" id="6_ugjdb"]
+[ext_resource type="AudioStream" uid="uid://bgmvotvnlkug8" path="res://Assets/Music/flotten_v3.mp3" id="7_klkcs"]
+[ext_resource type="AudioStream" uid="uid://dhjjvvklmcxc7" path="res://Assets/Music/raft_v1.mp3" id="8_yog7s"]
+[ext_resource type="AudioStream" uid="uid://bupcq4kifpcrl" path="res://Assets/Music/raft_v2.mp3" id="9_vegmj"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eskpd"]
+streams_count = 6
+stream_0/stream = ExtResource("5_wmwyq")
+stream_1/stream = ExtResource("6_ugjdb")
+stream_2/stream = ExtResource("7_klkcs")
+stream_3/stream = ExtResource("8_yog7s")
+stream_4/stream = ExtResource("9_vegmj")
+stream_5/stream = ExtResource("9_vegmj")
 
 [node name="Menu_CanvasLayer" type="CanvasLayer"]
 process_mode = 3
@@ -119,6 +133,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_gc886")
 text = "Main Menu"
+
+[node name="Music_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_eskpd")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/Resume_TextureButton" to="." method="_on_resume_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/MuteMusic_TextureButton2" to="." method="_on_mute_music_texture_button_2_pressed"]

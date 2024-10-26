@@ -27,27 +27,27 @@ func _ready() -> void:
 	
 	_create_grid()
 	_create_starting_area(starting_area_squares)
+	SignalBus.paddle.connect(_on_paddle)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	paddle()
-	print(deg_to_rad(rotation_degrees))
-	#print(deg_to_rad(position.angle_to_point($"./Sprite2D".position)))
+	forward_force()
 	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
 		rebuild_tile(2, 2)
 
+func forward_force():
+	var force = Vector2.from_angle(deg_to_rad(rotation_degrees) - deg_to_rad(90))
+	apply_central_force(force*20)
 
-func paddle():
-	if Input.is_action_pressed("ui_page_up"):
-		apply_force(Vector2.LEFT*10, position+Vector2.DOWN*150)
-	if Input.is_action_pressed("ui_page_down"):
-		apply_force(Vector2.RIGHT*10, position+Vector2.DOWN*150)
+func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
+	# Force based on player direction
+	apply_force(-cur_dir*50, player_pos)
 
 func take_damage(r, c):
-	grid[r][c].take_damage()
+	grid[r][c].take_damage(1.0)
 
 func rebuild_tile(r, c):
 	grid[r][c].rebuild()
@@ -59,8 +59,6 @@ func _create_starting_area(expands):
 	# Creates a square of usable tiles around the center
 	var center_x: int = ceil(float(rows) / 2)
 	var center_y: int = ceil(float(columns) / 2)
-	print(center_x)
-	print(center_y)
 	for r in range(center_y - expands, center_y + expands + 1):
 		for c in range(center_x - expands, center_x + expands + 1):
 			grid[r][c].rebuild()

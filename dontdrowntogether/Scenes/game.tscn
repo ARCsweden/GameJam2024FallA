@@ -16,6 +16,7 @@ script = ExtResource("1_ol0k5")
 
 [node name="GrunkTimer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -60,3 +61,6 @@ texture = ExtResource("5_xo0xj")
 position = Vector2(1175, 429)
 texture = ExtResource("5_xo0xj")
 flip_h = true
+
+[node name="StoneTimer" type="Timer" parent="."]
+
