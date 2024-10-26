@@ -4,20 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://d1meoo3e2qlrg" path="res://WaterShader.svg" id="2_ssddn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f2052"]
-frequency = 0.0054
+frequency = 0.008
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ka3e4"]
-width = 600
-height = 600
+width = 1200
+height = 1200
 seamless = true
 noise = SubResource("FastNoiseLite_f2052")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_47rbq"]
-frequency = 0.0187
+frequency = 0.0263
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l2fvr"]
-width = 300
-height = 600
+width = 500
+height = 500
 seamless = true
 noise = SubResource("FastNoiseLite_47rbq")
 
@@ -34,7 +34,9 @@ shader_parameter/noise1 = SubResource("NoiseTexture2D_ka3e4")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_l2fvr")
 
 [node name="WaterShaderTEST" type="Sprite2D"]
+z_index = 1
+z_as_relative = false
 material = SubResource("ShaderMaterial_5x5xr")
-position = Vector2(-558.648, -493.533)
-scale = Vector2(8.44762, 4.91458)
+position = Vector2(292, 714.5)
+scale = Vector2(22.625, 38.4453)
 texture = ExtResource("2_ssddn")
