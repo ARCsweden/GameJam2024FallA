@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1ob4rh1obs52"]
+
+[ext_resource type="AudioStream" uid="uid://hubns7hsrdcu" path="res://Assets/Audio/Repair/Repair 1.mp3" id="1_fv6gr"]
+[ext_resource type="AudioStream" uid="uid://cuoncpde1wmfn" path="res://Assets/Audio/Repair/Repair 2.mp3" id="2_kqum4"]
+[ext_resource type="AudioStream" uid="uid://dehycr1vqo418" path="res://Assets/Audio/Repair/Repair.mp3" id="3_fnw3e"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uk2ld"]
+streams_count = 3
+stream_0/stream = ExtResource("1_fv6gr")
+stream_1/stream = ExtResource("2_kqum4")
+stream_2/stream = ExtResource("3_fnw3e")
+
+[node name="Repair_AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_uk2ld")

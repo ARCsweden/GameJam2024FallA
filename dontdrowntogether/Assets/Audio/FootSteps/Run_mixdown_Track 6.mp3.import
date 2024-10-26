@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyrs4m5pngd11"
+path="res://.godot/imported/Run_mixdown_Track 6.mp3-aefcfc48035016c64f5f95955e4fd44f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/FootSteps/Run_mixdown_Track 6.mp3"
+dest_files=["res://.godot/imported/Run_mixdown_Track 6.mp3-aefcfc48035016c64f5f95955e4fd44f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

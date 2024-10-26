@@ -1,0 +1,30 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2sa2u21mhyqc"]
+
+[ext_resource type="AudioStream" uid="uid://dpqjh6nc8sfbr" path="res://Assets/Audio/FootSteps/Run_mixdown_Mono.mp3" id="1_ftga3"]
+[ext_resource type="AudioStream" uid="uid://bpeujjlq1fs0o" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 1.mp3" id="2_aii7u"]
+[ext_resource type="AudioStream" uid="uid://bwcmcbyv3f7cy" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 10.mp3" id="3_0hfva"]
+[ext_resource type="AudioStream" uid="uid://cmrqnpbotyo78" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 2.mp3" id="4_ltona"]
+[ext_resource type="AudioStream" uid="uid://dfo1aaclk2qol" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 3.mp3" id="5_gnyac"]
+[ext_resource type="AudioStream" uid="uid://ckynm86fwhf34" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 4.mp3" id="6_yw0ju"]
+[ext_resource type="AudioStream" uid="uid://stoqpjw1prtx" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 5.mp3" id="7_nqtls"]
+[ext_resource type="AudioStream" uid="uid://cyrs4m5pngd11" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 6.mp3" id="8_ai7vn"]
+[ext_resource type="AudioStream" uid="uid://dedqu6ksixhai" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 7.mp3" id="9_kmbnc"]
+[ext_resource type="AudioStream" uid="uid://va7o8p5elelt" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 8.mp3" id="10_y20dm"]
+[ext_resource type="AudioStream" uid="uid://dgdos4hfk8ur6" path="res://Assets/Audio/FootSteps/Run_mixdown_Track 9.mp3" id="11_685tq"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_282cs"]
+streams_count = 11
+stream_0/stream = ExtResource("1_ftga3")
+stream_1/stream = ExtResource("2_aii7u")
+stream_2/stream = ExtResource("4_ltona")
+stream_3/stream = ExtResource("5_gnyac")
+stream_4/stream = ExtResource("6_yw0ju")
+stream_5/stream = ExtResource("7_nqtls")
+stream_6/stream = ExtResource("8_ai7vn")
+stream_7/stream = ExtResource("9_kmbnc")
+stream_8/stream = ExtResource("10_y20dm")
+stream_9/stream = ExtResource("11_685tq")
+stream_10/stream = ExtResource("3_0hfva")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_282cs")
