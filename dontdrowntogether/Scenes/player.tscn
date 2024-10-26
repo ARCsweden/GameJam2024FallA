@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkhs1oweifu3y"]
+[gd_scene load_steps=8 format=3 uid="uid://dkhs1oweifu3y"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
 [ext_resource type="Texture2D" uid="uid://c0xg5st4jh5tu" path="res://Assets/Cap1.png" id="2_o80hy"]
@@ -10,6 +10,9 @@ radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbwfu"]
 radius = 13.0384
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iufov"]
+radius = 17.0294
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_6bp4r")
@@ -47,6 +50,13 @@ script = ExtResource("3_777ti")
 [node name="Hook" parent="." instance=ExtResource("4_12b52")]
 visible = false
 distance = 400.0
+
+[node name="PaddleCheckArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="Mask checker" type="CollisionShape2D" parent="PaddleCheckArea"]
+shape = SubResource("CircleShape2D_iufov")
 
 [connection signal="area_entered" from="RepairCheckArea" to="." method="_on_damage_tile_entered"]
 [connection signal="area_exited" from="RepairCheckArea" to="." method="_on_repair_check_area_area_exited"]
