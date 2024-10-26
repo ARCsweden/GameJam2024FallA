@@ -48,7 +48,7 @@ func setup_texture():
 	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
 	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
 	# Large negative to make sure other items are on top
-	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
+	$"./Sprite2D".z_index += -5 + Global.rng.randi_range(-1, 1)
 	
 	
 func _scale_sprite():
