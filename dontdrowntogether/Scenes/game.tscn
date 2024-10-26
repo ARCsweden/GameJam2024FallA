@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://rslh7wyupis3"]
+[gd_scene load_steps=6 format=3 uid="uid://rslh7wyupis3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
 [ext_resource type="PackedScene" uid="uid://becbpdg61vwge" path="res://Scenes/Walls.tscn" id="3_5jli6"]
 [ext_resource type="Texture2D" uid="uid://brlyj5y5qoqgy" path="res://Assets/Floorbed.png" id="5_imhee"]
+[ext_resource type="Texture2D" uid="uid://c4jj7kifn4fr0" path="res://Assets/Wall.png" id="5_xo0xj"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -45,10 +46,17 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1000, 1000)
 
 [node name="Parallax2D_walls" type="Parallax2D" parent="."]
-z_index = -100
+z_index = 10
+scale = Vector2(2, 2)
 scroll_scale = Vector2(1.1, 1.1)
+repeat_size = Vector2(0, 3000)
 repeat_times = 2
 
 [node name="WallLeft" type="Sprite2D" parent="Parallax2D_walls"]
+position = Vector2(-163.5, 17)
+texture = ExtResource("5_xo0xj")
 
-[node name="WallRight" type="Sprite2D" parent="Parallax2D_walls"]
+[node name="WallLeft2" type="Sprite2D" parent="Parallax2D_walls"]
+position = Vector2(1175, 429)
+texture = ExtResource("5_xo0xj")
+flip_h = true
