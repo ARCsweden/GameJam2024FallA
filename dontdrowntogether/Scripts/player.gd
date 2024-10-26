@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
@@ -56,8 +57,10 @@ func _process(_delta) -> void:
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed("DebugRepair"): #TODO Change to an actual button for a controller
 			if(can_repair):
+				#NULL CHECK FOR LAST REPAIRABLE TILE
 				last_repairable_tile.call_repair()
 				if(Global.scrapAmount < Global.repair_cost):
+					$PlayerBoundUi/Label.visible = false
 					can_repair = false
 
 func repair_raft_tile() -> void:
@@ -73,3 +76,8 @@ func _on_damage_tile_entered(_area):
 func _on_repair_check_area_area_exited(area: Area2D) -> void:
 	$PlayerBoundUi/Label.visible = false
 	can_repair = false
+	last_repairable_tile = null
+
+func set_repair(_status) -> void:
+	can_repair = _status
+	$PlayerBoundUi/Label.visible = _status
