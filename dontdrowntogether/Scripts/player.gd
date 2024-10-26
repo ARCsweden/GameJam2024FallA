@@ -12,14 +12,15 @@ var move_up
 var move_down
 var move_left
 var move_right
-var paddle
+var paddle_btn
 var hook_btn
+var repair_btn
 var controller_ready := false
 
 var last_repairable_tile
 var can_repair = false
 
-var cur_dir: Vector2 = Vector2.LEFT
+@export var cur_dir: Vector2 = Vector2.LEFT
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -47,15 +48,18 @@ func set_controller_id(id) -> void:
 	move_down = "move_down" + str(controller_id)
 	move_right = "move_right" + str(controller_id)
 	move_left = "move_left" + str(controller_id)
-	paddle = "paddle" + str(controller_id)
+	paddle_btn = "paddle" + str(controller_id)
 	hook_btn = "hook" + str(controller_id)
+	repair_btn = "repair" + str(controller_id)
 	controller_ready = true
 
 func _process(_delta) -> void:
 	if controller_ready == true:
-		if Input.is_action_just_pressed("hook" + str(controller_id)):
+		if Input.is_action_pressed(paddle_btn):
+			SignalBus.paddle.emit(position, cur_dir)
+		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
-		if Input.is_action_just_pressed("DebugRepair"): #TODO Change to an actual button for a controller
+		if Input.is_action_just_pressed(repair_btn):
 			if(can_repair):
 				#NULL CHECK FOR LAST REPAIRABLE TILE
 				last_repairable_tile.call_repair()
@@ -73,7 +77,7 @@ func _on_damage_tile_entered(_area):
 		last_repairable_tile = _area
 		can_repair = true
 
-func _on_repair_check_area_area_exited(area: Area2D) -> void:
+func _on_repair_check_area_area_exited(_area: Area2D) -> void:
 	$PlayerBoundUi/Label.visible = false
 	can_repair = false
 	last_repairable_tile = null

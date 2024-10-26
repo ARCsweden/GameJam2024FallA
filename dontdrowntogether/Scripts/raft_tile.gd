@@ -8,6 +8,11 @@ var collision_scale = 0.9
 
 @onready var decay_timer: Timer = $DecayTimer
 
+const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
+const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
+const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
+var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
+
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
@@ -20,7 +25,7 @@ func setup_decay_timer() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup_texture()
-	
+	set_random_sprite()
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
@@ -28,8 +33,6 @@ func _ready() -> void:
 	$"./RepairArea/RaftTileCollisionShape".shape.size.x = Global.raft_tile_length*collision_scale
 	$"./RepairArea/RaftTileCollisionShape".shape.size.y = Global.raft_tile_length*collision_scale
 	
-	$"./PaddleArea/PaddleCollisionShape".shape.size.x = Global.raft_tile_length
-	$"./PaddleArea/PaddleCollisionShape".shape.size.y = Global.raft_tile_length
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
 	# Instantiate them invisible
@@ -46,7 +49,7 @@ func setup_texture():
 	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
 	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
 	# Large negative to make sure other items are on top
-	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
+	$"./Sprite2D".z_index += -5 + Global.rng.randi_range(-1, 1)
 	
 	
 func _scale_sprite():
@@ -78,7 +81,6 @@ func destroy():
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
-	set_collision_layer_value(9, true) # player can paddle near it
 
 func update_color() -> void:
 	self.modulate = Color(
@@ -107,9 +109,6 @@ func rebuild():
 	set_collision_layer_value(5, true) # tile collides with walls
 	set_collision_mask_value(5, true)
 	set_collision_layer_value(1, false)
-	set_collision_layer_value(9, false) # player cannot paddle near it
-
-
-func _on_paddle_area_area_entered(_area) -> void:
-	#print("Entered!")
-	pass
+	
+func set_random_sprite():
+	$Sprite2D.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]

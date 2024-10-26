@@ -1,16 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://cw6sggaruqqcp"]
+[gd_scene load_steps=9 format=3 uid="uid://cw6sggaruqqcp"]
 
 [ext_resource type="Script" path="res://Scripts/raft_tile.gd" id="1_3r40d"]
 [ext_resource type="PackedScene" uid="uid://b1ob4rh1obs52" path="res://Assets/Audio/repair_audio_stream.tscn" id="2_0etbt"]
 [ext_resource type="Texture2D" uid="uid://dur8h03gaqp28" path="res://Assets/WoodRaftTile.png" id="2_rp4dj"]
+[ext_resource type="Shader" path="res://tile.gdshader" id="3_2x4d2"]
 [ext_resource type="Script" path="res://Scripts/repair_area.gd" id="4_chgcs"]
 [ext_resource type="PackedScene" uid="uid://nysssxwky0oq" path="res://Assets/Audio/crash_audio_stream_player.tscn" id="4_nin0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv43m"]
 size = Vector2(100, 100)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_urw24"]
-size = Vector2(100, 100)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o378r"]
+shader = ExtResource("3_2x4d2")
+shader_parameter/Strength = 4.943
+shader_parameter/Speed = 6.097
 
 [node name="RaftTile" type="StaticBody2D"]
 collision_layer = 9
@@ -24,6 +27,7 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_mv43m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_o378r")
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_rp4dj")
 
@@ -39,12 +43,3 @@ shape = SubResource("RectangleShape2D_mv43m")
 
 [node name="DecayTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="PaddleArea" type="Area2D" parent="."]
-collision_layer = 256
-collision_mask = 256
-
-[node name="PaddleCollisionShape" type="CollisionShape2D" parent="PaddleArea"]
-shape = SubResource("RectangleShape2D_urw24")
-
-[connection signal="area_entered" from="PaddleArea" to="." method="_on_paddle_area_area_entered"]

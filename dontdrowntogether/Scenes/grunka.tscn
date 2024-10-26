@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://6yoilchxrtp4"]
+[gd_scene load_steps=3 format=3 uid="uid://6yoilchxrtp4"]
 
 [ext_resource type="Script" path="res://Scripts/grunka.gd" id="1_yv43a"]
-[ext_resource type="Texture2D" uid="uid://cw4t3crg23tmv" path="res://Assets/Bottle1.png" id="2_nmt8h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tli18"]
 radius = 25.0799
@@ -13,7 +12,6 @@ script = ExtResource("1_yv43a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.062, 0.062)
-texture = ExtResource("2_nmt8h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tli18")
