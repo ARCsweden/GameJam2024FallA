@@ -18,13 +18,13 @@ var cur_dir: Vector2 = Vector2.LEFT
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
-	rotation = 0 - $"..".rotation #Tries to lock rotation
 	# Get input direction
 	if controller_ready == true:
 		direction = Input.get_vector(move_left, move_right, move_up, move_down).normalized()
 	# Update last known facing, used for hook
 	if direction != Vector2.ZERO:
 		cur_dir = direction
+		rotation = (cur_dir.angle() + PI/2) - get_parent().rotation
 
 	velocity = direction * speed
 
