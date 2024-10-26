@@ -10,16 +10,20 @@ var health = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Gives random rotation
-	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
-	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
-	# Large negative to make sure other items are on top
-	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
+	setup_texture()
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
+	
+func setup_texture():
+	# Gives random rotation
+	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
+	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
+	# Large negative to make sure other items are on top
+	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
+	
 	
 func _scale_sprite():
 	var sprite_size: Vector2 = $"./Sprite2D".texture.get_size()
