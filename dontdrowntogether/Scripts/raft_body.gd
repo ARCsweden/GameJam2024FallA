@@ -47,7 +47,7 @@ func paddle():
 		apply_force(Vector2.RIGHT*10, position+Vector2.DOWN*150)
 
 func take_damage(r, c):
-	grid[r][c].take_damage()
+	grid[r][c].take_damage(1.0)
 
 func rebuild_tile(r, c):
 	grid[r][c].rebuild()
