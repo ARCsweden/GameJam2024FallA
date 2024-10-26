@@ -3,6 +3,7 @@ class_name Hook
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var coll: CollisionShape2D = $Sprite2D/Area2D/CollisionShape2D
+@onready var hook_audio_stream_player: AudioStreamPlayer = $Hook_AudioStreamPlayer
 
 @export var distance: float = 200.0
 @export var speed: float = 0.5
@@ -27,6 +28,7 @@ func activate_hook(dir: Vector2) -> void:
 		tween.set_trans(Tween.TRANS_CIRC)
 		tween.tween_property(sprite, "position", dir * distance, speed).as_relative()
 		tween.tween_callback(_on_finished)
+		hook_audio_stream_player.play()
 
 func _on_finished() -> void:
 	visible = false
