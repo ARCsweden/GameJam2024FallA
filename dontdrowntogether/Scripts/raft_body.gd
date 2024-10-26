@@ -70,4 +70,3 @@ func _create_grid() -> void:
 			
 			
 			grid[r].append(instance)
-	print(grid)
