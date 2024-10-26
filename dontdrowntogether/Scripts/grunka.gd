@@ -12,3 +12,7 @@ func _on_hooked(body) -> void:
 	if body == self:
 		SignalBus.pickup_grunka.emit(value)
 		queue_free()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free() # Remove grunkor that are outside the camera
