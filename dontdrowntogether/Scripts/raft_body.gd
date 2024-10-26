@@ -49,19 +49,25 @@ func rebuild_tile(r, c):
 func _create_grid() -> void:
 	#Instantiate tiles in a grid.
 	var instance
-	for r in rows+1:
+	for r in rows+2:
 		grid.append([])
-		for c in columns+1:
+		for c in columns+2:
 			# Creates an instance of RaftTileScene
 			instance = RaftTileScene.instantiate() 
 			# Adds the instance to the scene tree
 			add_child(instance)
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
-			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2) + (Vector2(Global.raft_tile_length / 2, Global.raft_tile_length / 2))
+			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2) - (Vector2(Global.raft_tile_length / 2, Global.raft_tile_length / 2))
 			# Adds instance to grid so it can edited later
+			
+			# Creates an invisible layer around the raft to block the player
 			if r == 0 or r == rows+1:
 				instance.edge_tile()
+			if c == 0 or c == columns+1:
+				instance.edge_tile()
+				
+			
 			
 			grid[r].append(instance)
 	print(grid)

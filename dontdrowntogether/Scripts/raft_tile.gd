@@ -6,6 +6,7 @@ var health = 2
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
 #Layer 4: Environment collision layer
+#Layer 5: raft edge layer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,6 +31,8 @@ func _process(delta: float) -> void:
 	
 func edge_tile():
 	set_collision_layer_value(5, true)
+	self.visible = 1
+	$"./Sprite2D".flip_v = true
 
 func take_damage():
 	set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
