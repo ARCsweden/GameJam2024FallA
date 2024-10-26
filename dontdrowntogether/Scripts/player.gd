@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var hook: Hook = $Hook
+@onready var sprite: Sprite2D = $Sprite2D
 
 @export var speed: float = 200.0  # Movement speed of the character
 
@@ -31,8 +32,12 @@ func _physics_process(_delta: float) -> void:
 	# Move the character
 	move_and_slide()
 
+func _ready() -> void:
+	if(controller_id % 2 == 1):
+		var texture = load("res://Assets/Cap2.png")
+		sprite.texture = texture
 
-func set_controller_id(id) -> void: 
+func set_controller_id(id) -> void:
 	controller_id = id
 	move_up = "move_up" + str(controller_id)
 	move_down = "move_down" + str(controller_id)
