@@ -38,8 +38,6 @@ func _process(_delta: float) -> void:
 		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
 		rebuild_tile(2, 2)
-	if Input.is_action_just_pressed("DebugRepair"):
-		repair_tile(2, 2)
 
 
 func paddle():
