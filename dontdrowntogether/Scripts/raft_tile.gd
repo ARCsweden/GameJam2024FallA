@@ -14,7 +14,7 @@ var health := 0.0
 #Layer 5: Wall collision layer
 
 func setup_decay_timer() -> void:
-	decay_timer.start(randf_range(4.0, 10.0))
+	decay_timer.start(randf_range(10.0, 20.0))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -74,9 +74,10 @@ func destroy():
 
 func update_color() -> void:
 	self.modulate = Color(
-		lerp(0.5, 1.0, health / max_hp),
 		lerp(0.8, 1.0, health / max_hp),
-		lerp(0.8, 1.0, health / max_hp)
+		lerp(0.3, 1.0, health / max_hp),
+		lerp(0.3, 1.0, health / max_hp),
+		health / max_hp
 	)
 
 func repair():
