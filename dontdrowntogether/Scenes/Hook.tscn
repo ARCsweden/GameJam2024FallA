@@ -23,5 +23,6 @@ collision_mask = 128
 shape = SubResource("CircleShape2D_7k8jp")
 
 [node name="Hook_AudioStreamPlayer" parent="." instance=ExtResource("3_rdarj")]
+bus = &"SFX"
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
