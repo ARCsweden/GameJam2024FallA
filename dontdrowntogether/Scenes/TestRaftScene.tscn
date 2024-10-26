@@ -6,3 +6,4 @@
 
 [node name="Raft" parent="." instance=ExtResource("1_17yum")]
 position = Vector2(500, 500)
+script = null

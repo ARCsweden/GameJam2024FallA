@@ -6,20 +6,25 @@ var health = 2
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
 #Layer 4: Environment collision layer
-#Layer 5: raft edge layer
+#Layer 5: Wall collision layer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Gives random rotation
-	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
-	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
-	# Large negative to make sure other items are on top
-	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
+	setup_texture()
+	
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
 	# Scales sprite to the raft_tile_length
 	_scale_sprite()
+	
+func setup_texture():
+	# Gives random rotation
+	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
+	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
+	# Large negative to make sure other items are on top
+	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
+	
 	
 func _scale_sprite():
 	var sprite_size: Vector2 = $"./Sprite2D".texture.get_size()
@@ -48,6 +53,7 @@ func destroy():
 	self.visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$Area2D.set_collision_layer_value(2, false) #Tile is no longer damaged
+	set_collision_layer_value(5, false) # Tile no longer collides with walls
 
 func repair():
 	self.health = 2
@@ -58,4 +64,6 @@ func rebuild():
 	self.visible = 1
 	self.health = 2
 	self.modulate = Color("ffffff")
+	set_collision_layer_value(5, true) # tile collides with walls
+	set_collision_mask_value(5, true)
 	set_collision_layer_value(1, false)
