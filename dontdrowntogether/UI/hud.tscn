@@ -54,7 +54,7 @@ layout_mode = 2
 text = "0"
 
 [node name="ScrapCounter" type="MarginContainer" parent="."]
-anchors_preset = -1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
