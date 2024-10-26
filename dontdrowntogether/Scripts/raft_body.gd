@@ -32,12 +32,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	paddle()
+	print(deg_to_rad(rotation_degrees))
+	#print(deg_to_rad(position.angle_to_point($"./Sprite2D".position)))
 	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
 		rebuild_tile(2, 2)
-	if Input.is_action_just_pressed("DebugRepair"):
-		repair_tile(2, 2)
 
 
 func paddle():
@@ -80,8 +80,6 @@ func _create_grid() -> void:
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
 			instance.position = Vector2(r*Global.raft_tile_length, c*Global.raft_tile_length) - ($RaftCollisionShape.shape.size / 2.0) - (Vector2(Global.raft_tile_length / 2.0, Global.raft_tile_length / 2.0))
-			# Start all tiles as destroyed
-			instance.destroy()
 			
 			# Creates an invisible layer around the raft to block the player
 			if r == 0 or r == rows+1:
