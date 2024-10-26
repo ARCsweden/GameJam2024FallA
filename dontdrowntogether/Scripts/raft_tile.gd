@@ -6,11 +6,12 @@ var health = 2
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
 #Layer 4: Environment collision layer
-#Layer 5: raft edge layer
+#Layer 5: Wall collision layer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup_texture()
+	
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
@@ -52,6 +53,7 @@ func destroy():
 	self.visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	set_collision_layer_value(2, false) #Tile is no longer damaged
+	set_collision_layer_value(5, false) # Tile no longer collides with walls
 
 func repair():
 	self.health = 2
@@ -62,4 +64,6 @@ func rebuild():
 	self.visible = 1
 	self.health = 2
 	self.modulate = Color("ffffff")
+	set_collision_layer_value(5, true) # tile collides with walls
+	set_collision_mask_value(5, true)
 	set_collision_layer_value(1, false)
