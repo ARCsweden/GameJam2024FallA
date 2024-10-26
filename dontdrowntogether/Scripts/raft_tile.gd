@@ -22,6 +22,9 @@ func _scale_sprite():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func edge_tile():
+	set_collision_layer_value(5, true)
 
 func take_damage():
 	set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
