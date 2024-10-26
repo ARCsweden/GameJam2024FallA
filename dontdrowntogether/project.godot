@@ -14,6 +14,10 @@ config/name="DontDrownTogether"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://Scripts/SignalBus.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -22,3 +26,8 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="DontDrownTogether"
+
+[layer_names]
+
+2d_physics/layer_1="PlayerCollision"
+2d_physics/layer_2="Damaged"

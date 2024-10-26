@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
 		destroy_tile(1, 1)
 	if Input.is_action_just_pressed("ui_down"):
-		repair_tile(1, 1)
+		rebuild_tile(1, 1)
 
 
 func paddle():
@@ -39,8 +39,8 @@ func paddle():
 func destroy_tile(r, c):
 	grid[r][c].destroy()
 
-func repair_tile(r, c):
-	grid[r][c].repair()
+func rebuild_tile(r, c):
+	grid[r][c].rebuild()
 
 func _create_grid() -> void:
 	#Instantiate tiles in a 3x3 grid.
