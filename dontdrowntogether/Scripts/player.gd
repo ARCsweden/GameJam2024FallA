@@ -17,15 +17,9 @@ func _physics_process(_delta: float) -> void:
 
 	# Get input direction
 	if controller_ready == true:
-		direction.x = Input.get_action_strength(move_right) - Input.get_action_strength(move_left)
-		direction.y = Input.get_action_strength(move_down) - Input.get_action_strength(move_up)
+		direction = Input.get_vector(move_left, move_right, move_up, move_down).normalized()
 
-	# Normalize direction to have consistent speed in all directions
-	if direction != Vector2.ZERO:
-		direction = direction.normalized()
-		velocity = direction * speed
-	else:
-		velocity = Vector2.ZERO
+	velocity = direction * speed
 
 	# Move the character
 	move_and_slide()

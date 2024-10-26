@@ -34,6 +34,5 @@ func get_unique_controller_id(player_num) -> int:
 		return -1
 		
 func _process(_delta):
-	pass
-	# Example movement input (adjust based on your input mappings)
-	# Add instances to the scene tree
+	if Input.is_action_just_pressed("OpenCloseMenu"):
+		get_tree().quit()
