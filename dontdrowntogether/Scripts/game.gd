@@ -15,7 +15,7 @@ func _ready():
 
 	# Set positions or other properties if necessary
 	player1.position = Vector2(100, 100)  # Adjust as needed
-	player2.position = Vector2(300, 100)  # Adjust as needed
+	player2.position = Vector2(300, 100)  # Adjust as needed	
 	player1.set_controller_id(get_unique_controller_id(0))
 	player2.set_controller_id(get_unique_controller_id(1))
 	add_child(player1)
@@ -27,13 +27,14 @@ func _ready():
 func get_unique_controller_id(player_num) -> int:
 	var connected = Input.get_connected_joypads()
 	# Check if there are any connected controllers
-	if connected.size() > 0:
+	if connected.size() >= 2:
 			return connected[player_num]
 	else:
-		print("Not enough controllers connected!")
+		print("Un oh, please only connect two controllers")
+		get_tree().quit()
 		return -1
 		
-func _process(delta):
+func _process(_delta):
 	pass
 	# Example movement input (adjust based on your input mappings)
 	# Add instances to the scene tree
