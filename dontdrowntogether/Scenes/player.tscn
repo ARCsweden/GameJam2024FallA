@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkhs1oweifu3y"]
+[gd_scene load_steps=9 format=3 uid="uid://ck38gv86qh428"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
 [ext_resource type="Texture2D" uid="uid://pw2elp0ug1sy" path="res://images/RockyDude.png" id="2_myuhg"]
