@@ -30,6 +30,10 @@ func pickup() -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free() # Remove grunkor that are outside the camera
 
+
 func set_random_sprite():
-	
 	sprite_2d.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]
+	if sprite_2d.texture.get_size() >= Vector2(1000,1000):
+		var newCollisionShape2D = CircleShape2D.new()
+		newCollisionShape2D.radius = sprite_2d.texture.get_size().x/40
+		$CollisionShape2D.shape = newCollisionShape2D
