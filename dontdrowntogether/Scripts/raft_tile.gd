@@ -10,6 +10,11 @@ var health = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Gives random rotation
+	$"./Sprite2D".rotation_degrees = Global.rng.randi_range(0, 3) * 90
+	$"./Sprite2D".rotation_degrees += Global.rng.randi_range(-5, 5)
+	# Large negative to make sure other items are on top
+	$"./Sprite2D".z_index += -50 + Global.rng.randi_range(-1, 1)
 	# Sets raft tile length
 	$"./RaftTileCollisionShape".shape.size.x = Global.raft_tile_length
 	$"./RaftTileCollisionShape".shape.size.y = Global.raft_tile_length
@@ -20,7 +25,7 @@ func _scale_sprite():
 	var sprite_size: Vector2 = $"./Sprite2D".texture.get_size()
 	var new_scale = Vector2(Global.raft_tile_length / sprite_size.x, Global.raft_tile_length / sprite_size.y)
 	# Additional scaling to make sure sprite edges don't perfectly connect, it causes visual bug
-	$"./Sprite2D".scale = new_scale * 0.99
+	$"./Sprite2D".scale = new_scale * 1.25
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -29,6 +34,7 @@ func _process(_delta: float) -> void:
 func edge_tile():
 	set_collision_layer_value(2, true)
 	self.visible = 1
+	$"./Sprite2D".texture = load("res://icon.svg")
 	$"./Sprite2D".flip_v = true
 
 func take_damage():
