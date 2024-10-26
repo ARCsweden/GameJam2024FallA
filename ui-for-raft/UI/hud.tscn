@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn6hyjabd7tel"]
+
+[ext_resource type="Script" path="res://UI/hud.gd" id="1_umctx"]
+[ext_resource type="Texture2D" uid="uid://c0pnrjv0efmgv" path="res://UI/Images/Scrap Icon.PNG.jpg" id="2_cv6u2"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_umctx")
+
+[node name="TimeAndLengthCounter" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="TimeAndLengthCounter"]
+layout_mode = 2
+color = Color(0.427451, 1, 1, 0.392157)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimeAndLengthCounter"]
+layout_mode = 2
+
+[node name="Distance_HBox" type="HBoxContainer" parent="TimeAndLengthCounter/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextLength_Label" type="Label" parent="TimeAndLengthCounter/VBoxContainer/Distance_HBox"]
+layout_mode = 2
+text = "Distance:"
+
+[node name="NumberCounterLentgh_Label" type="Label" parent="TimeAndLengthCounter/VBoxContainer/Distance_HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="Time_HBox2" type="HBoxContainer" parent="TimeAndLengthCounter/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextTime_Label" type="Label" parent="TimeAndLengthCounter/VBoxContainer/Time_HBox2"]
+layout_mode = 2
+text = "Time:"
+
+[node name="NumberCounterTime_Label" type="Label" parent="TimeAndLengthCounter/VBoxContainer/Time_HBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="ScrapCounter" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -137.0
+offset_right = 198.0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="ScrapCounter"]
+layout_mode = 2
+color = Color(0.427451, 1, 1, 0.392157)
+
+[node name="ScrapCounter_HBox" type="HBoxContainer" parent="ScrapCounter"]
+layout_mode = 2
+
+[node name="ScrapIcon_TextureRect" type="TextureRect" parent="ScrapCounter/ScrapCounter_HBox"]
+layout_mode = 2
+texture = ExtResource("2_cv6u2")
+expand_mode = 2
+
+[node name="ScrapCounter_label" type="Label" parent="ScrapCounter/ScrapCounter_HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "0"
