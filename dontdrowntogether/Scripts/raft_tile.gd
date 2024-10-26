@@ -18,12 +18,9 @@ func _ready() -> void:
 	
 func _scale_sprite():
 	var sprite_size: Vector2 = $"./Sprite2D".texture.get_size()
-	print(sprite_size)
 	var new_scale = Vector2(Global.raft_tile_length / sprite_size.x, Global.raft_tile_length / sprite_size.y)
-	print(new_scale)
 	# Additional scaling to make sure sprite edges don't perfectly connect, it causes visual bug
 	$"./Sprite2D".scale = new_scale * 0.99
-	print("Size:", $"./Sprite2D".scale)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
