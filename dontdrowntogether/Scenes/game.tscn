@@ -5,10 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://becbpdg61vwge" path="res://Scenes/Walls.tscn" id="3_5jli6"]
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_ol0k5")
 
 [node name="HUD" parent="." instance=ExtResource("2_q2g3m")]
 
 [node name="Walls" parent="." instance=ExtResource("3_5jli6")]
+
 [node name="GrunkTimer" type="Timer" parent="."]
 wait_time = 2.0
