@@ -8,7 +8,7 @@ func _ready():
 	var player1 = PlayerScene.instantiate()
 	var player2 = PlayerScene.instantiate()
 
-	var raft = preload("res://Scenes/player.tscn").instantiate()
+	var raft = preload("res://Scenes/Raft.tscn").instantiate()
 	add_child(raft)
 	#TODO: Get spawnpoints for player 1 and player 2 from raft
 	

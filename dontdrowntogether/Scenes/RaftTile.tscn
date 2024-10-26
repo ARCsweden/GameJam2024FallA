@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://csvgmj6yrj608"]
+[gd_scene load_steps=4 format=3 uid="uid://cw6sggaruqqcp"]
 
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="1_1dexo"]
 [ext_resource type="Script" path="res://Scripts/raft_tile.gd" id="1_3r40d"]
