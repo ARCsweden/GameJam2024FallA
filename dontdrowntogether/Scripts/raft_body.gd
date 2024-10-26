@@ -40,7 +40,6 @@ func _process(_delta: float) -> void:
 
 func forward_force():
 	var force = Vector2.from_angle(deg_to_rad(rotation_degrees) - deg_to_rad(90))
-	print(force)
 	apply_central_force(force*20)
 
 func paddle():
@@ -63,8 +62,6 @@ func _create_starting_area(expands):
 	# Creates a square of usable tiles around the center
 	var center_x: int = ceil(float(rows) / 2)
 	var center_y: int = ceil(float(columns) / 2)
-	print(center_x)
-	print(center_y)
 	for r in range(center_y - expands, center_y + expands + 1):
 		for c in range(center_x - expands, center_x + expands + 1):
 			grid[r][c].rebuild()

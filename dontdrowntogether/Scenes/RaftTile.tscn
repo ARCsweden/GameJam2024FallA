@@ -39,6 +39,7 @@ shape = SubResource("RectangleShape2D_mv43m")
 
 [node name="DecayTimer" type="Timer" parent="."]
 one_shot = true
+
 [node name="PaddleArea" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 256

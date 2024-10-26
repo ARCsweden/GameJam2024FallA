@@ -110,4 +110,5 @@ func rebuild():
 
 
 func _on_paddle_area_area_entered(_area) -> void:
-	print("Entered!")
+	#print("Entered!")
+	pass
