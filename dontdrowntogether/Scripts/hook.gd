@@ -7,8 +7,6 @@ class_name Hook
 @export var distance: float = 200.0
 @export var speed: float = 0.5
 
-var id: int = 0
-
 var thrown: bool = false
 var tween: Tween
 
@@ -17,15 +15,8 @@ func _ready() -> void:
 	visible = false
 	coll.disabled = true
 
-func set_controller_id(controller_id: int) -> void:
-	id = controller_id
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if !thrown and Input.is_action_just_pressed("hook" + str(id)):
-		var target = get_global_mouse_position()
-		var dir = (target - get_parent().global_position).normalized()
-
+func activate_hook(dir: Vector2) -> void:
+	if !thrown:
 		sprite.rotation = dir.angle() - PI/2
 		visible = true
 		thrown = true
