@@ -15,6 +15,7 @@ var paddle
 var hook_btn
 var controller_ready := false
 
+
 var cur_dir: Vector2 = Vector2.LEFT
 
 func _physics_process(_delta: float) -> void:
