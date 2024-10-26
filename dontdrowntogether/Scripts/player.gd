@@ -18,7 +18,7 @@ var controller_ready := false
 var last_repairable_tile
 var can_repair = false
 
-var cur_dir: Vector2 = Vector2.LEFT
+@export var cur_dir: Vector2 = Vector2.LEFT
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
