@@ -36,11 +36,11 @@ func paddle():
 	if Input.is_action_pressed("ui_right"):
 		apply_force(Vector2.RIGHT*10, position+Vector2.DOWN*150)
 
-func destroy_tile(row, col):
-	grid[row][col].destroy()
+func destroy_tile(r, c):
+	grid[r][c].destroy()
 
-func repair_tile(row, col):
-	grid[row][col].repair()
+func repair_tile(r, c):
+	grid[r][c].repair()
 
 func _create_grid() -> void:
 	#Instantiate tiles in a 3x3 grid.
