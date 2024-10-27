@@ -8,11 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://m84cyg770d3x" path="res://Scenes/Hook.tscn" id="4_12b52"]
 [ext_resource type="PackedScene" path="res://Assets/Audio/drowning_audio_stream_player.tscn" id="5_1dg16"]
 [ext_resource type="PackedScene" uid="uid://c2sa2u21mhyqc" path="res://Assets/Audio/Running_audio_stream.tscn" id="7_r6qri"]
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://bhn1f1npwot15" path="res://Assets/Audio/paddel_audio_stream_player.tscn" id="8_2jmte"]
-=======
-[ext_resource type="PackedScene" path="res://Assets/Audio/paddel_audio_stream_player.tscn" id="8_2jmte"]
->>>>>>> Stashed changes
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8k613"]
 atlas = ExtResource("2_aaxva")
