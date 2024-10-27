@@ -85,11 +85,10 @@ func _process(_delta) -> void:
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
-			if(can_repair and current_tile != null):
-				current_tile.call_repair()
-				if(Global.scrapAmount < Global.repair_cost):
-					label.visible = false
-					can_repair = false
+			if(can_repair and current_tile != null && Global.scrapAmount >= Global.repair_cost):
+					current_tile.call_repair()
+				else:
+					set_repair(false)
 		if Input.is_action_just_pressed(build_btn):
 			if (current_tile != null):
 				SignalBus.build.emit(position, cur_dir, current_tile)
@@ -143,8 +142,6 @@ func _on_pickup_grunka(_value: int) -> void:
 	if(current_tile != null):
 		if(current_tile.get_health() < current_tile.get_max_health()):
 			set_repair(true)
-
-
 
 func play_running_sound():
 	if running_audio_stream_player.playing:

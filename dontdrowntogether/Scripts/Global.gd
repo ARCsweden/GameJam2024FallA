@@ -12,7 +12,7 @@ const repair_cost : int = 1
 # Max hp of a tile
 const raft_max_hp := 10.0
 # Amount of tile hp repaired with a single repair (clamps at raft_max_hp)
-const repair_amount : float = 1.0
+const repair_amount : float = 10.0
 
 # Timer range for tile decay (randomized) in seconds. Lower values is faster decay
 const raft_decay_min : float = 10.0
@@ -29,7 +29,7 @@ const hook_retract : float = 0.1 # In s. Lower value is faster
 
 # Rand range of grunka scrap value (determined on spawn)
 const grunka_value_min : int = 1
-const grunka_value_max : int = 5
+const grunka_value_max : int = 1
 
 # Spawn timer range for grunkor in s (lower value is more frequent)
 const grunka_spawn_min : float = 2.0
@@ -43,7 +43,7 @@ const grunka_ang_vel : float = 2.0 # Initial angular veclocity in radians/s (in 
 # Spawn timer range for stones in s (lower value is more frequent)
 const stone_spawn_min : float = 1.0
 const stone_spawn_max : float = 2.0
-var stone_spawn_offset : int = 20
+var stone_spawn_offset : int = 5
 const stone_size_min : float = 50.0
 const stone_size_max : float = 200.0
 
