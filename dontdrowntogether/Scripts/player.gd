@@ -4,6 +4,7 @@ class_name Player
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var label: Label = $PlayerBoundUi/Label
+@onready var paddle_sprite: AnimatedSprite2D = $PaddleSprite
 
 @export var speed: float = Global.player_move_speed
 
@@ -60,6 +61,9 @@ func _process(_delta) -> void:
 	if controller_ready == true:
 		if Input.is_action_pressed(paddle_btn):
 			SignalBus.paddle.emit(position, cur_dir)
+			paddle_sprite.visible = true
+		else:
+			paddle_sprite.visible = false
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
