@@ -103,6 +103,7 @@ func _process(_delta) -> void:
 				
 		if Input.is_action_just_pressed(build_btn):
 			if (current_tile != null && Global.scrapAmount >= Global.build_cost):
+				$Build_AudioStreamPlayer.play()
 				Global.scrapAmount -= Global.build_cost
 				hud.update_scrap_Counter(Global.scrapAmount)
 				SignalBus.build.emit(position, cur_dir, current_tile)
