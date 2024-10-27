@@ -54,6 +54,10 @@ const wall_damaged_tiles_min: int = 1
 const wall_damaged_tiles_max: int = 3
 const wall_damage: float = 3.0
 
+# Bounce when colliding
+const wall_bounce: Vector2 = Vector2(150, 0) 
+const stone_bounce: Vector2 = Vector2(0, 100)
+
 # Raft max dimensions
 const raft_rows : int = 5
 const raft_columns : int = 5
