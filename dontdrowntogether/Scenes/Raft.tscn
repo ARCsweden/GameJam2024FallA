@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctnqn23etgcp0"]
+[gd_scene load_steps=6 format=3 uid="uid://ctnqn23etgcp0"]
 
 [ext_resource type="Script" path="res://Scripts/raft_body.gd" id="1_sw433"]
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_12dra"]
 [ext_resource type="PackedScene" uid="uid://bj3j8e3vpjgrb" path="res://Scenes/water_shader_test.tscn" id="3_cj5d0"]
 [ext_resource type="Script" path="res://Scenes/water_shader_test.gd" id="4_mi4bn"]
+[ext_resource type="Script" path="res://Scenes/ripple_timer.gd" id="5_6o3fh"]
 
 [node name="RaftBody" type="RigidBody2D"]
 z_index = 5
@@ -37,4 +38,10 @@ position = Vector2(409.5, 205.25)
 scale = Vector2(56.6328, 46.1758)
 script = ExtResource("4_mi4bn")
 
+[node name="RippleTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+script = ExtResource("5_6o3fh")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="RippleTimer" to="." method="_on_ripple_timer_timeout"]

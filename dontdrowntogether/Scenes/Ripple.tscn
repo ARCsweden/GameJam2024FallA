@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://clu8ykelafrfq"]
+
+[ext_resource type="Script" path="res://Scenes/ripple.gd" id="1_hhvu5"]
+
+[sub_resource type="Curve" id="Curve_d5t4j"]
+_data = [Vector2(0.0195531, 0.990736), 0.0, 0.0, 0, 0, Vector2(0.480447, 0.895012), 0.0, 0.0, 0, 0, Vector2(0.681564, 0.734442), 0.0, 0.0, 0, 0, Vector2(0.924581, 0.366983), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="Ripple" type="CPUParticles2D"]
+z_index = -20
+emitting = false
+amount = 500
+lifetime = 4.0
+one_shot = true
+speed_scale = 1.6
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_amount_curve = SubResource("Curve_d5t4j")
+color = Color(0.607843, 1, 1, 0.0901961)
+script = ExtResource("1_hhvu5")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://82fhe0w6dwgo"]
+[gd_scene load_steps=8 format=3 uid="uid://82fhe0w6dwgo"]
 
 [ext_resource type="Script" path="res://UI/main_menu.gd" id="1_676ga"]
 [ext_resource type="Texture2D" uid="uid://dld5gwe03povq" path="res://UI/Images/MenuBackground2.PNG" id="2_twjcq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b1tgm44fknjxm" path="res://UI/Images/BetterButton.png" id="4_rppa8"]
 [ext_resource type="Theme" uid="uid://jia55bt3fpaw" path="res://UI/MainMenuTheme.tres" id="5_3cfmo"]
 [ext_resource type="AudioStream" uid="uid://dkmuwv6tvng7e" path="res://Assets/Music/title_screen.mp3" id="6_kr5xl"]
+[ext_resource type="PackedScene" uid="uid://dk1ee5sd6a77h" path="res://Assets/Audio/button_pressed_audio_stream_player.tscn" id="7_8fchx"]
 
 [node name="MainMenu_CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_676ga")
@@ -132,6 +133,8 @@ stream = ExtResource("6_kr5xl")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="ButtonPressed_AudioStreamPlayer" parent="." instance=ExtResource("7_8fchx")]
 
 [connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Play_TextureButton" to="." method="_on_play_texture_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons_VBoxContainer/Mute_TextureButton2" to="." method="_on_mute_texture_button_2_pressed"]
