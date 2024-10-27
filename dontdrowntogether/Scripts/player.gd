@@ -5,6 +5,9 @@ class_name Player
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var label: Label = $PlayerBoundUi/Label
 @onready var paddle_sprite: AnimatedSprite2D = $PaddleSprite
+@onready var running_audio_stream_player: AudioStreamPlayer = $Running_AudioStreamPlayer
+@onready var paddel_audio_stream_player: AudioStreamPlayer = $Paddel_AudioStreamPlayer
+@onready var drowning_audio_stream_player: AudioStreamPlayer = $Drowning_AudioStreamPlayer
 
 const GAME_OVER_CANVAS_LAYER = preload("res://UI/game_over_canvas_layer.tscn")
 
@@ -38,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 		rotation = (cur_dir.angle() + PI/2) - get_parent().rotation
 		play_running_sound()
 	else:
-		$Running_AudioStreamPlayer.stop()
+		running_audio_stream_player.stop()
 
 
 	velocity = direction * speed
@@ -72,7 +75,7 @@ func _process(_delta) -> void:
 			paddle_sprite.visible = true
 			play_paddel_sound()
 		else:
-			$Paddel_AudioStreamPlayer.stop()
+			paddel_audio_stream_player.stop()
 			paddle_sprite.visible = false
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
@@ -118,8 +121,8 @@ func killPlayer(body):
 		add_child(newGameover)
 		get_tree().paused = true
 	if removeSelf:
-		$Drowning_AudioStreamPlayer.play()
-		await $Drowning_AudioStreamPlayer.finished
+		drowning_audio_stream_player.play()
+		await drowning_audio_stream_player.finished
 		queue_free()
 
 func set_repair(_status) -> void:
@@ -136,14 +139,14 @@ func _on_pickup_grunka(_value: int) -> void:
 
 
 func play_running_sound():
-	if $Running_AudioStreamPlayer.playing:
+	if running_audio_stream_player.playing:
 		return
-	$Running_AudioStreamPlayer.play()
+	running_audio_stream_player.play()
 	
 func play_paddel_sound():
-	if $Paddel_AudioStreamPlayer.playing:
+	if paddel_audio_stream_player.playing:
 		return
-	$Paddel_AudioStreamPlayer.play()
+	paddel_audio_stream_player.play()
 	
 func _on_tile_entered(area) -> void:
 	last_tile = area
