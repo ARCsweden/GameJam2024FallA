@@ -102,3 +102,9 @@ func _create_grid() -> void:
 			
 			# Adds instance to grid so it can edited later
 			grid[r].append(instance)
+
+
+func _on_body_entered(body) -> void:
+	# Detect stone
+	if body.get_collision_layer() == 132:
+		pass
