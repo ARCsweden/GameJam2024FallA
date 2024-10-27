@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://rslh7wyupis3"]
+[gd_scene load_steps=18 format=3 uid="uid://rslh7wyupis3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://brlyj5y5qoqgy" path="res://Assets/Floorbed.png" id="5_imhee"]
 [ext_resource type="Texture2D" uid="uid://c4jj7kifn4fr0" path="res://Assets/Wall.png" id="5_xo0xj"]
 [ext_resource type="Script" path="res://Scenes/lightning_strike.gd" id="7_lmuvi"]
+[ext_resource type="AudioStream" uid="uid://bcwcwkuskomn3" path="res://Assets/Audio/Blixt/Blixt.mp3" id="8_blhhc"]
+[ext_resource type="AudioStream" uid="uid://vg5tce1hx6lc" path="res://Assets/Audio/Blixt/Blixt2.mp3" id="9_4pnya"]
+[ext_resource type="AudioStream" uid="uid://41ilrbktsaw4" path="res://Assets/Audio/Blixt/Blixt3.mp3" id="10_7i8fg"]
 
 [sub_resource type="Gradient" id="Gradient_3ou28"]
 offsets = PackedFloat32Array(0, 0.506494, 1)
@@ -59,6 +62,12 @@ _data = {
 "RESET": SubResource("Animation_q6i1t"),
 "strike": SubResource("Animation_tnqd6")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_im76i"]
+streams_count = 3
+stream_0/stream = ExtResource("8_blhhc")
+stream_1/stream = ExtResource("9_4pnya")
+stream_2/stream = ExtResource("10_7i8fg")
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -151,3 +160,6 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="LightningStrike"]
+
+[node name="Blixt_AudioStreamPlayer" type="AudioStreamPlayer" parent="LightningStrike"]
+stream = SubResource("AudioStreamRandomizer_im76i")
