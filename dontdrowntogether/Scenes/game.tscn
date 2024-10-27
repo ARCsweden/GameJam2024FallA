@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://rslh7wyupis3"]
+[gd_scene load_steps=14 format=3 uid="uid://rslh7wyupis3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/rain.gd" id="3_ddig8"]
 [ext_resource type="Texture2D" uid="uid://brlyj5y5qoqgy" path="res://Assets/Floorbed.png" id="5_imhee"]
 [ext_resource type="Texture2D" uid="uid://c4jj7kifn4fr0" path="res://Assets/Wall.png" id="5_xo0xj"]
+[ext_resource type="Script" path="res://Scenes/lightning_strike.gd" id="7_lmuvi"]
 
 [sub_resource type="Gradient" id="Gradient_3ou28"]
 offsets = PackedFloat32Array(0, 0.506494, 1)
@@ -18,6 +19,46 @@ height = 48
 use_hdr = true
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.991453, 0)
+
+[sub_resource type="Environment" id="Environment_xcm2t"]
+glow_enabled = true
+glow_bloom = 0.23
+
+[sub_resource type="Animation" id="Animation_tnqd6"]
+resource_name = "strike"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.3, 0.333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0, 1.0, 2.0, 1.55556, 1.48148, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_q6i1t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_stn8e"]
+_data = {
+"RESET": SubResource("Animation_q6i1t"),
+"strike": SubResource("Animation_tnqd6")
+}
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -50,10 +91,6 @@ script = ExtResource("3_ddig8")
 [node name="GrunkTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.458405, 0.458405, 0.458405, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
@@ -97,3 +134,20 @@ texture = ExtResource("5_xo0xj")
 flip_h = true
 
 [node name="StoneTimer" type="Timer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.882291, 0.923, 0.961948, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xcm2t")
+
+[node name="LightningStrike" type="DirectionalLight2D" parent="."]
+energy = 0.0
+script = ExtResource("7_lmuvi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LightningStrike"]
+libraries = {
+"": SubResource("AnimationLibrary_stn8e")
+}
+
+[node name="Timer" type="Timer" parent="LightningStrike"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkhs1oweifu3y"]
+[gd_scene load_steps=17 format=3 uid="uid://dkhs1oweifu3y"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
 [ext_resource type="Texture2D" uid="uid://ksjw4mqj1kvj" path="res://Assets/PaddleSpriteSheet.png" id="2_aaxva"]
@@ -11,6 +11,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c2sa2u21mhyqc" path="res://Assets/Audio/Running_audio_stream.tscn" id="7_r6qri"]
 [ext_resource type="PackedScene" path="res://Assets/Audio/paddel_audio_stream_player.tscn" id="8_2jmte"]
+[ext_resource type="Texture2D" uid="uid://tb7b8ipiefl8" path="res://Assets/Art/2d_lights_and_shadows_neutral_point_light.webp" id="10_lucq4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8k613"]
 atlas = ExtResource("2_aaxva")
@@ -140,6 +141,12 @@ shape = SubResource("CircleShape2D_nbwfu")
 [node name="Running_AudioStreamPlayer" parent="." instance=ExtResource("7_r6qri")]
 
 [node name="Paddel_AudioStreamPlayer" parent="." instance=ExtResource("8_2jmte")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.882833, 0.81, 1)
+energy = 0.5
+texture = ExtResource("10_lucq4")
+texture_scale = 2.56
 
 [connection signal="area_entered" from="RepairCheckArea" to="." method="_on_damage_tile_entered"]
 [connection signal="area_exited" from="RepairCheckArea" to="." method="_on_repair_check_area_area_exited"]
