@@ -11,6 +11,8 @@ z_index = 5
 collision_layer = 4
 collision_mask = 4
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 angular_damp_mode = 1
 angular_damp = 1.0
 script = ExtResource("1_sw433")
@@ -36,3 +38,5 @@ z_index = -50
 position = Vector2(409.5, 205.25)
 scale = Vector2(56.6328, 46.1758)
 script = ExtResource("4_mi4bn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

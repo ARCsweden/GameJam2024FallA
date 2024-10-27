@@ -76,6 +76,7 @@ func edge_tile():
 	$"./Sprite2D".flip_v = true
 
 func take_damage(amount):
+	$TakeDamage_AudioStreamPlayer.play()
 	$RepairArea.set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
 	health -= amount
 	update_color()

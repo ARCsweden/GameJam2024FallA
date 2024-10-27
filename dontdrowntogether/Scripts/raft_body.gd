@@ -29,7 +29,7 @@ func _ready() -> void:
 	#$"./RaftCollisionShape".shape.size.x = Global.raft_tile_length*(columns+3)
 	#$"./RaftCollisionShape".shape.size.y = Global.raft_tile_length*(rows+3)
 	#$"./RaftCollisionShape".position -= Vector2(150, 150)
-	
+	add_to_group("RaftBody")
 	_create_grid()
 	set_collision_layer_value(3, true)
 	set_collision_mask_value(3, true)
@@ -53,8 +53,8 @@ func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
 	# Force based on player direction
 	apply_force(-cur_dir*Global.paddle_force, player_pos)
 
-func take_damage(r, c):
-	grid[r][c].take_damage(1.0)
+func take_damage(r, c, damage):
+	grid[r][c].take_damage(damage)
 
 func rebuild_tile(r, c):
 	grid[r][c].rebuild()
@@ -100,3 +100,45 @@ func _create_grid() -> void:
 			
 			# Adds instance to grid so it can edited later
 			grid[r].append(instance)
+
+
+func _on_body_entered(body) -> void:
+	# Detect stone
+	if body.get_collision_layer() == 132:
+		var tiles_to_damage: int = Global.rng.randi_range(1, 3)
+		var stone_position = body.global_position
+		var nearest_tiles = Array()
+		nearest_tiles.resize(tiles_to_damage)
+		var nearest_tile_distances = Array()
+		nearest_tile_distances.resize(tiles_to_damage)
+		
+		for f in range(tiles_to_damage):
+			nearest_tiles[f] = null
+			nearest_tile_distances[f] = 9999
+		
+		
+		# Finds tiles closest to the stone
+		for r in range(grid.size()):
+			for c in range(grid[r].size()):
+				var tile = grid[r][c]
+				if tile.health < 1:
+					continue
+				
+				# Sorts list so when a new minimum is found, it replaces the furthest away tile
+				nearest_tile_distances.sort()
+				nearest_tile_distances.reverse()
+				nearest_tiles.sort()
+				nearest_tiles.reverse()
+				#print(nearest_tile_distances)
+				var tile_distance = tile.global_position.distance_to(stone_position)
+				for i in range(nearest_tile_distances.size()):
+					if tile_distance < nearest_tile_distances[i]:
+						nearest_tile_distances[i] = tile_distance
+						nearest_tiles[i] = Vector2(r, c)
+						break
+		for coords in nearest_tiles:
+			if coords != null:
+				var tile_name = grid[coords.x][coords.y].name
+				take_damage(coords.x, coords.y, Global.stone_damage)
+				
+		
