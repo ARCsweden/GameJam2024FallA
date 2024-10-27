@@ -1,11 +1,11 @@
 extends StaticBody2D
 
 @onready var hud: HUD = $"../../HUD"
+@onready var decay_timer: Timer = $DecayTimer
 
 var health := 0.0
 var collision_scale = 0.9
 
-@onready var decay_timer: Timer = $DecayTimer
 @onready var wobbleSprite : Sprite2D = $Sprite2D
 
 @export var top_level_collision_shape: CollisionShape2D
@@ -14,6 +14,9 @@ const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
 const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
 const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
 var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
+
+signal destroyTile(areaNode)
+
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
@@ -40,6 +43,7 @@ func _ready() -> void:
 	top_level_collision_shape.set_deferred("disabled", true)
 	$"./Sprite2D".visible = 0
 	decay_timer.timeout.connect(_on_decay)
+	add_to_group("RaftTiles")
 
 func _on_decay() -> void:
 	take_damage(Global.raft_decay_amount)
@@ -80,14 +84,14 @@ func take_damage(amount):
 		destroy()
 
 func destroy():
+	destroyTile.emit(self)
 	$Crash_AudioStreamPlayer.play()
-	self.top_level_collision_shape.top_level_collision_shape.set_deferred("disabled", true)
+	top_level_collision_shape.set_deferred("disabled", true)
 	$"./Sprite2D".visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
-	
-	
+
 func update_color() -> void:
 	self.modulate = Color(
 		lerp(0.8, 1.0, health / Global.raft_max_hp),
