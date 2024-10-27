@@ -15,6 +15,8 @@ var raft: Raft
 const spawn_point = Vector2(1000, 500)
 
 func _ready():
+	Global.scrapAmount = 0
+
 	raft = RaftScene.instantiate()
 	raft.position = spawn_point
 	add_child(raft)
