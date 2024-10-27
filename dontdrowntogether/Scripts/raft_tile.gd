@@ -2,7 +2,6 @@ extends StaticBody2D
 
 @onready var hud: HUD = $"../../HUD"
 
-const max_hp := 10.0
 var health := 0.0
 var collision_scale = 0.9
 
@@ -22,7 +21,7 @@ var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
 #Layer 5: Wall collision layer
 
 func setup_decay_timer() -> void:
-	decay_timer.start(randf_range(10.0, 20.0))
+	decay_timer.start(randf_range(Global.raft_decay_min, Global.raft_decay_max))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,7 +42,7 @@ func _ready() -> void:
 	decay_timer.timeout.connect(_on_decay)
 
 func _on_decay() -> void:
-	take_damage(1.0)
+	take_damage(Global.raft_decay_amount)
 	if health >= 0.0:
 		setup_decay_timer()
 
@@ -90,17 +89,17 @@ func destroy():
 	
 func update_color() -> void:
 	self.modulate = Color(
-		lerp(0.8, 1.0, health / max_hp),
-		lerp(0.3, 1.0, health / max_hp),
-		lerp(0.3, 1.0, health / max_hp),
-		health / max_hp
+		lerp(0.8, 1.0, health / Global.raft_max_hp),
+		lerp(0.3, 1.0, health / Global.raft_max_hp),
+		lerp(0.3, 1.0, health / Global.raft_max_hp),
+		health / Global.raft_max_hp
 	)
 
 func repair():
 	$Repair_AudioStreamPlayer.play()
-	self.health += 1.0
+	self.health = clampf(health + Global.repair_amount, 0.0, Global.raft_max_hp)
 	update_color()
-	if health >= max_hp:
+	if health >= Global.raft_max_hp:
 		$RepairArea.set_collision_layer_value(2, false)
 	Global.scrapAmount -= Global.repair_cost
 	hud.update_scrap_Counter(Global.scrapAmount)
@@ -110,7 +109,7 @@ func repair():
 func rebuild():
 	self.top_level_collision_shape.set_deferred("disabled", false)
 	$"./Sprite2D".visible = 1
-	self.health = max_hp
+	self.health = Global.raft_max_hp
 	update_color()
 	setup_decay_timer()
 	set_collision_layer_value(5, true) # tile collides with walls
