@@ -25,6 +25,7 @@ script = ExtResource("2_pc87c")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftWall/LeftWallCollision"]
+visible = false
 texture = ExtResource("2_l7dus")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
@@ -33,10 +34,11 @@ collision_mask = 20
 constant_linear_velocity = Vector2(-150, 0)
 
 [node name="RightWallCollision" type="CollisionShape2D" parent="RightWall"]
-position = Vector2(3495, -399)
+position = Vector2(3714, -387)
 shape = SubResource("RectangleShape2D_2bc84")
 script = ExtResource("2_pc87c")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="RightWall/RightWallCollision"]
+visible = false
 texture = ExtResource("2_l7dus")

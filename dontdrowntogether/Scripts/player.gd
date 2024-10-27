@@ -147,4 +147,3 @@ func play_paddel_sound():
 	
 func _on_tile_entered(area) -> void:
 	last_tile = area
-
