@@ -16,4 +16,5 @@ func _process(delta: float) -> void:
 	var distance = raft.position.y/50
 
 	# Noise is in range [-1, 1] so rotation will be in range [-20, 20]
-	rotation_degrees = 20.0 * noise.get_noise_2d(timer * 5, distance)
+	rotation_degrees = 20 + 20.0 * noise.get_noise_2d(timer * 5, distance)
+	print(rotation_degrees)
