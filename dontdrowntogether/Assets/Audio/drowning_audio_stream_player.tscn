@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlfqyxb3eld16"]
+
+[ext_resource type="AudioStream" uid="uid://mf8cmucit7yv" path="res://Assets/Audio/Drowning/Drowning.mp3" id="1_xvyjd"]
+[ext_resource type="AudioStream" uid="uid://do1fx02mcjkuh" path="res://Assets/Audio/Drowning/Drowning1.mp3" id="2_10luh"]
+[ext_resource type="AudioStream" uid="uid://bdm37x6d4xbkm" path="res://Assets/Audio/Drowning/Drowning2.mp3" id="3_pon01"]
+[ext_resource type="AudioStream" uid="uid://c6gete5abrv0x" path="res://Assets/Audio/Drowning/Drowning3.mp3" id="4_vhc44"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_42fd7"]
+streams_count = 4
+stream_0/stream = ExtResource("1_xvyjd")
+stream_1/stream = ExtResource("2_10luh")
+stream_2/stream = ExtResource("3_pon01")
+stream_3/stream = ExtResource("4_vhc44")
+
+[node name="Drowning_AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_42fd7")
