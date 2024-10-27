@@ -28,7 +28,7 @@ var repair_prompt = "PRESS B TO REPAIR"
 var last_tile
 var can_repair = false
 
-@export var cur_dir: Vector2 = Vector2.LEFT
+@export var cur_dir: Vector2 = Vector2.UP
 
 func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -69,6 +69,9 @@ func set_controller_id(id) -> void:
 	controller_ready = true
 
 func _process(_delta) -> void:
+	# Move the repair label to the player's position
+	label.global_position = global_position + Vector2(-100, -80)
+
 	if controller_ready == true:
 		if Input.is_action_pressed(paddle_btn):
 			SignalBus.paddle.emit(position, cur_dir)

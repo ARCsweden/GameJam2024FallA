@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctnqn23etgcp0"]
+[gd_scene load_steps=5 format=3 uid="uid://ctnqn23etgcp0"]
 
 [ext_resource type="Script" path="res://Scripts/raft_body.gd" id="1_sw433"]
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_12dra"]
 [ext_resource type="PackedScene" uid="uid://bj3j8e3vpjgrb" path="res://Scenes/water_shader_test.tscn" id="3_cj5d0"]
-[ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="3_wg7ce"]
 [ext_resource type="Script" path="res://Scenes/water_shader_test.gd" id="4_mi4bn"]
 
 [node name="RaftBody" type="RigidBody2D"]
@@ -31,7 +30,6 @@ limit_right = 2700
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
-script = ExtResource("3_wg7ce")
 
 [node name="WaterShaderTEST" parent="." instance=ExtResource("3_cj5d0")]
 z_index = -50

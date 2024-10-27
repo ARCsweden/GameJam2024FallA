@@ -138,7 +138,5 @@ func _on_body_entered(body) -> void:
 						break
 		for coords in nearest_tiles:
 			if coords != null:
-				var tile_name = grid[coords.x][coords.y].name
+				#var tile_name = grid[coords.x][coords.y].name
 				take_damage(coords.x, coords.y, Global.stone_damage)
-				
-		
