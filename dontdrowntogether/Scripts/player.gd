@@ -70,7 +70,9 @@ func _process(_delta) -> void:
 		if Input.is_action_pressed(paddle_btn):
 			SignalBus.paddle.emit(position, cur_dir)
 			paddle_sprite.visible = true
+			play_paddel_sound()
 		else:
+			$Paddel_AudioStreamPlayer.stop()
 			paddle_sprite.visible = false
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
@@ -138,4 +140,9 @@ func play_running_sound():
 	if $Running_AudioStreamPlayer.playing:
 		return
 	$Running_AudioStreamPlayer.play()
+	
+func play_paddel_sound():
+	if $Paddel_AudioStreamPlayer.playing:
+		return
+	$Paddel_AudioStreamPlayer.play()
 	
