@@ -36,6 +36,10 @@ func _physics_process(_delta: float) -> void:
 	if direction != Vector2.ZERO:
 		cur_dir = direction
 		rotation = (cur_dir.angle() + PI/2) - get_parent().rotation
+		play_running_sound()
+	else:
+		$Running_AudioStreamPlayer.stop()
+
 
 	velocity = direction * speed
 
@@ -129,3 +133,9 @@ func _on_pickup_grunka(_value: int) -> void:
 
 func _on_tile_entered(_area) -> void:
 	last_tile = _area
+
+func play_running_sound():
+	if $Running_AudioStreamPlayer.playing:
+		return
+	$Running_AudioStreamPlayer.play()
+	
