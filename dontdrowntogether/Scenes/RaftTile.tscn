@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw6sggaruqqcp"]
+[gd_scene load_steps=10 format=3 uid="uid://cw6sggaruqqcp"]
 
 [ext_resource type="Script" path="res://Scripts/raft_tile.gd" id="1_3r40d"]
 [ext_resource type="PackedScene" uid="uid://b1ob4rh1obs52" path="res://Assets/Audio/repair_audio_stream.tscn" id="2_0etbt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://tile.gdshader" id="3_2x4d2"]
 [ext_resource type="Script" path="res://Scripts/repair_area.gd" id="4_chgcs"]
 [ext_resource type="PackedScene" uid="uid://nysssxwky0oq" path="res://Assets/Audio/crash_audio_stream_player.tscn" id="4_nin0e"]
+[ext_resource type="AudioStream" uid="uid://bwxx20om5kfqs" path="res://Assets/Audio/TakeDamage.mp3" id="7_arqjl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv43m"]
 size = Vector2(100, 100)
@@ -44,3 +45,6 @@ shape = SubResource("RectangleShape2D_mv43m")
 
 [node name="DecayTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TakeDamage_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_arqjl")
