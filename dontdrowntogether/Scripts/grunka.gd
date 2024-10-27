@@ -32,8 +32,12 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func set_random_sprite():
-	sprite_2d.texture = SpriteArrayTexture[randi() % SpriteArrayTexture.size() + 0]
-	if sprite_2d.texture.get_size() >= Vector2(1000,1000):
+	var randInt : int = randi() % SpriteArrayTexture.size()
+	sprite_2d.texture = SpriteArrayTexture[randInt]
+	if randInt == 2:
 		var newCollisionShape2D = CircleShape2D.new()
 		newCollisionShape2D.radius = sprite_2d.texture.get_size().x/40
 		$CollisionShape2D.shape = newCollisionShape2D
+	if randInt == 1:
+		sprite_2d.scale = sprite_2d.transform.get_scale()*2
+		
