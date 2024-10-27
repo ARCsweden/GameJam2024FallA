@@ -140,23 +140,20 @@ func _on_body_entered(body) -> void:
 		var nearest_tiles = nearest_tiles_to_point(stone_position, tiles_to_damage)
 		for coords in nearest_tiles:
 			if coords != null:
-				var tile_name = grid[coords.x][coords.y].name
 				take_damage(coords.x, coords.y, Global.stone_damage)
-				
+
 	if body.name == "LeftWall":
 		var left_pos = position + Vector2.LEFT*9999
 		var tiles_to_damage: int = Global.rng.randi_range(Global.wall_damaged_tiles_min, Global.wall_damaged_tiles_max)
 		var nearest_tiles = nearest_tiles_to_point(left_pos, tiles_to_damage)
 		for coords in nearest_tiles:
 			if coords != null:
-				var tile_name = grid[coords.x][coords.y].name
 				take_damage(coords.x, coords.y, Global.wall_damage)
-				
+
 	if body.name == "RightWall":
 		var left_pos = position + Vector2.RIGHT*9999
 		var tiles_to_damage: int = Global.rng.randi_range(Global.wall_damaged_tiles_min, Global.wall_damaged_tiles_max)
 		var nearest_tiles = nearest_tiles_to_point(left_pos, tiles_to_damage)
 		for coords in nearest_tiles:
 			if coords != null:
-				var tile_name = grid[coords.x][coords.y].name
 				take_damage(coords.x, coords.y, Global.wall_damage)
