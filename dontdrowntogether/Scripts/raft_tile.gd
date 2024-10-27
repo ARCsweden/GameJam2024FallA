@@ -6,6 +6,7 @@ var health := 0.0
 var collision_scale = 0.9
 
 @onready var decay_timer: Timer = $DecayTimer
+@onready var wobbleSprite : Sprite2D = $Sprite2D
 
 @export var top_level_collision_shape: CollisionShape2D
 
@@ -13,7 +14,6 @@ const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
 const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
 const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
 var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
-
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
@@ -75,6 +75,7 @@ func take_damage(amount):
 	$RepairArea.set_collision_layer_value(2, true) #Collision layer that shows the tile is damaged
 	health -= amount
 	update_color()
+	update_wobble()
 	if(health <= 0):
 		destroy()
 
@@ -94,11 +95,14 @@ func update_color() -> void:
 		lerp(0.3, 1.0, health / Global.raft_max_hp),
 		health / Global.raft_max_hp
 	)
-
+func update_wobble() -> void:
+	wobbleSprite.material.set_shader_parameter("Strength",40-self.health*3.8+2)
+	
 func repair():
 	$Repair_AudioStreamPlayer.play()
 	self.health = clampf(health + Global.repair_amount, 0.0, Global.raft_max_hp)
 	update_color()
+	update_wobble()
 	if health >= Global.raft_max_hp:
 		$RepairArea.set_collision_layer_value(2, false)
 	Global.scrapAmount -= Global.repair_cost
@@ -111,6 +115,7 @@ func rebuild():
 	$"./Sprite2D".visible = 1
 	self.health = Global.raft_max_hp
 	update_color()
+	update_wobble()
 	setup_decay_timer()
 	set_collision_layer_value(5, true) # tile collides with walls
 	set_collision_mask_value(5, true)
