@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ksjw4mqj1kvj" path="res://Assets/PaddleSpriteSheet.png" id="2_aaxva"]
 [ext_resource type="Texture2D" uid="uid://c0xg5st4jh5tu" path="res://Assets/Cap1.png" id="2_o80hy"]
 [ext_resource type="Script" path="res://Scripts/label.gd" id="3_777ti"]
-[ext_resource type="PackedScene" path="res://Scenes/Hook.tscn" id="4_12b52"]
+[ext_resource type="PackedScene" uid="uid://m84cyg770d3x" path="res://Scenes/Hook.tscn" id="4_12b52"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8k613"]
 atlas = ExtResource("2_aaxva")
