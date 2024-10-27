@@ -45,9 +45,14 @@ const stone_spawn_min : float = 1.0
 const stone_spawn_max : float = 5.0
 const stone_size_min : float = 50.0
 const stone_size_max : float = 200.0
+
+# Damage when colliding
 const stone_damaged_tiles_min: int = 1
 const stone_damaged_tiles_max: int = 3
 const stone_damage: float = 3.0
+const wall_damaged_tiles_min: int = 1
+const wall_damaged_tiles_max: int = 3
+const wall_damage: float = 3.0
 
 # Raft max dimensions
 const raft_rows : int = 5
