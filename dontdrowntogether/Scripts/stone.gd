@@ -11,6 +11,7 @@ func _ready() -> void:
 	setup_collision_size()
 	setup_texture()
 	setup_sprite()
+	constant_linear_velocity = Global.stone_bounce
 
 func setup_sprite():
 	#set the size of the texture stone to fit the collision
