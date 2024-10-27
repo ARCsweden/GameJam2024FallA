@@ -2,7 +2,7 @@ extends RigidBody2D
 class_name Grunka
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
-
+var Ripple: PackedScene = preload("res://Scenes/Ripple.tscn")
 
 const BOTTLE_1 : Texture = preload("res://Assets/Bottle1.png")
 const PLANKS : Texture = preload("res://Assets/Art/Planks.png")
@@ -41,3 +41,19 @@ func set_random_sprite():
 	if randInt == 1:
 		sprite_2d.scale = sprite_2d.transform.get_scale()*2
 		
+func _process(_delta) -> void:
+	
+	pass
+	
+	
+
+
+func _on_ripple_timer_timeout():
+	
+	add_child(Ripple.instantiate())
+	pass # Replace with function body.
+
+
+func _on_memory_timer_timeout():
+	$RippleTimer.stop()
+	pass # Replace with function body.
