@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cu7dqnxar2vcm"]
+[gd_scene load_steps=12 format=3 uid="uid://cu7dqnxar2vcm"]
 
 [ext_resource type="Script" path="res://UI/ingame_menu.gd" id="1_iru8w"]
 [ext_resource type="Texture2D" uid="uid://0esun8vk0q22" path="res://UI/Images/BackgroundBoardNoB.png" id="1_nfdg2"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bgmvotvnlkug8" path="res://Assets/Music/flotten_v3.mp3" id="7_klkcs"]
 [ext_resource type="AudioStream" uid="uid://dhjjvvklmcxc7" path="res://Assets/Music/raft_v1.mp3" id="8_yog7s"]
 [ext_resource type="AudioStream" uid="uid://bupcq4kifpcrl" path="res://Assets/Music/raft_v2.mp3" id="9_vegmj"]
+[ext_resource type="PackedScene" uid="uid://dk1ee5sd6a77h" path="res://Assets/Audio/button_pressed_audio_stream_player.tscn" id="10_yu5r6"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eskpd"]
 streams_count = 6
@@ -138,6 +139,8 @@ text = "Main Menu"
 stream = SubResource("AudioStreamRandomizer_eskpd")
 autoplay = true
 bus = &"Music"
+
+[node name="ButtonPressed_AudioStreamPlayer" parent="." instance=ExtResource("10_yu5r6")]
 
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/Resume_TextureButton" to="." method="_on_resume_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/Buttons_VBoxContainer/MuteMusic_TextureButton2" to="." method="_on_mute_music_texture_button_2_pressed"]

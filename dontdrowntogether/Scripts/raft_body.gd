@@ -36,7 +36,7 @@ func _ready() -> void:
 	set_collision_mask_value(3, true)
 	_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
-	set_axis_velocity(Vector2(0,-300))
+	set_axis_velocity(Vector2(0,-200))
 	
 	mass = Global.raft_mass
 	angular_damp = Global.raft_angular_damping
