@@ -5,14 +5,14 @@ class_name Raft
 # Preloads scene for faster loading
 var RaftTileScene := load("res://Scenes/RaftTile.tscn")
 
-var rows: int = 5
-var columns: int = 5
+var rows: int = Global.raft_rows
+var columns: int = Global.raft_columns
 
 var raft_max_size = Vector2(Global.raft_tile_length*(columns+3), Global.raft_tile_length*(rows+3))
 
-var starting_area_squares: int = 1
+var starting_area_squares: int = Global.raft_start_radius
 
-var force_mult = 20
+var force_mult: float = Global.river_force
 
 var grid = []
 
@@ -38,9 +38,9 @@ func _ready() -> void:
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	forward_force()
-	force_mult += 0.01
+	force_mult += Global.river_acc * delta
 	if Input.is_action_just_pressed("DebugTakeDamage"):
 		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
@@ -53,7 +53,7 @@ func forward_force():
 
 func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
 	# Force based on player direction
-	apply_force(-cur_dir*50, player_pos)
+	apply_force(-cur_dir*Global.paddle_force, player_pos)
 
 func take_damage(r, c):
 	grid[r][c].take_damage(1.0)

@@ -48,7 +48,6 @@ script = ExtResource("3_777ti")
 
 [node name="Hook" parent="." instance=ExtResource("4_12b52")]
 visible = false
-distance = 400.0
 
 [node name="TileCheckArea" type="Area2D" parent="."]
 collision_layer = 512

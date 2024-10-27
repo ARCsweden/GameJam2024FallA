@@ -7,4 +7,4 @@ func get_health() -> float:
 	return $"..".health
 
 func get_max_health() -> float:
-	return $"..".max_hp
+	return Global.raft_max_hp

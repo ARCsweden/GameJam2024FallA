@@ -29,27 +29,27 @@ func _ready():
 	SignalBus.pickup_grunka.connect(_on_pickup_grunka)
 
 	grunk_timer.connect("timeout", _on_grunk_spawn)
-	grunk_timer.start(randf_range(1.5, 3.0))
+	grunk_timer.start(randf_range(Global.grunka_spawn_min, Global.grunka_spawn_max))
 
 	stone_timer.connect("timeout", _on_stone_spawn)
-	stone_timer.start(randf_range(5.0, 10.0))
+	stone_timer.start(randf_range(Global.stone_spawn_min, Global.stone_spawn_max))
 
 func _on_grunk_spawn() -> void:
 	var grunka: Grunka = GrunkaScene.instantiate()
-	var value = randi_range(1, 5)
+	var value = randi_range(Global.grunka_value_min, Global.grunka_value_max)
 	grunka.value = value
 	grunka.position = Vector2(randf_range(-1900, 1900), -1000) + raft.position
-	grunka.angular_velocity = randf_range(-1.0, 1.0)
-	grunka.linear_velocity = Vector2(randf_range(-50.0, 50.0), randf_range(100.0, 300.0)) 
+	grunka.angular_velocity = randf_range(-Global.grunka_ang_vel, Global.grunka_ang_vel)
+	grunka.linear_velocity = Vector2(randf_range(-Global.grunka_xvel, Global.grunka_xvel), randf_range(Global.grunka_yvel_min, Global.grunka_yvel_max)) 
 	add_child(grunka)
 	# Randomize timer
-	grunk_timer.start(randf_range(0.25, 1.0))
+	grunk_timer.start(randf_range(Global.grunka_spawn_min, Global.grunka_spawn_max))
 
 func _on_stone_spawn() -> void:
 	var stone = stone_Scene.instantiate()
 	stone.position = Vector2(randf_range(-1900, 1900), randf_range(-1000, -1900)) + raft.position
 	add_child(stone)
-	stone_timer.start(randf_range(5.0, 10.0))
+	stone_timer.start(randf_range(Global.stone_spawn_min, Global.stone_spawn_max))
 
 func _on_pickup_grunka(value: int) -> void:
 	Global.scrapAmount += value
