@@ -69,4 +69,4 @@ const raft_columns : int = 5
 const raft_start_radius : int = 1 # layers outside the center tile. 1 = 3x3 square
 
 const river_force : float = 20.0
-const river_acc : float = 0.0 # Amount that river_force increases every second
+const river_acc : float = 0.0067 # Amount that river_force increases every second

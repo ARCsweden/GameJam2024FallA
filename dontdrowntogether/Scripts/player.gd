@@ -4,6 +4,7 @@ class_name Player
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var label: Label = $PlayerBoundUi/Label
+@onready var RepairIcon : TextureRect = $PlayerBoundUi/Repair_TextureRect
 @onready var paddle_sprite: AnimatedSprite2D = $PaddleSprite
 @onready var running_audio_stream_player: AudioStreamPlayer = $Running_AudioStreamPlayer
 @onready var paddel_audio_stream_player: AudioStreamPlayer = $Paddel_AudioStreamPlayer
@@ -70,7 +71,8 @@ func set_controller_id(id) -> void:
 
 func _process(_delta) -> void:
 	# Move the repair label to the player's position
-	label.global_position = global_position + Vector2(-100, -80)
+	#label.global_position = global_position + Vector2(-100, -80)
+	RepairIcon.global_position = global_position + Vector2(-25, -80)
 
 	if controller_ready == true:
 		if Input.is_action_pressed(paddle_btn):
@@ -85,20 +87,26 @@ func _process(_delta) -> void:
 		if Input.is_action_just_pressed(repair_btn):
 			if(can_repair and last_tile != null && Global.scrapAmount >= Global.repair_cost):
 				last_tile.call_repair()
+				#label.visible = false
+				RepairIcon.visible = false
+				can_repair = false
 			else:
 				set_repair(false)
+
 
 func repair_raft_tile() -> void:
 	pass
 
 func _on_damage_tile_entered(_area):
 	if(Global.scrapAmount >= Global.repair_cost):
-		label.text = repair_prompt
-		label.visible = true
+		#label.text = repair_prompt
+		#label.visible = true
+		RepairIcon.visible = true
 		can_repair = true
 
 func _on_repair_check_area_area_exited(_area: Area2D) -> void:
-	label.visible = false
+	#label.visible = false
+	RepairIcon.visible = false
 	can_repair = false
 
 func connect_Raft_Tiles_signal():
@@ -129,9 +137,9 @@ func killPlayer(body):
 
 func set_repair(_status) -> void:
 	can_repair = _status
-	label.visible = _status
-	if(_status):
-		label.text = repair_prompt
+	#label.visible = _status
+	#if(_status):
+		#label.text = repair_prompt
 	
 func _on_pickup_grunka(_value: int) -> void:
 	if(last_tile != null):
