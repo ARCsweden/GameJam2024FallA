@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://rslh7wyupis3"]
+[gd_scene load_steps=9 format=3 uid="uid://rslh7wyupis3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
 [ext_resource type="PackedScene" uid="uid://becbpdg61vwge" path="res://Scenes/Walls.tscn" id="3_5jli6"]
+[ext_resource type="Script" path="res://Scenes/rain.gd" id="3_ddig8"]
 [ext_resource type="Texture2D" uid="uid://brlyj5y5qoqgy" path="res://Assets/Floorbed.png" id="5_imhee"]
 [ext_resource type="Texture2D" uid="uid://c4jj7kifn4fr0" path="res://Assets/Wall.png" id="5_xo0xj"]
 
@@ -26,7 +27,6 @@ script = ExtResource("1_ol0k5")
 
 [node name="Rain" type="CPUParticles2D" parent="HUD"]
 position = Vector2(950, -400)
-rotation = 0.349066
 amount = 3000
 lifetime = 2.0
 preprocess = 2.0
@@ -43,6 +43,7 @@ spread = 0.0
 initial_velocity_min = 200.0
 initial_velocity_max = 400.0
 color = Color(0.619608, 0.619608, 0.619608, 0.545098)
+script = ExtResource("3_ddig8")
 
 [node name="Walls" parent="." instance=ExtResource("3_5jli6")]
 

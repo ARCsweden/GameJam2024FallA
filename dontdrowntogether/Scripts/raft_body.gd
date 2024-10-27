@@ -36,8 +36,8 @@ func _ready() -> void:
 	_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
 	SignalBus.build.connect(_on_build)
-	set_axis_velocity(Vector2(0,-300))
-	
+	set_axis_velocity(Vector2(0,-200))
+
 	mass = Global.raft_mass
 	angular_damp = Global.raft_angular_damping
 
