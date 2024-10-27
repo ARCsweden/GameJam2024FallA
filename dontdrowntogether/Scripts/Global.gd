@@ -43,7 +43,7 @@ const grunka_ang_vel : float = 2.0 # Initial angular veclocity in radians/s (in 
 # Spawn timer range for stones in s (lower value is more frequent)
 const stone_spawn_min : float = 1.0
 const stone_spawn_max : float = 2.0
-var stone_spawn_offset : int = 20
+var stone_spawn_offset : int = 5
 const stone_size_min : float = 50.0
 const stone_size_max : float = 200.0
 
@@ -69,4 +69,4 @@ const raft_columns : int = 5
 const raft_start_radius : int = 1 # layers outside the center tile. 1 = 3x3 square
 
 const river_force : float = 20.0
-const river_acc : float = 0.0 # Amount that river_force increases every second
+const river_acc : float = 0.006 # Amount that river_force increases every second

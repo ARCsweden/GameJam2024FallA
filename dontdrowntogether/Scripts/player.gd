@@ -85,12 +85,14 @@ func _process(_delta) -> void:
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
-			if(can_repair and last_tile != null):
+			if(can_repair and last_tile != null && Global.scrapAmount >= Global.repair_cost):
 				last_tile.call_repair()
-				if(Global.scrapAmount < Global.repair_cost):
-					#label.visible = false
-					RepairIcon.visible = false
-					can_repair = false
+				#label.visible = false
+				RepairIcon.visible = false
+				can_repair = false
+			else:
+				set_repair(false)
+
 
 func repair_raft_tile() -> void:
 	pass
@@ -143,8 +145,6 @@ func _on_pickup_grunka(_value: int) -> void:
 	if(last_tile != null):
 		if(last_tile.get_health() < last_tile.get_max_health()):
 			set_repair(true)
-
-
 
 func play_running_sound():
 	if running_audio_stream_player.playing:
