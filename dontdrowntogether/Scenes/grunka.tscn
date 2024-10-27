@@ -1,38 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://6yoilchxrtp4"]
+[gd_scene load_steps=3 format=3 uid="uid://6yoilchxrtp4"]
 
 [ext_resource type="Script" path="res://Scripts/grunka.gd" id="1_yv43a"]
-[ext_resource type="Shader" path="res://water.gdshader" id="2_dw4r4"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fd46l"]
-frequency = 0.002
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vmbp0"]
-width = 50
-height = 50
-seamless = true
-noise = SubResource("FastNoiseLite_fd46l")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ydq21"]
-frequency = 0.002
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p8s2o"]
-width = 50
-height = 50
-seamless = true
-as_normal_map = true
-noise = SubResource("FastNoiseLite_ydq21")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_coggc"]
-shader = ExtResource("2_dw4r4")
-shader_parameter/scroll1 = Vector2(0.05, 0.05)
-shader_parameter/scroll2 = Vector2(-0.05, -0.05)
-shader_parameter/distortion_strength = 0.1
-shader_parameter/tone_color = Color(1, 1, 1, 1)
-shader_parameter/top_color = Color(0, 0, 0, 1)
-shader_parameter/light_start = 0.275
-shader_parameter/light_end = 0.4
-shader_parameter/noise1 = SubResource("NoiseTexture2D_vmbp0")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_p8s2o")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tli18"]
 radius = 25.0799
@@ -42,38 +10,18 @@ collision_layer = 128
 collision_mask = 16
 script = ExtResource("1_yv43a")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-z_index = -20
-material = SubResource("ShaderMaterial_coggc")
-position = Vector2(0, 21)
-amount = 30
-lifetime = 3.0
-speed_scale = 2.0
-direction = Vector2(500, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 30.0
-initial_velocity_max = 30.0
-orbit_velocity_max = 0.02
-scale_amount_max = 7.0
-
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
-z_index = -20
-material = SubResource("ShaderMaterial_coggc")
-position = Vector2(0, 21)
-amount = 30
-lifetime = 3.0
-speed_scale = 2.0
-direction = Vector2(-500, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 30.0
-initial_velocity_max = 30.0
-orbit_velocity_max = 0.02
-scale_amount_max = 7.0
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.062, 0.062)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tli18")
+
+[node name="RippleTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Memory Timer" type="Timer" parent="RippleTimer"]
+wait_time = 10.0
+
+[connection signal="timeout" from="RippleTimer" to="." method="_on_ripple_timer_timeout"]
+[connection signal="timeout" from="RippleTimer/Memory Timer" to="." method="_on_memory_timer_timeout"]
