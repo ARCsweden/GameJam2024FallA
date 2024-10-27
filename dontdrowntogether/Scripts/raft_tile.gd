@@ -17,6 +17,10 @@ var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
 
 signal destroyTile(areaNode)
 
+var grid_pos: Vector2
+
+var is_edge_tile = false
+
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
 #Layer 3: Raft layer
@@ -69,6 +73,7 @@ func _process(_delta: float) -> void:
 	pass
 	
 func edge_tile():
+	is_edge_tile = true
 	set_collision_layer_value(1, true)
 	$"./Sprite2D".visible = 1
 	self.top_level_collision_shape.set_deferred("disabled", true)

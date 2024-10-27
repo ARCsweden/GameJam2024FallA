@@ -64,9 +64,9 @@ const raft_mass: float = 1.0
 const raft_angular_damping: float = 0.15
 
 # Raft max dimensions
-const raft_rows : int = 5
-const raft_columns : int = 5
-const raft_start_radius : int = 1 # layers outside the center tile. 1 = 3x3 square
+const raft_rows : int = 10
+const raft_columns : int = 10
+const raft_start_radius : int = 2 # layers outside the center tile. 1 = 3x3 square
 
 const river_force : float = 20.0
 const river_acc : float = 0.0 # Amount that river_force increases every second

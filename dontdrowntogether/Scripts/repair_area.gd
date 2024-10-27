@@ -8,3 +8,6 @@ func get_health() -> float:
 
 func get_max_health() -> float:
 	return Global.raft_max_hp
+	
+func get_grid_pos():
+	return $"..".grid_pos

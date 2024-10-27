@@ -22,10 +22,11 @@ var move_right
 var paddle_btn
 var hook_btn
 var repair_btn
+var build_btn
 var controller_ready := false
 var repair_prompt = "PRESS B TO REPAIR"
 
-var last_tile
+var current_tile
 var can_repair = false
 
 @export var cur_dir: Vector2 = Vector2.UP
@@ -66,6 +67,7 @@ func set_controller_id(id) -> void:
 	paddle_btn = "paddle" + str(controller_id)
 	hook_btn = "hook" + str(controller_id)
 	repair_btn = "repair" + str(controller_id)
+	build_btn = "build" + str(controller_id)
 	controller_ready = true
 
 func _process(_delta) -> void:
@@ -83,11 +85,14 @@ func _process(_delta) -> void:
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
-			if(can_repair and last_tile != null):
-				last_tile.call_repair()
+			if(can_repair and current_tile != null):
+				current_tile.call_repair()
 				if(Global.scrapAmount < Global.repair_cost):
 					label.visible = false
 					can_repair = false
+		if Input.is_action_just_pressed(build_btn):
+			if (current_tile != null):
+				SignalBus.build.emit(position, cur_dir, current_tile)
 
 func repair_raft_tile() -> void:
 	pass
@@ -135,8 +140,8 @@ func set_repair(_status) -> void:
 		label.text = repair_prompt
 	
 func _on_pickup_grunka(_value: int) -> void:
-	if(last_tile != null):
-		if(last_tile.get_health() < last_tile.get_max_health()):
+	if(current_tile != null):
+		if(current_tile.get_health() < current_tile.get_max_health()):
 			set_repair(true)
 
 
@@ -152,4 +157,4 @@ func play_paddel_sound():
 	paddel_audio_stream_player.play()
 	
 func _on_tile_entered(area) -> void:
-	last_tile = area
+	current_tile = area
