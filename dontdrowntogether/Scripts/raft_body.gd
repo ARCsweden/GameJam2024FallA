@@ -101,44 +101,62 @@ func _create_grid() -> void:
 			# Adds instance to grid so it can edited later
 			grid[r].append(instance)
 
+func nearest_tiles_to_point(point: Vector2, tiles: int) -> Array:
+	var nearest_tiles = Array()
+	nearest_tiles.resize(tiles)
+	var nearest_tile_distances = Array()
+	nearest_tile_distances.resize(tiles)
+	
+	for f in range(tiles):
+		nearest_tiles[f] = null
+		nearest_tile_distances[f] = 9999
+	
+	# Finds tiles closest to the stone
+	for r in range(grid.size()):
+		for c in range(grid[r].size()):
+			var tile = grid[r][c]
+			if tile.health < 1:
+				continue
+			
+			# Sorts list so when a new minimum is found, it replaces the furthest away tile
+			nearest_tile_distances.sort()
+			nearest_tile_distances.reverse()
+			nearest_tiles.sort()
+			nearest_tiles.reverse()
+			#print(nearest_tile_distances)
+			var tile_distance = tile.global_position.distance_to(point)
+			for i in range(nearest_tile_distances.size()):
+				if tile_distance < nearest_tile_distances[i]:
+					nearest_tile_distances[i] = tile_distance
+					nearest_tiles[i] = Vector2(r, c)
+					break
+	return nearest_tiles
 
 func _on_body_entered(body) -> void:
 	# Detect stone
 	if body.get_collision_layer() == 132:
 		var tiles_to_damage: int = Global.rng.randi_range(Global.stone_damaged_tiles_min, Global.stone_damaged_tiles_max)
 		var stone_position = body.global_position
-		var nearest_tiles = Array()
-		nearest_tiles.resize(tiles_to_damage)
-		var nearest_tile_distances = Array()
-		nearest_tile_distances.resize(tiles_to_damage)
-		
-		for f in range(tiles_to_damage):
-			nearest_tiles[f] = null
-			nearest_tile_distances[f] = 9999
-		
-		
-		# Finds tiles closest to the stone
-		for r in range(grid.size()):
-			for c in range(grid[r].size()):
-				var tile = grid[r][c]
-				if tile.health < 1:
-					continue
-				
-				# Sorts list so when a new minimum is found, it replaces the furthest away tile
-				nearest_tile_distances.sort()
-				nearest_tile_distances.reverse()
-				nearest_tiles.sort()
-				nearest_tiles.reverse()
-				#print(nearest_tile_distances)
-				var tile_distance = tile.global_position.distance_to(stone_position)
-				for i in range(nearest_tile_distances.size()):
-					if tile_distance < nearest_tile_distances[i]:
-						nearest_tile_distances[i] = tile_distance
-						nearest_tiles[i] = Vector2(r, c)
-						break
+		var nearest_tiles = nearest_tiles_to_point(stone_position, tiles_to_damage)
 		for coords in nearest_tiles:
 			if coords != null:
 				var tile_name = grid[coords.x][coords.y].name
 				take_damage(coords.x, coords.y, Global.stone_damage)
 				
-		
+	if body.name == "LeftWall":
+		var left_pos = position + Vector2.LEFT*9999
+		var tiles_to_damage: int = Global.rng.randi_range(Global.wall_damaged_tiles_min, Global.wall_damaged_tiles_max)
+		var nearest_tiles = nearest_tiles_to_point(left_pos, tiles_to_damage)
+		for coords in nearest_tiles:
+			if coords != null:
+				var tile_name = grid[coords.x][coords.y].name
+				take_damage(coords.x, coords.y, Global.wall_damage)
+				
+	if body.name == "RightWall":
+		var left_pos = position + Vector2.RIGHT*9999
+		var tiles_to_damage: int = Global.rng.randi_range(Global.wall_damaged_tiles_min, Global.wall_damaged_tiles_max)
+		var nearest_tiles = nearest_tiles_to_point(left_pos, tiles_to_damage)
+		for coords in nearest_tiles:
+			if coords != null:
+				var tile_name = grid[coords.x][coords.y].name
+				take_damage(coords.x, coords.y, Global.wall_damage)
