@@ -9,6 +9,8 @@ var scrapAmount : int = 0
 ### MECHANICS ###
 # Cost in scrap to repair a tile
 const repair_cost : int = 1
+# Cost in scrap to build a tile
+const build_cost : int = 3
 # Max hp of a tile
 const raft_max_hp := 10.0
 # Amount of tile hp repaired with a single repair (clamps at raft_max_hp)

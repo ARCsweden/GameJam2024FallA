@@ -9,6 +9,7 @@ class_name Player
 @onready var running_audio_stream_player: AudioStreamPlayer = $Running_AudioStreamPlayer
 @onready var paddel_audio_stream_player: AudioStreamPlayer = $Paddel_AudioStreamPlayer
 @onready var drowning_audio_stream_player: AudioStreamPlayer = $Drowning_AudioStreamPlayer
+@onready var hud: HUD = $"../../HUD"
 
 const GAME_OVER_CANVAS_LAYER = preload("res://UI/game_over_canvas_layer.tscn")
 
@@ -88,14 +89,17 @@ func _process(_delta) -> void:
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
 			if(can_repair and current_tile != null && Global.scrapAmount >= Global.repair_cost):
-					current_tile.call_repair()
-					#label.visible = false
-					RepairIcon.visible = false
-					can_repair = false
-				else:
-					set_repair(false)
+				current_tile.call_repair()
+				#label.visible = false
+				RepairIcon.visible = false
+				can_repair = false
+			else:
+				set_repair(false)
+				
 		if Input.is_action_just_pressed(build_btn):
-			if (current_tile != null):
+			if (current_tile != null && Global.scrapAmount >= Global.build_cost):
+				Global.scrapAmount -= Global.build_cost
+				hud.update_scrap_Counter(Global.scrapAmount)
 				SignalBus.build.emit(position, cur_dir, current_tile)
 
 func repair_raft_tile() -> void:

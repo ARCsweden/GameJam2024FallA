@@ -57,28 +57,16 @@ func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
 	# Force based on player direction
 	apply_force(-cur_dir*Global.paddle_force, player_pos)
 
-func _on_build(player_pos: Vector2, cur_dir: Vector2, current_tile):
-	print(player_pos)
-	print(cur_dir)
-	print(current_tile)
-	
+func _on_build(player_pos: Vector2, cur_dir: Vector2, current_tile):	
 	var raft_rotation = rotation_degrees * (PI / 180)  # Convert degrees to radians
 	var rotated_dir = cur_dir.rotated(-raft_rotation)  # Rotate in the opposite direction
 	var relative_dir = round_to_nearest_axis(rotated_dir)  # Snap to nearest axis vector
 	# Calculate the tile position to build
 	var tile_to_build_pos = current_tile.get_grid_pos() + relative_dir
 	
-	# cur_dir - round(raft_direction_degrees)
-	#var tile_to_build_pos = current_tile.get_grid_pos()+cur_dir
 	var tile_to_build = grid[tile_to_build_pos.x][tile_to_build_pos.y]
 	if tile_to_build.health < 1 and tile_to_build.is_edge_tile == false:
 		rebuild_tile(tile_to_build_pos.x, tile_to_build_pos.y)
-	
-	#player_pos + Global.raft_tile_length * cur_dir
-	
-	# Get player direction
-	# look one tile length forward
-	# if point belongs to empty tile, build
 
 func round_to_nearest_axis(v: Vector2) -> Vector2:
 	# Normalize the vector to get the direction
