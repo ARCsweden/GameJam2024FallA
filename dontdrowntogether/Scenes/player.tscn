@@ -1,9 +1,39 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkhs1oweifu3y"]
+[gd_scene load_steps=12 format=3 uid="uid://dkhs1oweifu3y"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
+[ext_resource type="Texture2D" uid="uid://ksjw4mqj1kvj" path="res://Assets/PaddleSpriteSheet.png" id="2_aaxva"]
 [ext_resource type="Texture2D" uid="uid://c0xg5st4jh5tu" path="res://Assets/Cap1.png" id="2_o80hy"]
 [ext_resource type="Script" path="res://Scripts/label.gd" id="3_777ti"]
 [ext_resource type="PackedScene" uid="uid://m84cyg770d3x" path="res://Scenes/Hook.tscn" id="4_12b52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8k613"]
+atlas = ExtResource("2_aaxva")
+region = Rect2(0, 0, 250, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh1pp"]
+atlas = ExtResource("2_aaxva")
+region = Rect2(250, 0, 250, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d54uk"]
+atlas = ExtResource("2_aaxva")
+region = Rect2(500, 0, 250, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vb310"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8k613")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh1pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d54uk")
+}],
+"loop": true,
+"name": &"paddle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nyveq"]
 radius = 22.0
@@ -15,6 +45,15 @@ radius = 1.41421
 z_index = 5
 z_as_relative = false
 script = ExtResource("1_6bp4r")
+
+[node name="PaddleSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -95)
+scale = Vector2(0.224, 0.224)
+sprite_frames = SubResource("SpriteFrames_vb310")
+animation = &"paddle"
+autoplay = "paddle"
+frame_progress = 0.189352
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.092, 0.092)
