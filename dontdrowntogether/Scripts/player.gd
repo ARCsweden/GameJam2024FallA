@@ -3,8 +3,9 @@ class_name Player
 
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var label: Label = $PlayerBoundUi/Label
 
-@export var speed: float = 200.0  # Movement speed of the character
+@export var speed: float = Global.player_move_speed
 
 var controller_id
 
@@ -66,7 +67,7 @@ func _process(_delta) -> void:
 				#NULL CHECK FOR LAST REPAIRABLE TILE
 				last_tile.call_repair()
 				if(Global.scrapAmount < Global.repair_cost):
-					$PlayerBoundUi/Label.visible = false
+					label.visible = false
 					can_repair = false
 
 func repair_raft_tile() -> void:
@@ -74,19 +75,19 @@ func repair_raft_tile() -> void:
 
 func _on_damage_tile_entered(_area):
 	if(Global.scrapAmount >= Global.repair_cost):
-		$PlayerBoundUi/Label.text = repair_prompt
-		$PlayerBoundUi/Label.visible = true
+		label.text = repair_prompt
+		label.visible = true
 		can_repair = true
 
 func _on_repair_check_area_area_exited(_area: Area2D) -> void:
-	$PlayerBoundUi/Label.visible = false
+	label.visible = false
 	can_repair = false
 
 func set_repair(_status) -> void:
 	can_repair = _status
-	$PlayerBoundUi/Label.visible = _status
+	label.visible = _status
 	if(_status):
-		$PlayerBoundUi/Label.text = repair_prompt
+		label.text = repair_prompt
 	
 func _on_pickup_grunka(value: int) -> void:
 	if(last_tile.get_health() < last_tile.get_max_health()):

@@ -5,8 +5,8 @@ class_name Hook
 @onready var coll: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var hook_audio_stream_player: AudioStreamPlayer = $Hook_AudioStreamPlayer
 
-@export var distance: float = 200.0
-@export var speed: float = 0.5
+var distance: float = Global.hook_distance
+var speed: float = Global.hook_speed
 
 var thrown: bool = false
 var tween: Tween
@@ -41,5 +41,5 @@ func _on_finished() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	SignalBus.hooked.emit(body, get_parent())
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "global_position", get_parent().global_position, 0.1)
+	tween.tween_property(self, "global_position", get_parent().global_position, Global.hook_retract)
 	tween.tween_callback(_on_finished)

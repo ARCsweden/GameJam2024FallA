@@ -20,7 +20,7 @@ func _ready() -> void:
 func _on_hooked(body, player: Node2D) -> void:
 	if body == self:
 		var tween = get_tree().create_tween()
-		tween.tween_property(self, "global_position", player.global_position, 0.1)
+		tween.tween_property(self, "global_position", player.global_position, Global.hook_retract)
 		tween.tween_callback(pickup)
 
 func pickup() -> void:
