@@ -3,6 +3,8 @@ extends CanvasLayer
 @onready var main_menu_scene: PackedScene = load("res://UI/main_menu.tscn")
 
 func _on_texture_button_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
+	#await $ButtonPressed_AudioStreamPlayer.finished
 	get_tree().call_deferred("change_scene_to_packed", main_menu_scene)
 	get_tree().paused = false
 	for i in get_tree().get_root().get_children():
