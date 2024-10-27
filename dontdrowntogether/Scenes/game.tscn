@@ -63,4 +63,3 @@ texture = ExtResource("5_xo0xj")
 flip_h = true
 
 [node name="StoneTimer" type="Timer" parent="."]
-
