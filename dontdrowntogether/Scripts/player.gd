@@ -85,17 +85,12 @@ func _on_repair_check_area_area_exited(_area: Area2D) -> void:
 	can_repair = false
 
 
-func _on_repair_check_area_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	pass # Replace with function body.
-
 func connect_Raft_Tiles_signal():
 	var raftTiles = get_tree().get_nodes_in_group("RaftTiles")
 	for i in raftTiles:
 		i.destroyTile.connect(killPlayer)
 
 func killPlayer(body):
-	#$TileConfirmTimer.start(0.5)
-	#await $TileConfirmTimer.timeout
 	var distaneToDestiodTile = body.position - self.position
 	var removeSelf = false
 	
