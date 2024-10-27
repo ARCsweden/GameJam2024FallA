@@ -3,6 +3,7 @@ extends CollisionShape2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_scale_sprite()
+	$"..".constant_linear_velocity = -Global.wall_bounce
 
 func _scale_sprite():
 	var sprite_size: Vector2 = $"./Sprite2D".texture.get_size()

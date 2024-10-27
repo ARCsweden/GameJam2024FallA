@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://becbpdg61vwge"]
+[gd_scene load_steps=8 format=3 uid="uid://becbpdg61vwge"]
 
 [ext_resource type="Script" path="res://Scripts/Walls.gd" id="1_qyktd"]
 [ext_resource type="Texture2D" uid="uid://3h803uy12370" path="res://icon.svg" id="2_l7dus"]
-[ext_resource type="Script" path="res://Scripts/wall.gd" id="2_pc87c"]
+[ext_resource type="Script" path="res://Scripts/left_wall.gd" id="2_pc87c"]
+[ext_resource type="Script" path="res://Scenes/right_wall.gd" id="4_hparq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgky3"]
 size = Vector2(3373.5, 2823)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bc84"]
 size = Vector2(2904, 2858.5)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xr0md"]
+distance = -1000.0
 
 [node name="Walls" type="Node2D"]
 script = ExtResource("1_qyktd")
@@ -25,6 +29,7 @@ script = ExtResource("2_pc87c")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftWall/LeftWallCollision"]
+visible = false
 texture = ExtResource("2_l7dus")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
@@ -33,10 +38,20 @@ collision_mask = 20
 constant_linear_velocity = Vector2(-150, 0)
 
 [node name="RightWallCollision" type="CollisionShape2D" parent="RightWall"]
-position = Vector2(3495, -399)
+position = Vector2(3714, -387)
 shape = SubResource("RectangleShape2D_2bc84")
-script = ExtResource("2_pc87c")
+script = ExtResource("4_hparq")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="RightWall/RightWallCollision"]
+visible = false
 texture = ExtResource("2_l7dus")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_xr0md")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

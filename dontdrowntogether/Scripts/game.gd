@@ -5,7 +5,7 @@ var PlayerScene: PackedScene = preload("res://Scenes/player.tscn")
 var GrunkaScene: PackedScene = preload("res://Scenes/grunka.tscn")
 var RaftScene: PackedScene = preload("res://Scenes/Raft.tscn")
 var stone_Scene: PackedScene = preload("res://Scenes/stone.tscn")
-
+var previous_distance: int = 0
 var raft: Raft
 
 @onready var grunk_timer: Timer = $GrunkTimer
@@ -48,10 +48,13 @@ func _on_grunk_spawn() -> void:
 	grunk_timer.start(randf_range(Global.grunka_spawn_min, Global.grunka_spawn_max))
 
 func _on_stone_spawn() -> void:
+	if(Global.distance_traveled < previous_distance + Global.stone_spawn_offset): # Don't spawn a stone if the player hasn't traveled far enough
+		return
 	var stone = stone_Scene.instantiate()
 	stone.position = Vector2(randf_range(-1900, 1900), randf_range(-1000, -1900)) + raft.position
 	add_child(stone)
 	stone_timer.start(randf_range(Global.stone_spawn_min, Global.stone_spawn_max))
+	previous_distance = Global.distance_traveled
 
 func _on_pickup_grunka(value: int) -> void:
 	Global.scrapAmount += value

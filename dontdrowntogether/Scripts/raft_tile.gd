@@ -98,7 +98,7 @@ func update_color() -> void:
 		lerp(0.8, 1.0, health / Global.raft_max_hp),
 		lerp(0.3, 1.0, health / Global.raft_max_hp),
 		lerp(0.3, 1.0, health / Global.raft_max_hp),
-		health / Global.raft_max_hp
+		1.0 #health / Global.raft_max_hp
 	)
 func update_wobble() -> void:
 	wobbleSprite.material.set_shader_parameter("Strength",40-self.health*3.8+2)
