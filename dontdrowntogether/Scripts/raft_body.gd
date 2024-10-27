@@ -35,7 +35,7 @@ func _ready() -> void:
 	set_collision_mask_value(3, true)
 	_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
-	
+	set_axis_velocity(Vector2(0,-300))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
