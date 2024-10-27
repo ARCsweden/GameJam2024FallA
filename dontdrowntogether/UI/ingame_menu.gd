@@ -12,6 +12,7 @@ func _ready() -> void:
 
 
 func _on_mute_music_texture_button_2_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
 	if musicPlayer_node.playing:
 		musicPlayer_node.stop()
 	else:
@@ -20,6 +21,8 @@ func _on_mute_music_texture_button_2_pressed() -> void:
 
 
 func _on_main_menu_texture_button_3_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
+	await $ButtonPressed_AudioStreamPlayer.finished
 	get_tree().call_deferred("change_scene_to_packed", main_menu_scene)
 	get_tree().paused = false
 	self.get_meta("gameNode").queue_free()
@@ -34,10 +37,12 @@ func pause_and_unpause():
 		self.show()
 
 func _on_resume_texture_button_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
 	pause_and_unpause()
 	pass # Replace with function body.
 
 
 func _on_music_audio_stream_player_finished() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
 	$Music_AudioStreamPlayer.play()
 	pass # Replace with function body.

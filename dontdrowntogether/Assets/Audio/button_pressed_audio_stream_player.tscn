@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk1ee5sd6a77h"]
+
+[ext_resource type="AudioStream" uid="uid://b6jyy5dc5cjsb" path="res://Assets/Audio/plums.mp3" id="1_5tt4m"]
+
+[node name="ButtonPressed_AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_5tt4m")
