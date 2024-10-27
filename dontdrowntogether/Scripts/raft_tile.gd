@@ -6,7 +6,6 @@ extends StaticBody2D
 var health := 0.0
 var collision_scale = 0.9
 
-@onready var decay_timer: Timer = $DecayTimer
 @onready var wobbleSprite : Sprite2D = $Sprite2D
 
 @export var top_level_collision_shape: CollisionShape2D
@@ -87,7 +86,7 @@ func take_damage(amount):
 func destroy():
 	destroyTile.emit(self)
 	$Crash_AudioStreamPlayer.play()
-	self.top_level_collision_shape.top_level_collision_shape.set_deferred("disabled", true)
+	top_level_collision_shape.set_deferred("disabled", true)
 	$"./Sprite2D".visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged

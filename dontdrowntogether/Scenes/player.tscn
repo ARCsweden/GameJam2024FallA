@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkhs1oweifu3y"]
+[gd_scene load_steps=13 format=3 uid="uid://dkhs1oweifu3y"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_6bp4r"]
 [ext_resource type="Texture2D" uid="uid://ksjw4mqj1kvj" path="res://Assets/PaddleSpriteSheet.png" id="2_aaxva"]
