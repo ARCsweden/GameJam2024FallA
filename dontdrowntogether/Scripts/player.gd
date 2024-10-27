@@ -12,7 +12,11 @@ class_name Player
 @onready var hud: HUD = $"../../HUD"
 
 const GAME_OVER_CANVAS_LAYER = preload("res://UI/game_over_canvas_layer.tscn")
-
+const CAP1 = preload("res://Assets/Cap1.png")
+const CAP2 = preload("res://Assets/Cap2.png")
+const CAP3 = preload("res://Assets/Cap3.png")
+const CAP4 = preload("res://Assets/Cap4.png")
+var CapTextures : Array = [CAP1, CAP2, CAP3, CAP4]
 @export var speed: float = Global.player_move_speed
 
 var controller_id
@@ -54,9 +58,10 @@ func _physics_process(_delta: float) -> void:
 
 func _ready() -> void:
 	add_to_group("ActivePlayers")
-	if(controller_id % 2 == 1):
-		var texture = load("res://Assets/Cap2.png")
-		sprite.texture = texture
+	#if(controller_id % 2 == 1):
+	#	var texture = load("res://Assets/Cap2.png")
+	var texture = CapTextures[controller_id]
+	sprite.texture = texture
 	connect_Raft_Tiles_signal()
 	SignalBus.pickup_grunka.connect(_on_pickup_grunka)
 

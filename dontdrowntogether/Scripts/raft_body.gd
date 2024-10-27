@@ -4,6 +4,7 @@ class_name Raft
 
 # Preloads scene for faster loading
 var RaftTileScene := load("res://Scenes/RaftTile.tscn")
+var Ripple: PackedScene = preload("res://Scenes/Ripple.tscn")
 
 var rows: int = Global.raft_rows
 var columns: int = Global.raft_columns
@@ -188,3 +189,17 @@ func _on_body_entered(body) -> void:
 		for coords in nearest_tiles:
 			if coords != null:
 				take_damage(coords.x, coords.y, Global.wall_damage)
+
+
+func _on_ripple_timer_timeout():
+	var ripple = Ripple.instantiate()
+	ripple.lifetime = 5
+	ripple.preprocess = 1
+	ripple.initial_velocity_min = 50
+	ripple.amount = 1000
+	ripple.scale_amount_min = 1.5
+	
+	
+	add_child(ripple)
+	#ripple.emitting = true
+	pass # Replace with function body.

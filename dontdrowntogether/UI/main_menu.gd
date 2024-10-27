@@ -24,11 +24,15 @@ func _ready() -> void:
 
 
 func _on_quit_texture_button_3_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
+	await $ButtonPressed_AudioStreamPlayer.finished	
 	get_tree().quit()
 	pass # Replace with function body.
 
 
 func _on_play_texture_button_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
+	await $ButtonPressed_AudioStreamPlayer.finished	
 	var newGameScene = game_scene.instantiate()
 	var newInGameMenu_scene = inGameMenu_scene.instantiate()
 	get_tree().root.add_child(newGameScene)
@@ -41,6 +45,7 @@ func _on_play_texture_button_pressed() -> void:
 
 
 func _on_mute_texture_button_2_pressed() -> void:
+	$ButtonPressed_AudioStreamPlayer.play()
 	if TitleScreenAudioStream_Node.playing:
 		TitleScreenAudioStream_Node.stop()
 	else:
