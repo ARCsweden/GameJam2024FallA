@@ -36,6 +36,10 @@ func _physics_process(_delta: float) -> void:
 	if direction != Vector2.ZERO:
 		cur_dir = direction
 		rotation = (cur_dir.angle() + PI/2) - get_parent().rotation
+		play_running_sound()
+	else:
+		$Running_AudioStreamPlayer.stop()
+
 
 	velocity = direction * speed
 
@@ -66,7 +70,9 @@ func _process(_delta) -> void:
 		if Input.is_action_pressed(paddle_btn):
 			SignalBus.paddle.emit(position, cur_dir)
 			paddle_sprite.visible = true
+			play_paddel_sound()
 		else:
+			$Paddel_AudioStreamPlayer.stop()
 			paddle_sprite.visible = false
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
@@ -127,5 +133,18 @@ func _on_pickup_grunka(_value: int) -> void:
 		if(last_tile.get_health() < last_tile.get_max_health()):
 			set_repair(true)
 
+
+
+func play_running_sound():
+	if $Running_AudioStreamPlayer.playing:
+		return
+	$Running_AudioStreamPlayer.play()
+	
+func play_paddel_sound():
+	if $Paddel_AudioStreamPlayer.playing:
+		return
+	$Paddel_AudioStreamPlayer.play()
+	
 func _on_tile_entered(area) -> void:
 	last_tile = area
+

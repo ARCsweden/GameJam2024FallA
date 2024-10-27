@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhn1f1npwot15"]
+
+[ext_resource type="AudioStream" uid="uid://dbmt0k5b31n31" path="res://Assets/Audio/Paddel/Paddel (1).mp3" id="1_aokpy"]
+[ext_resource type="AudioStream" uid="uid://c7lw7jm0qm3y0" path="res://Assets/Audio/Paddel/Paddel (2).mp3" id="2_kcxt5"]
+[ext_resource type="AudioStream" uid="uid://cqosrjxbslvb8" path="res://Assets/Audio/Paddel/Paddel (3).mp3" id="3_k1pmt"]
+[ext_resource type="AudioStream" uid="uid://ceu0fgsbq1pbv" path="res://Assets/Audio/Paddel/Paddel.mp3" id="4_uxc3j"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_c0sok"]
+streams_count = 4
+stream_0/stream = ExtResource("1_aokpy")
+stream_1/stream = ExtResource("2_kcxt5")
+stream_2/stream = ExtResource("3_k1pmt")
+stream_3/stream = ExtResource("4_uxc3j")
+
+[node name="Paddel_AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_c0sok")
+bus = &"SFX"

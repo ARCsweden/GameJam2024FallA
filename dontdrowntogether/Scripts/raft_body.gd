@@ -29,7 +29,7 @@ func _ready() -> void:
 	#$"./RaftCollisionShape".shape.size.x = Global.raft_tile_length*(columns+3)
 	#$"./RaftCollisionShape".shape.size.y = Global.raft_tile_length*(rows+3)
 	#$"./RaftCollisionShape".position -= Vector2(150, 150)
-	
+	add_to_group("RaftBody")
 	_create_grid()
 	set_collision_layer_value(3, true)
 	set_collision_mask_value(3, true)
