@@ -77,8 +77,7 @@ func _process(_delta) -> void:
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
-			if(can_repair):
-				#NULL CHECK FOR LAST REPAIRABLE TILE
+			if(can_repair and last_tile != null):
 				last_tile.call_repair()
 				if(Global.scrapAmount < Global.repair_cost):
 					label.visible = false
@@ -130,11 +129,11 @@ func set_repair(_status) -> void:
 		label.text = repair_prompt
 	
 func _on_pickup_grunka(_value: int) -> void:
-	if(last_tile.get_health() < last_tile.get_max_health()):
-		set_repair(true)
+	if(last_tile != null):
+		if(last_tile.get_health() < last_tile.get_max_health()):
+			set_repair(true)
 
-func _on_tile_entered(_area) -> void:
-	last_tile = _area
+
 
 func play_running_sound():
 	if $Running_AudioStreamPlayer.playing:
@@ -146,3 +145,6 @@ func play_paddel_sound():
 		return
 	$Paddel_AudioStreamPlayer.play()
 	
+func _on_tile_entered(area) -> void:
+	last_tile = area
+
