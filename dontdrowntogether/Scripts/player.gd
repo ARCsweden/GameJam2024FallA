@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 const GAME_OVER_CANVAS_LAYER = preload("res://UI/game_over_canvas_layer.tscn")
 
+
 @export var speed: float = 200.0  # Movement speed of the character
 
 var controller_id
@@ -43,6 +44,8 @@ func _ready() -> void:
 	if(controller_id % 2 == 1):
 		var texture = load("res://Assets/Cap2.png")
 		sprite.texture = texture
+	connect_Raft_Tiles_signal()
+	
 
 func set_controller_id(id) -> void:
 	controller_id = id
@@ -83,21 +86,33 @@ func _on_repair_check_area_area_exited(_area: Area2D) -> void:
 
 
 func _on_repair_check_area_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	var areas = $RepairCheckArea.get_overlapping_areas()
+	pass # Replace with function body.
+
+func connect_Raft_Tiles_signal():
+	var raftTiles = get_tree().get_nodes_in_group("RaftTiles")
+	for i in raftTiles:
+		i.destroyTile.connect(killPlayer)
+
+func killPlayer(body):
+	#$TileConfirmTimer.start(0.5)
+	#await $TileConfirmTimer.timeout
+	var distaneToDestiodTile = body.position - self.position
 	var removeSelf = false
-	if areas.size() == 0:
+	
+	if distaneToDestiodTile.length() <= (Global.raft_tile_length - 50):
 		print("remove")
+		print(self)
 		self.remove_from_group("ActivePlayers")
 		removeSelf = true
+		self.hide()
 		
 	var playersGroup = get_tree().get_nodes_in_group("ActivePlayers")
-	print(playersGroup)
 	if playersGroup.size() == 0:
-		print("gameover")
 		var newGameover = GAME_OVER_CANVAS_LAYER.instantiate()
 		add_child(newGameover)
 		get_tree().paused = true
 	if removeSelf:
+		$Drowning_AudioStreamPlayer.play()
+		await $Drowning_AudioStreamPlayer.finished
 		queue_free()
 	
-	pass # Replace with function body.

@@ -1,16 +1,18 @@
 extends StaticBody2D
 
 @onready var hud: HUD = $"../../HUD"
+@onready var decay_timer: Timer = $DecayTimer
 
 const max_hp := 10.0
 var health := 0.0
 
-@onready var decay_timer: Timer = $DecayTimer
 
 const WOOD_RAFT_TILE : Texture = preload("res://Assets/WoodRaftTile.png")
 const BARREL : Texture = preload("res://Assets/Art/Barrel.png")
 const BOTTLE_TILE : Texture = preload("res://Assets/BottleTile.png")
 var SpriteArrayTexture = [WOOD_RAFT_TILE, BARREL, BOTTLE_TILE]
+
+signal destroyTile(areaNode)
 
 #Layer 1: Player collision layer
 #Layer 2: Damage taken layer
@@ -37,6 +39,7 @@ func _ready() -> void:
 	# Instantiate them invisible
 	self.visible = 0
 	decay_timer.timeout.connect(_on_decay)
+	add_to_group("RaftTiles")
 
 func _on_decay() -> void:
 	take_damage(1.0)
@@ -75,11 +78,13 @@ func take_damage(amount):
 		destroy()
 
 func destroy():
+	destroyTile.emit(self)
 	$Crash_AudioStreamPlayer.play()
 	self.visible = 0
 	set_collision_layer_value(1, true) #Set collision layer to one that collides with a player
 	$RepairArea.set_collision_layer_value(2, false) #Tile is no longer damaged
 	set_collision_layer_value(5, false) # Tile no longer collides with walls
+	
 
 func update_color() -> void:
 	self.modulate = Color(
