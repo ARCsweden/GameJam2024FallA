@@ -36,8 +36,9 @@ func _ready() -> void:
 	set_collision_mask_value(3, true)
 	_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
+	SignalBus.build.connect(_on_build)
 	set_axis_velocity(Vector2(0,-200))
-	
+
 	mass = Global.raft_mass
 	angular_damp = Global.raft_angular_damping
 
@@ -57,14 +58,40 @@ func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
 	# Force based on player direction
 	apply_force(-cur_dir*Global.paddle_force, player_pos)
 
+func _on_build(player_pos: Vector2, cur_dir: Vector2, current_tile):	
+	var raft_rotation = rotation_degrees * (PI / 180)  # Convert degrees to radians
+	var rotated_dir = cur_dir.rotated(-raft_rotation)  # Rotate in the opposite direction
+	var relative_dir = round_to_nearest_axis(rotated_dir)  # Snap to nearest axis vector
+	# Calculate the tile position to build
+	var tile_to_build_pos = current_tile.get_grid_pos() + relative_dir
+	
+	var tile_to_build = grid[tile_to_build_pos.x][tile_to_build_pos.y]
+	if tile_to_build.health < 1 and tile_to_build.is_edge_tile == false:
+		rebuild_tile(tile_to_build_pos.x, tile_to_build_pos.y)
+
+func round_to_nearest_axis(v: Vector2) -> Vector2:
+	# Normalize the vector to get the direction
+	if v.length() == 0:
+		return Vector2.ZERO  # Return a zero vector if the input is zero
+
+	v = v.normalized()  # Normalize to unit length
+
+	# Determine which axis the vector is closer to
+	if abs(v.x) > abs(v.y):
+		return Vector2(sign(v.x), 0)  # Return (1, 0) or (-1, 0)
+	else:
+		return Vector2(0, sign(v.y))  # Return (0, 1) or (0, -1)
+
 func take_damage(r, c, damage):
 	grid[r][c].take_damage(damage)
 
 func rebuild_tile(r, c):
+	#if (r < rows or c < columns):
 	grid[r][c].rebuild()
 
 func repair_tile(r, c):
 	grid[r][c].repair()
+	
 
 func _create_starting_area(expands):
 	# Creates a square of usable tiles around the center
@@ -86,6 +113,7 @@ func _create_grid() -> void:
 			# Moves the instance. +50 is to move the image coordinate to the top left corner
 			# Then each instance is moved to the top left corner of the collision shape, to center it
 			instance.position = Vector2((r+1)*Global.raft_tile_length, (c+1)*Global.raft_tile_length) - (raft_max_size / 2.0) 
+			instance.grid_pos = Vector2(r, c)
 			
 			var collision_shape = CollisionShape2D.new()
 			add_child(collision_shape)

@@ -9,6 +9,8 @@ var scrapAmount : int = 0
 ### MECHANICS ###
 # Cost in scrap to repair a tile
 const repair_cost : int = 1
+# Cost in scrap to build a tile
+const build_cost : int = 3
 # Max hp of a tile
 const raft_max_hp := 10.0
 # Amount of tile hp repaired with a single repair (clamps at raft_max_hp)
@@ -64,9 +66,9 @@ const raft_mass: float = 1.0
 const raft_angular_damping: float = 0.15
 
 # Raft max dimensions
-const raft_rows : int = 5
-const raft_columns : int = 5
-const raft_start_radius : int = 1 # layers outside the center tile. 1 = 3x3 square
+const raft_rows : int = 10
+const raft_columns : int = 10
+const raft_start_radius : int = 2 # layers outside the center tile. 1 = 3x3 square
 
 const river_force : float = 20.0
 const river_acc : float = 0.0067 # Amount that river_force increases every second
