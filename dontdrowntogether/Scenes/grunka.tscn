@@ -21,9 +21,7 @@ wait_time = 0.25
 autostart = true
 
 [node name="Memory Timer" type="Timer" parent="RippleTimer"]
-wait_time = 5.0
-one_shot = true
-autostart = true
+wait_time = 10.0
 
 [connection signal="timeout" from="RippleTimer" to="." method="_on_ripple_timer_timeout"]
 [connection signal="timeout" from="RippleTimer/Memory Timer" to="." method="_on_memory_timer_timeout"]
