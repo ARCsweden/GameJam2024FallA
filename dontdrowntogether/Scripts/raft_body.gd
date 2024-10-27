@@ -36,6 +36,9 @@ func _ready() -> void:
 	_create_starting_area(starting_area_squares)
 	SignalBus.paddle.connect(_on_paddle)
 	set_axis_velocity(Vector2(0,-300))
+	
+	mass = Global.raft_mass
+	angular_damp = Global.raft_angular_damping
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

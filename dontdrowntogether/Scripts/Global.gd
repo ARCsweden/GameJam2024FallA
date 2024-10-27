@@ -58,6 +58,10 @@ const wall_damage: float = 3.0
 const wall_bounce: Vector2 = Vector2(150, 0) 
 const stone_bounce: Vector2 = Vector2(0, 100)
 
+# Raft Movement Characteristics
+const raft_mass: float = 1.0
+const raft_angular_damping: float = 0.15
+
 # Raft max dimensions
 const raft_rows : int = 5
 const raft_columns : int = 5
