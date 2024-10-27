@@ -105,7 +105,7 @@ func _create_grid() -> void:
 func _on_body_entered(body) -> void:
 	# Detect stone
 	if body.get_collision_layer() == 132:
-		var tiles_to_damage: int = Global.rng.randi_range(1, 3)
+		var tiles_to_damage: int = Global.rng.randi_range(Global.stone_damaged_tiles_min, Global.stone_damaged_tiles_max)
 		var stone_position = body.global_position
 		var nearest_tiles = Array()
 		nearest_tiles.resize(tiles_to_damage)
