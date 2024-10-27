@@ -48,12 +48,13 @@ z_as_relative = false
 script = ExtResource("1_6bp4r")
 
 [node name="PaddleSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -95)
 scale = Vector2(0.224, 0.224)
 sprite_frames = SubResource("SpriteFrames_vb310")
 animation = &"paddle"
 autoplay = "paddle"
-frame_progress = 0.956984
+frame_progress = 0.288074
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="PaddleSprite"]
 z_index = -1
