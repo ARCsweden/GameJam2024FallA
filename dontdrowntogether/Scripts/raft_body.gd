@@ -105,13 +105,24 @@ func _create_grid() -> void:
 func _on_body_entered(body) -> void:
 	# Detect stone
 	if body.get_collision_layer() == 132:
+		var tiles_to_damage: int = Global.rng.randi_range(1, 3)
 		var stone_position = body.global_position
-		var nearest_tiles = [null, null, null]
-		var nearest_tile_distances = [9999, 9999, 9999]
+		var nearest_tiles = Array()
+		nearest_tiles.resize(tiles_to_damage)
+		var nearest_tile_distances = Array()
+		nearest_tile_distances.resize(tiles_to_damage)
+		
+		for f in range(tiles_to_damage):
+			nearest_tiles[f] = null
+			nearest_tile_distances[f] = 9999
+		
+		
 		# Finds tiles closest to the stone
 		for r in range(grid.size()):
 			for c in range(grid[r].size()):
 				var tile = grid[r][c]
+				if tile.health < 1:
+					continue
 				
 				# Sorts list so when a new minimum is found, it replaces the furthest away tile
 				nearest_tile_distances.sort()
@@ -125,11 +136,9 @@ func _on_body_entered(body) -> void:
 						nearest_tile_distances[i] = tile_distance
 						nearest_tiles[i] = Vector2(r, c)
 						break
-		print(nearest_tiles)
 		for coords in nearest_tiles:
 			if coords != null:
-				print("take damage")
 				var tile_name = grid[coords.x][coords.y].name
-				take_damage(coords.x, coords.y, 10)
+				take_damage(coords.x, coords.y, 1)
 				
 		
