@@ -59,7 +59,7 @@ func create_player(i: int) -> void:
 	var player = PlayerScene.instantiate()
 
 	# Set positions or other properties if necessary
-	# player.position = spawn_point  + Vector2(10 + i * 1, 1)  # Adjust as needed
+	#player.position = spawn_point  + Vector2(10 + i * 1, 1)  # Adjust as needed
 	# Controller ID for this player
 	player.set_controller_id(i)
 	raft.add_child(player)

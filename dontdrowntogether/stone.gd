@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends StaticBody2D
 
 @onready var collionShape_Node = $CollisionShape2D
 @onready var sprite2D_Node = $Sprite2D

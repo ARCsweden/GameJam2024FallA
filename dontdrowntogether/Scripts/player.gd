@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
@@ -15,8 +16,9 @@ var paddle_btn
 var hook_btn
 var repair_btn
 var controller_ready := false
+var repair_prompt = "PRESS B TO REPAIR"
 
-var last_repairable_tile
+var last_tile
 var can_repair = false
 
 @export var cur_dir: Vector2 = Vector2.LEFT
@@ -40,6 +42,7 @@ func _ready() -> void:
 	if(controller_id % 2 == 1):
 		var texture = load("res://Assets/Cap2.png")
 		sprite.texture = texture
+	SignalBus.pickup_grunka.connect(_on_pickup_grunka)
 
 func set_controller_id(id) -> void:
 	controller_id = id
@@ -60,8 +63,10 @@ func _process(_delta) -> void:
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
 			if(can_repair):
-				last_repairable_tile.call_repair()
+				#NULL CHECK FOR LAST REPAIRABLE TILE
+				last_tile.call_repair()
 				if(Global.scrapAmount < Global.repair_cost):
+					$PlayerBoundUi/Label.visible = false
 					can_repair = false
 
 func repair_raft_tile() -> void:
@@ -69,11 +74,23 @@ func repair_raft_tile() -> void:
 
 func _on_damage_tile_entered(_area):
 	if(Global.scrapAmount >= Global.repair_cost):
-		$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
+		$PlayerBoundUi/Label.text = repair_prompt
 		$PlayerBoundUi/Label.visible = true
-		last_repairable_tile = _area
 		can_repair = true
 
 func _on_repair_check_area_area_exited(_area: Area2D) -> void:
 	$PlayerBoundUi/Label.visible = false
 	can_repair = false
+
+func set_repair(_status) -> void:
+	can_repair = _status
+	$PlayerBoundUi/Label.visible = _status
+	if(_status):
+		$PlayerBoundUi/Label.text = repair_prompt
+	
+func _on_pickup_grunka(value: int) -> void:
+	if(last_tile.get_health() < last_tile.get_max_health()):
+		set_repair(true)
+
+func _on_tile_entered(_area) -> void:
+	last_tile = _area
