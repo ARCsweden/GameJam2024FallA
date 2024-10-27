@@ -13,5 +13,5 @@ func _process(delta):
 	else:
 		wait_time = abs(1 / ( $"..".linear_velocity.y  * 0.012))
 		
-	print(wait_time)
+
 	
