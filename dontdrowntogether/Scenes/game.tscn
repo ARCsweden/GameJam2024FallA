@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://rslh7wyupis3"]
+[gd_scene load_steps=8 format=3 uid="uid://rslh7wyupis3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ol0k5"]
 [ext_resource type="PackedScene" uid="uid://bn6hyjabd7tel" path="res://UI/hud.tscn" id="2_q2g3m"]
@@ -6,11 +6,43 @@
 [ext_resource type="Texture2D" uid="uid://brlyj5y5qoqgy" path="res://Assets/Floorbed.png" id="5_imhee"]
 [ext_resource type="Texture2D" uid="uid://c4jj7kifn4fr0" path="res://Assets/Wall.png" id="5_xo0xj"]
 
+[sub_resource type="Gradient" id="Gradient_3ou28"]
+offsets = PackedFloat32Array(0, 0.506494, 1)
+colors = PackedColorArray(0.381703, 0.381703, 0.381703, 1, 1, 1, 1, 1, 0.36283, 0.362829, 0.362829, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lt1tr"]
+gradient = SubResource("Gradient_3ou28")
+width = 2
+height = 48
+use_hdr = true
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0.991453, 0)
+
 [node name="Game" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_ol0k5")
 
 [node name="HUD" parent="." instance=ExtResource("2_q2g3m")]
+
+[node name="Rain" type="CPUParticles2D" parent="HUD"]
+position = Vector2(950, -400)
+rotation = 0.349066
+amount = 3000
+lifetime = 2.0
+preprocess = 2.0
+speed_scale = 2.0
+randomness = 0.2
+lifetime_randomness = 0.3
+local_coords = true
+draw_order = 1
+texture = SubResource("GradientTexture2D_lt1tr")
+emission_shape = 3
+emission_rect_extents = Vector2(3000, 5)
+direction = Vector2(0, 1)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+color = Color(0.619608, 0.619608, 0.619608, 0.545098)
 
 [node name="Walls" parent="." instance=ExtResource("3_5jli6")]
 
@@ -50,6 +82,7 @@ region_rect = Rect2(0, 0, 1000, 1000)
 z_index = 10
 scale = Vector2(2, 2)
 scroll_scale = Vector2(1.1, 1.1)
+scroll_offset = Vector2(130, 20)
 repeat_size = Vector2(0, 3000)
 repeat_times = 2
 
