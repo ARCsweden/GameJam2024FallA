@@ -23,7 +23,8 @@ func update_time_counter():
 func update_lentgh_counter():
 	raftbody_node = get_tree().get_nodes_in_group("RaftBody") 
 	var raft = raftbody_node[0]
-	lengthCounterLabel_node.text = str(-int(raft.position.y/100))
+	Global.distance_traveled = -int(raft.position.y/100)
+	lengthCounterLabel_node.text = str(max(Global.distance_traveled,0)) #TODO change raft spawn position so its 0 by default
 
 func update_scrap_Counter(newScrapAmount):
 	scrapCounterLabel_Node.text = str(newScrapAmount)
