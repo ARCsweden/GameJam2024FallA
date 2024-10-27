@@ -3,7 +3,7 @@ extends Node
 # Raft
 var raft_tile_length: int = 100
 var rng = RandomNumberGenerator.new()
-
+var distance_traveled : int = 0
 var scrapAmount : int = 0
 
 ### MECHANICS ###
@@ -42,7 +42,8 @@ const grunka_ang_vel : float = 2.0 # Initial angular veclocity in radians/s (in 
 
 # Spawn timer range for stones in s (lower value is more frequent)
 const stone_spawn_min : float = 1.0
-const stone_spawn_max : float = 5.0
+const stone_spawn_max : float = 2.0
+var stone_spawn_offset : int = 20
 const stone_size_min : float = 50.0
 const stone_size_max : float = 200.0
 
