@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://byjt4r0m3o8iq" path="res://Assets/Art/Repair Logo.png" id="5_c80hd"]
 [ext_resource type="PackedScene" uid="uid://c2sa2u21mhyqc" path="res://Assets/Audio/Running_audio_stream.tscn" id="7_r6qri"]
 [ext_resource type="PackedScene" path="res://Assets/Audio/paddel_audio_stream_player.tscn" id="8_2jmte"]
-[ext_resource type="PackedScene" uid="uid://b1ob4rh1obs52" path="res://Assets/Audio/repair_audio_stream.tscn" id="10_i26tm"]
+[ext_resource type="Texture2D" uid="uid://tb7b8ipiefl8" path="res://Assets/Art/2d_lights_and_shadows_neutral_point_light.webp" id="10_lucq4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8k613"]
 atlas = ExtResource("2_aaxva")
@@ -141,6 +141,11 @@ shape = SubResource("CircleShape2D_nbwfu")
 [node name="Paddel_AudioStreamPlayer" parent="." instance=ExtResource("8_2jmte")]
 
 [node name="Build_AudioStreamPlayer" parent="." instance=ExtResource("10_i26tm")]
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.882833, 0.81, 1)
+energy = 0.5
+texture = ExtResource("10_lucq4")
+texture_scale = 2.56
 
 [connection signal="area_entered" from="RepairCheckArea" to="." method="_on_damage_tile_entered"]
 [connection signal="area_exited" from="RepairCheckArea" to="." method="_on_repair_check_area_area_exited"]
