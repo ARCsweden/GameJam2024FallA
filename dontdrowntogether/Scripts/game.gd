@@ -15,6 +15,8 @@ var raft: Raft
 const spawn_point = Vector2(1000, 500)
 
 func _ready():
+	Global.scrapAmount = 0
+
 	raft = RaftScene.instantiate()
 	raft.position = spawn_point
 	add_child(raft)
@@ -57,7 +59,7 @@ func _on_pickup_grunka(value: int) -> void:
 
 func create_player(i: int) -> void:
 	var player = PlayerScene.instantiate()
-
+	player.position = Vector2(50,0).rotated(deg_to_rad(90*i))
 	# Set positions or other properties if necessary
 	#player.position = spawn_point  + Vector2(10 + i * 1, 1)  # Adjust as needed
 	# Controller ID for this player

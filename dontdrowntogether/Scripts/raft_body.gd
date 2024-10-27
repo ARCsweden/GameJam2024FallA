@@ -41,8 +41,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	forward_force()
 	force_mult += Global.river_acc * delta
-	if Input.is_action_just_pressed("DebugTakeDamage"):
-		take_damage(2, 2)
 	if Input.is_action_just_pressed("DebugRebuild"):
 		rebuild_tile(2, 2)
 

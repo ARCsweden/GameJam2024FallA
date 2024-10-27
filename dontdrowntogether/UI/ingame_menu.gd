@@ -36,3 +36,8 @@ func pause_and_unpause():
 func _on_resume_texture_button_pressed() -> void:
 	pause_and_unpause()
 	pass # Replace with function body.
+
+
+func _on_music_audio_stream_player_finished() -> void:
+	$Music_AudioStreamPlayer.play()
+	pass # Replace with function body.

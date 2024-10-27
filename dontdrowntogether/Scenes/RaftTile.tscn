@@ -11,6 +11,7 @@
 size = Vector2(100, 100)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o378r"]
+resource_local_to_scene = true
 shader = ExtResource("3_2x4d2")
 shader_parameter/Strength = 4.943
 shader_parameter/Speed = 6.097

@@ -18,6 +18,8 @@ func _ready() -> void:
 
 func activate_hook(dir: Vector2) -> void:
 	if !thrown:
+		if tween:
+			tween.kill()
 		rotation = dir.angle() - PI/2
 		visible = true
 		thrown = true
@@ -40,6 +42,8 @@ func _on_finished() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	SignalBus.hooked.emit(body, get_parent())
+	if tween:
+		tween.kill()
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", get_parent().global_position, Global.hook_retract)
 	tween.tween_callback(_on_finished)
