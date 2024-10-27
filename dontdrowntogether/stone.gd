@@ -1,14 +1,13 @@
-extends RigidBody2D
+extends StaticBody2D
 
 @onready var collionShape_Node = $CollisionShape2D
 @onready var sprite2D_Node = $Sprite2D
 #@onready var newCollisionShape2D = CircleShape2D.new()
 
-var randomScale : Vector2
-var randomScaleNumber : int = 50
+var randomScaleNumber : float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	randomScaleNumber =  randi() % 151 + 50
+	randomScaleNumber = randf_range(Global.stone_size_min, Global.stone_size_max)
 	setup_collision_size()
 	setup_texture()
 	setup_sprite()

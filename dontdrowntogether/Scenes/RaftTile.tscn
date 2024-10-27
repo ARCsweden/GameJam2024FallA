@@ -11,6 +11,7 @@
 size = Vector2(100, 100)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o378r"]
+resource_local_to_scene = true
 shader = ExtResource("3_2x4d2")
 shader_parameter/Strength = 4.943
 shader_parameter/Speed = 6.097
@@ -32,8 +33,8 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_rp4dj")
 
 [node name="RepairArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 512
+collision_mask = 512
 script = ExtResource("4_chgcs")
 
 [node name="RaftTileCollisionShape" type="CollisionShape2D" parent="RepairArea"]

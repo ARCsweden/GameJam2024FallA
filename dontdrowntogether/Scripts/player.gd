@@ -1,12 +1,14 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var hook: Hook = $Hook
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var label: Label = $PlayerBoundUi/Label
+@onready var paddle_sprite: AnimatedSprite2D = $PaddleSprite
 
 const GAME_OVER_CANVAS_LAYER = preload("res://UI/game_over_canvas_layer.tscn")
 
-
-@export var speed: float = 200.0  # Movement speed of the character
+@export var speed: float = Global.player_move_speed
 
 var controller_id
 
@@ -18,8 +20,9 @@ var paddle_btn
 var hook_btn
 var repair_btn
 var controller_ready := false
+var repair_prompt = "PRESS B TO REPAIR"
 
-var last_repairable_tile
+var last_tile
 var can_repair = false
 
 @export var cur_dir: Vector2 = Vector2.LEFT
@@ -45,7 +48,7 @@ func _ready() -> void:
 		var texture = load("res://Assets/Cap2.png")
 		sprite.texture = texture
 	connect_Raft_Tiles_signal()
-	
+	SignalBus.pickup_grunka.connect(_on_pickup_grunka)
 
 func set_controller_id(id) -> void:
 	controller_id = id
@@ -62,12 +65,17 @@ func _process(_delta) -> void:
 	if controller_ready == true:
 		if Input.is_action_pressed(paddle_btn):
 			SignalBus.paddle.emit(position, cur_dir)
+			paddle_sprite.visible = true
+		else:
+			paddle_sprite.visible = false
 		if Input.is_action_just_pressed(hook_btn):
 			hook.activate_hook(cur_dir)
 		if Input.is_action_just_pressed(repair_btn):
 			if(can_repair):
-				last_repairable_tile.call_repair()
+				#NULL CHECK FOR LAST REPAIRABLE TILE
+				last_tile.call_repair()
 				if(Global.scrapAmount < Global.repair_cost):
+					label.visible = false
 					can_repair = false
 
 func repair_raft_tile() -> void:
@@ -75,15 +83,13 @@ func repair_raft_tile() -> void:
 
 func _on_damage_tile_entered(_area):
 	if(Global.scrapAmount >= Global.repair_cost):
-		$PlayerBoundUi/Label.text = "PRESS [BUTTON] TO REPAIR"
-		$PlayerBoundUi/Label.visible = true
-		last_repairable_tile = _area
+		label.text = repair_prompt
+		label.visible = true
 		can_repair = true
 
 func _on_repair_check_area_area_exited(_area: Area2D) -> void:
-	$PlayerBoundUi/Label.visible = false
+	label.visible = false
 	can_repair = false
-
 
 func connect_Raft_Tiles_signal():
 	var raftTiles = get_tree().get_nodes_in_group("RaftTiles")
@@ -110,4 +116,16 @@ func killPlayer(body):
 		$Drowning_AudioStreamPlayer.play()
 		await $Drowning_AudioStreamPlayer.finished
 		queue_free()
+
+func set_repair(_status) -> void:
+	can_repair = _status
+	label.visible = _status
+	if(_status):
+		label.text = repair_prompt
 	
+func _on_pickup_grunka(_value: int) -> void:
+	if(last_tile.get_health() < last_tile.get_max_health()):
+		set_repair(true)
+
+func _on_tile_entered(_area) -> void:
+	last_tile = _area
