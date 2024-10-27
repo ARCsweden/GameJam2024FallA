@@ -84,9 +84,11 @@ func _on_repair_check_area_area_exited(_area: Area2D) -> void:
 
 func _on_repair_check_area_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var areas = $RepairCheckArea.get_overlapping_areas()
+	var removeSelf = false
 	if areas.size() == 0:
 		print("remove")
 		self.remove_from_group("ActivePlayers")
+		removeSelf = true
 		
 	var playersGroup = get_tree().get_nodes_in_group("ActivePlayers")
 	print(playersGroup)
@@ -95,4 +97,7 @@ func _on_repair_check_area_area_shape_exited(area_rid: RID, area: Area2D, area_s
 		var newGameover = GAME_OVER_CANVAS_LAYER.instantiate()
 		add_child(newGameover)
 		get_tree().paused = true
+	if removeSelf:
+		queue_free()
+	
 	pass # Replace with function body.
