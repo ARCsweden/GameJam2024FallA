@@ -93,7 +93,7 @@ func set_repair(_status) -> void:
 	if(_status):
 		label.text = repair_prompt
 	
-func _on_pickup_grunka(value: int) -> void:
+func _on_pickup_grunka(_value: int) -> void:
 	if(last_tile.get_health() < last_tile.get_max_health()):
 		set_repair(true)
 
