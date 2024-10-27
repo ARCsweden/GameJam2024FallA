@@ -53,8 +53,8 @@ func _on_paddle(player_pos: Vector2, cur_dir: Vector2):
 	# Force based on player direction
 	apply_force(-cur_dir*Global.paddle_force, player_pos)
 
-func take_damage(r, c):
-	grid[r][c].take_damage(1.0)
+func take_damage(r, c, damage):
+	grid[r][c].take_damage(damage)
 
 func rebuild_tile(r, c):
 	grid[r][c].rebuild()
@@ -105,4 +105,31 @@ func _create_grid() -> void:
 func _on_body_entered(body) -> void:
 	# Detect stone
 	if body.get_collision_layer() == 132:
-		pass
+		var stone_position = body.global_position
+		var nearest_tiles = [null, null, null]
+		var nearest_tile_distances = [9999, 9999, 9999]
+		# Finds tiles closest to the stone
+		for r in range(grid.size()):
+			for c in range(grid[r].size()):
+				var tile = grid[r][c]
+				
+				# Sorts list so when a new minimum is found, it replaces the furthest away tile
+				nearest_tile_distances.sort()
+				nearest_tile_distances.reverse()
+				nearest_tiles.sort()
+				nearest_tiles.reverse()
+				#print(nearest_tile_distances)
+				var tile_distance = tile.global_position.distance_to(stone_position)
+				for i in range(nearest_tile_distances.size()):
+					if tile_distance < nearest_tile_distances[i]:
+						nearest_tile_distances[i] = tile_distance
+						nearest_tiles[i] = Vector2(r, c)
+						break
+		print(nearest_tiles)
+		for coords in nearest_tiles:
+			if coords != null:
+				print("take damage")
+				var tile_name = grid[coords.x][coords.y].name
+				take_damage(coords.x, coords.y, 10)
+				
+		
