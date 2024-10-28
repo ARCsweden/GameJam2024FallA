@@ -14,6 +14,7 @@ config/name="DontDrownTogether"
 run/main_scene="res://UI/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.png"
+config/windows_native_icon="res://Assets/icon.ico"
 
 [autoload]
 
@@ -252,8 +253,3 @@ build3={
 [physics]
 
 2d/default_gravity=0.0
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
