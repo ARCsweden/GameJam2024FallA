@@ -1,5 +1,6 @@
 shader_type canvas_item;
 
+
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 uniform sampler2D noise1 : repeat_enable;
@@ -20,16 +21,13 @@ void vertex() {
 
 void fragment() {
 	float depth = texture(noise1, UV + scroll1 * TIME).r * texture(noise2, UV + scroll2 * TIME).r;
-
-	//vec4 noise_col = texture(noise, UV + scroll * TIME);
-	vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth));
-	vec4 top_light = smoothstep(light_start, light_end, depth) * top_color;
-	COLOR = screen_col * tone_color + top_light;
+	vec4 screen_col = textureLod(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth),0.0);
+	// OLD vec4 top_light = smoothstep(light_start, light_end, depth) * top_color;
+	
+	vec3 top_light_rgb = smoothstep(light_start, light_end, depth) * top_color.rgb;
+	COLOR.rgb = screen_col.rgb * tone_color.rgb + top_light_rgb;
+	
+	// OLD COLOR = screen_col * tone_color + top_light;
 	COLOR.a = 1.0;
 
 }
-
-//void light() {
-	// Called for every pixel for every light affecting the CanvasItem.
-	// Uncomment to replace the default light processing function with this one.
-//}
